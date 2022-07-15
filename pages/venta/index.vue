@@ -22,9 +22,9 @@
                         min-width="290px" :close-on-content-click="false">
                         <template v-slot:activator="{ on }">
                           <div v-on="on" style="cursor:pointer">
-                            <v-text-field outlined dense class="selectInput font-weight-light" label="Seleccione una fecha"
-                              :rules="rules.required" :value="formatDate()" append-icon="mdi-calendar" readonly
-                              placeholder="DATE" height="10">
+                            <v-text-field outlined dense class="selectInput font-weight-light"
+                              label="Seleccione una fecha" :rules="rules.required" :value="formatDate()"
+                              append-icon="mdi-calendar" readonly placeholder="DATE" height="10">
                             </v-text-field>
                           </div>
                         </template>
@@ -40,12 +40,12 @@
                       </v-menu>
                     </v-col>
                     <v-col class="col-md-4">
-                      <v-select outlined dense :items="['Efectivo','Factura','Boleta',{value:'NotaCredito',text:'Nota de credito'},{value:'NotaDebito',text:'Nota de debito'}]" :rules="rules.required" v-model="venta.tipo"
-                        label="Tipo"></v-select>
+                      <v-select outlined dense
+                        :items="['Efectivo','Factura','Boleta',{value:'NotaCredito',text:'Nota de credito'},{value:'NotaDebito',text:'Nota de debito'}]"
+                        :rules="rules.required" v-model="venta.tipo" label="Tipo"></v-select>
                     </v-col>
                     <v-col class="col-md-4">
-                      <v-text-field label="Numero de factura (Manual)" outlined dense v-model="venta.codigo" :rules="rules.required"
-                        type="number"></v-text-field>
+                      <v-text-field label="Numero de factura (Manual)" outlined dense v-model="venta.codigo" type="number"></v-text-field>
                     </v-col>
                   </v-row>
                 </v-col>
@@ -84,47 +84,58 @@
               <v-divider></v-divider>
               <v-card-text>
                 <v-row>
-                  <v-col class="col-md-12 col-12">
-                    <v-input>
-                      <v-text-field hide-details filled readonly label="Articulo" prepend-inner-icon="mdi-cart"
-                        v-model="producto.nombre" class="rounded-r-0" outlined dense></v-text-field>
-                      <v-btn class="rounded-l-0 rounded-r-lg" height="40" color="primary"
-                        @click="showProductsModal = true">
-                        <v-icon>mdi-magnify</v-icon>
-                      </v-btn>
-                    </v-input>
-                  </v-col>
-                  <v-col>
-                    <v-input :disabled="producto.tipo != 'producto'">
-                      <v-text-field type="number" readonly hide-details v-model="producto.cantidad" class="rounded-r-0"
-                        prepend-inner-icon="mdi-format-list-bulleted" label="Cantidad" outlined dense>
-                      </v-text-field>
-                      <v-btn :disabled="producto.cantidad <=1 || producto.cantidad == undefined" @click="()=>{
+                  <v-col class="col-12" :class="{'col-md-8 col-12':referenciaConsulta.length>0}">
+                    <v-row>
+                      <v-col class="col-md-12 col-12">
+                        <v-input>
+                          <v-text-field hide-details filled readonly label="Articulo" prepend-inner-icon="mdi-cart"
+                            v-model="producto.nombre" class="rounded-r-0" outlined dense></v-text-field>
+                          <v-btn class="rounded-l-0 rounded-r-lg" height="40" color="primary"
+                            @click="showProductsModal = true">
+                            <v-icon>mdi-magnify</v-icon>
+                          </v-btn>
+                        </v-input>
+                      </v-col>
+                      <v-col>
+                        <v-input :disabled="producto.tipo != 'producto'">
+                          <v-text-field type="number" readonly hide-details v-model="producto.cantidad"
+                            class="rounded-r-0" prepend-inner-icon="mdi-format-list-bulleted" label="Cantidad" outlined
+                            dense>
+                          </v-text-field>
+                          <v-btn :disabled="producto.cantidad <=1 || producto.cantidad == undefined" @click="()=>{
                               producto.cantidad--
                             }" class="rounded-r-0 rounded-l-0" outlined height="40" color="warning">
-                        <v-icon>mdi-minus</v-icon>
-                      </v-btn>
-                      <v-btn :disabled="producto.cantidad == undefined" @click="()=>{
+                            <v-icon>mdi-minus</v-icon>
+                          </v-btn>
+                          <v-btn :disabled="producto.cantidad == undefined" @click="()=>{
                               producto.cantidad++
                             }" class="rounded-l-0 rounded-r-lg" height="40" outlined color="success">
-                        <v-icon>mdi-plus</v-icon>
-                      </v-btn>
-                    </v-input>
+                            <v-icon>mdi-plus</v-icon>
+                          </v-btn>
+                        </v-input>
+                      </v-col>
+                      <v-col>
+                        <v-text-field type="number" :readonly="producto.descuento == undefined"
+                          v-model="producto.descuento" prepend-inner-icon="mdi-percent" label="Descuento" outlined
+                          dense>
+                        </v-text-field>
+                      </v-col>
+                      <v-col>
+                        <v-text-field v-model="producto.precio" filled :readonly="producto.tipo != 'consulta'"
+                          prepend-inner-icon="mdi-currency-usd" label="Precio unidad" outlined dense></v-text-field>
+                      </v-col>
+                      <v-col class="col-md-12 col-12">
+                        <v-btn block color="gd-primary-to-right" class="rounded-lg  font-weight-light white--text"
+                          @click="addProduct()" height="40" :disabled="producto.nombre == undefined">
+                          Agregar a la venta&nbsp;&nbsp;<v-icon>mdi-cart-plus</v-icon>
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+
                   </v-col>
-                  <v-col>
-                    <v-text-field type="number" :readonly="producto.descuento == undefined" v-model="producto.descuento"
-                      prepend-inner-icon="mdi-percent" label="Descuento" outlined dense>
-                    </v-text-field>
-                  </v-col>
-                  <v-col>
-                    <v-text-field  v-model="producto.precio" filled :readonly="producto.tipo != 'consulta'"
-                      prepend-inner-icon="mdi-currency-usd" label="Precio unidad" outlined dense></v-text-field>
-                  </v-col>
-                  <v-col class="col-md-3 col-12">
-                    <v-btn block color="gd-primary-to-right" class="rounded-lg  font-weight-light white--text"
-                      @click="addProduct()" height="40" :disabled="producto.nombre == undefined">
-                      Agregar a la venta&nbsp;&nbsp;<v-icon>mdi-cart-plus</v-icon>
-                    </v-btn>
+                  <v-col class="col-md-4" v-if="referenciaConsulta.length>0">
+                    <v-textarea outlined label="Referencias de la consulta" v-model="referenciaConsulta" readonly>
+                    </v-textarea>
                   </v-col>
                 </v-row>
               </v-card-text>
@@ -158,8 +169,9 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn x-large color="success darken-1" class="rounded-lg font-weight-bold white--text font-weight-light" height="40"
-              @click="createVenta()" block>Generar venta&nbsp;<v-icon>mdi-cart</v-icon></v-btn>
+            <v-btn x-large color="success darken-1" class="rounded-lg font-weight-bold white--text font-weight-light"
+              height="40" @click="createVenta()" block>Generar venta&nbsp;<v-icon>mdi-cart</v-icon>
+            </v-btn>
 
           </v-card-actions>
         </v-card>
@@ -233,7 +245,7 @@
     data() {
       return {
         venta: {
-          tipo:'Efectivo',
+          tipo: 'Efectivo',
           cliente: {},
           productos: []
         },
@@ -242,7 +254,7 @@
         },
         ventas: [],
         producto: {},
-        findedClient:Number,
+        findedClient: Number,
         cliente_activo: null,
         search: {},
         headers: [{
@@ -279,6 +291,7 @@
             value: 'actions'
           }
         ],
+        referenciaConsulta: '',
         headersProducts: [{
           text: 'Codigo',
           value: 'codigo'
@@ -315,13 +328,16 @@
         if (tipo == 'consulta') {
           this.producto = {
             nombre: 'Consulta',
-            precio: (item.con_costo)? item.costo:'Sin costo',
+            precio: (item.con_costo) ? item.costo : 'Sin costo',
             cantidad: 1,
             descuento: 0,
             tipo: tipo,
             codigo: 'C' + item.id,
             productos: item.productos,
-            item:item
+            item: item
+          }
+          if (item.referencias_caja) {
+            this.referenciaConsulta = item.referencias_caja
           }
         } else {
           this.producto = {
@@ -337,7 +353,7 @@
         this.showProductsModal = false
       },
       checkTotal(item) {
-        if(!item.con_costo && item.tipo =='consulta') return 'Sin costo'
+        if (!item.con_costo && item.tipo == 'consulta') return 'Sin costo'
         return Math.round((item.precio * item.cantidad) - (item.precio * item.cantidad) * (item.descuento / 100))
       },
       addProduct() {
@@ -362,12 +378,12 @@
       },
       createVenta() {
         if (!this.$refs.form.validate() && this.venta.productos.length == 0) return
-        if(this.venta.tipo =='Efectivo') {
-          this.venta.productos.filter(async(pr)=>{
-            if(pr.tipo == 'consulta'){
+        if (this.venta.tipo == 'Efectivo') {
+          this.venta.productos.filter(async (pr) => {
+            if (pr.tipo == 'consulta') {
               let cons = pr.item
               cons.estado = 'Finalizada'
-              await this.$axios.put(`/atencion/${pr.item.id}`,cons)
+              await this.$axios.put(`/atencion/${pr.item.id}`, cons)
             }
           })
         }
@@ -393,8 +409,8 @@
           })
       },
     },
-    watch:{
-      findedClient(val){
+    watch: {
+      findedClient(val) {
         this.venta.cliente.direccion = val.address
         this.venta.cliente.nombre = val.name
         this.venta.cliente.apellido = val.last_name

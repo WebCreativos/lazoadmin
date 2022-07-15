@@ -2,7 +2,7 @@
   <v-card class="rounded-xl">
     <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text font-weight-thin">
       <v-toolbar-title>
-        Socios
+        MAscotas
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <slot name="buttonTitle"></slot>
@@ -43,14 +43,10 @@
       return {
         headers: [{
             text: 'Nombre',
-            value: 'name'
-          },
-          {
-            text: 'DNI',
-            value: 'user.username'
-          }, {
-            text: 'Ultima cuota paga',
-            value: 'payment_date'
+            value: 'nombre'
+          },{
+            text: 'Dueño',
+            value: 'socio.name'
           },
           {
             text: 'Acciones',
@@ -64,7 +60,7 @@
     },
     methods: {
       formatDate(date) {
-        if (date && date != '1000-01-01') {
+        if (date) {
           return moment(date).format('DD/MM/YYYY')
         } else {
           return 'Pago aun no realizado'

@@ -16,7 +16,7 @@
           </toolbarComponent>
           <v-card-title>
             <v-row>
-              <v-col class="col-md-7">
+              <v-col class="col-md-5">
                 <v-select dense class="font-weight-light" v-model="search.type" solo label="Tipo"
                   :items="[{text:'Todos',value:null},{text:'Consulta',value:'consulta'},{text:'Evento',value:'evento'}]">
                 </v-select>
@@ -27,12 +27,19 @@
                 </v-text-field>
               </v-col>
 
-              <v-col class="col-md-2">
+              <v-col class="col-md-3">
                 <v-btn block color="gd-primary-to-right" @click="getAgendas()"
                   class="white--text rounded-lg font-weight-light">
                   Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
                 </v-btn>
               </v-col>
+              <v-col class="col-md-1">
+                <v-btn block color="red" @click="search.fecha = null;getAgendas()"
+                  class="white--text rounded-lg font-weight-light">
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </v-col>
+
             </v-row>
           </v-card-title>
           <v-card-text>
@@ -85,22 +92,24 @@
         </v-toolbar>
         <v-card-text class="pa-3">
           <v-form ref="form">
-            <v-text-field solo class="rounded-lg" dense  v-if="agenda.type!='indisponible'" :rules="rules.required" v-model="agenda.titulo"
-              label="Nombre del evento"></v-text-field>
+            <v-text-field solo class="rounded-lg" dense v-if="agenda.type!='indisponible'" :rules="rules.required"
+              v-model="agenda.titulo" label="Nombre del evento"></v-text-field>
             <v-text-field solo class="rounded-lg" dense :rules="rules.required" type="date" v-model="agenda.fecha"
               label="Fecha"></v-text-field>
-            <v-text-field solo class="rounded-lg" dense  v-if="agenda.type!='indisponible'" :rules="rules.required" type="time" v-model="agenda.hora"
-              label="Hora"></v-text-field>
-            <v-textarea solo class="rounded-lg" dense v-if="agenda.type!='indisponible'" v-model="agenda.detalles" label="Detalle"></v-textarea>
+            <v-text-field solo class="rounded-lg" dense v-if="agenda.type!='indisponible'" :rules="rules.required"
+              type="time" v-model="agenda.hora" label="Hora"></v-text-field>
+            <v-textarea solo class="rounded-lg" dense v-if="agenda.type!='indisponible'" v-model="agenda.detalles"
+              label="Detalle"></v-textarea>
             <v-select solo class="rounded-lg" dense
-              :items="[{text:'Consulta',value:'consulta'},{text:'Evento',value:'evento'},{text:'Fecha indisponible',value:'indisponible'}]" v-model="agenda.type"
-              label="Tipo de evento"></v-select>
+              :items="[{text:'Consulta',value:'consulta'},{text:'Evento',value:'evento'},{text:'Fecha indisponible',value:'indisponible'}]"
+              v-model="agenda.type" label="Tipo de evento"></v-select>
             <div v-if="agenda.type == 'consulta'">
               <v-card outlined>
                 <v-card-title class="font-weight-light">Detalles de la consulta</v-card-title>
                 <v-card-text>
-                  <v-select solo hide-details :items="['Higiene','Consulta','Medicacion','Otro']" :rules="rules.required"
-                    v-model="agenda.consulta.tipo_consulta" label="Tipo de consulta" dense class="rounded-lg">
+                  <v-select solo hide-details :items="['Higiene','Consulta','Medicacion','Otro']"
+                    :rules="rules.required" v-model="agenda.consulta.tipo_consulta" label="Tipo de consulta" dense
+                    class="rounded-lg">
                   </v-select>
                 </v-card-text>
               </v-card>
@@ -225,6 +234,9 @@
       this.getAgendas()
     },
     methods: {
+      cleanSearch() {
+        this.getAgendas()
+      },
       getAgendas(date) {
         if (date) {
           this.search.fecha_gte = moment(date).startOf('month').format('YYYY-MM-DD')
@@ -241,7 +253,7 @@
           var colorsCalendar = (agenda) => {
             if (agenda.type == 'evento') {
               return '#4caf50'
-            } else if(agenda.type == 'consulta') {
+            } else if (agenda.type == 'consulta') {
               switch (agenda.consulta.tipo_consulta) {
                 case 'Higiene':
                   return 'blue darken-1';
@@ -262,7 +274,7 @@
 
 
           this.agendas = data.data.map(agenda => {
-            let date = (agenda.hora) ? agenda.fecha  +" "+ agenda.hora.split('.')[0] : agenda.fecha
+            let date = (agenda.hora) ? agenda.fecha + " " + agenda.hora.split('.')[0] : agenda.fecha
             return {
               name: agenda.titulo ?? "Fecha no disponible",
               start: date,
@@ -276,7 +288,7 @@
       },
       addAgenda() {
         if (!this.$refs.form.validate()) return
-        if(this.agenda.hora)
+        if (this.agenda.hora)
           this.agenda.hora = this.agenda.hora + ':00.00'
         this.$axios.post('/agendas', this.agenda).then(data => {
           this.getAgendas()

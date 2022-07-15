@@ -35,6 +35,10 @@
             <v-textarea outlined :readonly="readonly" v-model="atencion.tratamiento" label="Tratamiento"></v-textarea>
           </v-col>
           <v-col class="col-12">
+            <v-textarea outlined :readonly="readonly" v-model="atencion.referencias_caja" label="Referencias de la caja"></v-textarea>
+          </v-col>
+
+          <v-col class="col-12">
             <v-select outlined :readonly="readonly" v-model="proximaConsulta" :items="['Si','No']"
               label="Tendra proxima consulta?"></v-select>
           </v-col>
@@ -79,10 +83,10 @@
           </v-col>
 
           <v-col class="col-12">
-            <visitas-productos-component v-model="atencion.productos"></visitas-productos-component>
+            <visitas-productos-component :readonly="readonly" v-model="atencion.productos"></visitas-productos-component>
           </v-col>
           <v-col class="col-12">
-            <visitasProximaComponent v-model="atencion.proximas"></visitasProximaComponent>
+            <visitasProximaComponent :readonly="readonly" v-model="atencion.proximas"></visitasProximaComponent>
           </v-col>
 
         </v-row>
@@ -107,6 +111,9 @@
     },
 
     props: {
+      openModal:{
+        default:false
+      },
       value: Object,
       handler: Function,
       readonly: {
@@ -125,12 +132,12 @@
     },
     created() {},
     mounted() {
-      setTimeout(() => {
-        this.atencion.hora = moment().format('HH:mm');
-        this.atencion.fecha = moment().format('YYYY-MM-DD');
-        this.$forceUpdate()
-      }, 1000);
-
+            if(!this.atencion.id) {
+          this.atencion.fecha = moment().format('YYYY-MM-DD');
+          this.atencion.hora = moment().format('HH:MM');
+          this.$forceUpdate()
+        }
+  
     },
     methods: {
       checkHandler() {
@@ -154,6 +161,13 @@
           this.atencion = newValue
         },
         deep: true
+      },
+      openModal(value){
+        if(!this.atencion.id) {
+          this.atencion.fecha = moment().format('YYYY-MM-DD');
+          this.atencion.hora = moment().format('HH:MM');
+          this.$forceUpdate()
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
     <v-card outlined>
       <v-card-title>
-        <v-btn outlined color="primary" @click="addConsulta()">
+        <v-btn outlined color="primary" @click="addConsulta()" v-if="!readonly">
           AGREGAR CONSULTAS&nbsp;<v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-card-title>
@@ -17,7 +17,7 @@
             <v-text-field dense outlined  hide-details v-model="item.observacion"></v-text-field>
           </template>
           <template v-slot:item.delete="{ item }">
-            <v-btn small color="red" @click="deleteProduct(item)">
+            <v-btn small color="red" @click="deleteProduct(item)"  v-if="!readonly">
               <v-icon color="white">mdi-delete</v-icon>
             </v-btn>
           </template>
@@ -31,6 +31,9 @@
 <script>
   export default {
     props: {
+      readonly:{
+        default:false
+      },
       value: Array
     },
     data() {

@@ -9,16 +9,15 @@
       <v-form ref="form">
         <v-row>
           <v-col class="col-md-12">
-            <v-text-field label="CLIENTE AGREGADO" hide-details :value="setValueCreatedAt(socio.created_at)" outlined dense class="rounded-lg"></v-text-field>
+            <v-text-field label="CLIENTE AGREGADO" hide-details :value="setValueCreatedAt(socio.created_at)" outlined
+              dense class="rounded-lg"></v-text-field>
           </v-col>
           <v-col class="col-12 col-md-6">
-            <v-text-field label="NOMBRE SOCIO" class="rounded-lg" outlined dense
-              v-model="socio.name">
+            <v-text-field label="NOMBRE SOCIO" class="rounded-lg" outlined dense v-model="socio.name">
             </v-text-field>
-            <v-text-field label="APELLIDO" class="rounded-lg" outlined dense
-              v-model="socio.last_name">
+            <v-text-field label="APELLIDO" class="rounded-lg" outlined dense v-model="socio.last_name">
             </v-text-field>
-            <v-text-field label="DOCUMENTO" type="number" class="rounded-lg" outlined dense  
+            <v-text-field label="DOCUMENTO" type="number" class="rounded-lg" outlined dense
               v-model="socio.user.username">
             </v-text-field>
             <v-text-field label="DIRECCION" class="rounded-lg" outlined dense v-model="socio.address">
@@ -60,8 +59,8 @@
               </v-select>
             </v-col>
             <v-col class="col-md-6">
-              <v-select label="METODO DE PAGO" :items="['Mostrador','Automatico oca','Automatico (Otras)']" v-model="socio.metodo_pago"
-                class="rounded-lg" outlined dense :rules="rules.required">
+              <v-select label="METODO DE PAGO" :items="['Mostrador','Automatico oca','Automatico (Otras)']"
+                v-model="socio.metodo_pago" class="rounded-lg" outlined dense :rules="rules.required">
               </v-select>
             </v-col>
           </template>
@@ -80,13 +79,11 @@
                     </v-text-field>
                   </v-col>
                   <v-col class="col-12 col-md-12">
-                    <v-text-field label="RAZA" class="rounded-lg" outlined dense
-                      v-model="socio.mascotas[index].raza">
+                    <v-text-field label="RAZA" class="rounded-lg" outlined dense v-model="socio.mascotas[index].raza">
                     </v-text-field>
                   </v-col>
                   <v-col class="col-12 col-md-12">
-                    <v-text-field label="COLOR" class="rounded-lg" outlined dense
-                      v-model="socio.mascotas[index].color">
+                    <v-text-field label="COLOR" class="rounded-lg" outlined dense v-model="socio.mascotas[index].color">
                     </v-text-field>
                   </v-col>
                   <v-col class="col-12 col-md-12">
@@ -98,14 +95,14 @@
                   <v-col class="col-12 col-md-12">
                     <v-select label="SEXO" :items="[{
                       text:'Macho',
-                      value: 'Macho'
+                      value: 'M'
                     },{
                       text:'Hembra',
                       value: 'H'
                     },{
-                      text:'CASTRADO',
+                      text:'Indefinido',
                       value: 'C'
-                    }]" class="rounded-lg" outlined dense  v-model="socio.mascotas[index].sexo">
+                    }]" class="rounded-lg" outlined dense v-model="socio.mascotas[index].sexo">
                     </v-select>
                   </v-col>
                   <v-col class="col-12 col-md-12">
@@ -115,16 +112,16 @@
                     },{
                       text:'No',
                       value: 'No'
-                    }]" class="rounded-lg" outlined dense
-                      v-model="socio.mascotas[index].socio">
+                    }]" class="rounded-lg" outlined dense v-model="socio.mascotas[index].socio">
                     </v-select>
                   </v-col>
                   <v-col class="col-12">
-                    <sociosCreateEspeciesComponent v-model="socio.mascotas[index].especie"></sociosCreateEspeciesComponent>
+                    <sociosCreateEspeciesComponent v-model="socio.mascotas[index].especie">
+                    </sociosCreateEspeciesComponent>
                   </v-col>
                   <v-col class="col-12 col-md-12">
-                    <v-textarea label="Observaciones" class="rounded-lg" outlined dense 
-                    v-model="socio.mascotas[index].observaciones">
+                    <v-textarea label="Observaciones" class="rounded-lg" outlined dense
+                      v-model="socio.mascotas[index].observaciones">
                     </v-textarea>
                   </v-col>
 
@@ -166,7 +163,8 @@
   export default {
     props: {
       value: Object,
-      handler: Function
+      handler: Function,
+      openModal: false
     },
     data() {
       return {
@@ -209,7 +207,20 @@
       }
 
     },
-    watch: {},
+    watch: {
+      openModal() {
+        if (this.openModal) {
+          this.socio = {
+            suc: 'CASA CENTRAL',
+            socio: 'SI',
+            tipo: 'Cliente final',
+            user: {},
+            mascotas: [{}],
+            afiliacion: moment().format('YYYY-MM-DD'),
+          }
+        }
+      }
+    },
   }
 
 </script>

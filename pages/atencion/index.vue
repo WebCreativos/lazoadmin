@@ -9,7 +9,7 @@
       </v-col>
       <v-col class="col-12">
         <visitasMascotaComponent 
-        @changePage="getAtencionMascota($event)"
+        @changePage="getAtencionMascota($event.mascota,$event.page)"
         :items="consultaItems" 
         @getAtencionMascota="getAtencionMascota($event)" 
         v-model="atencion"></visitasMascotaComponent>
@@ -60,8 +60,8 @@
       //add to agenda 
       async getAtencionMascota(mascota, page = 1) {
 
-        this.search._start = 25*(page-1)
-        this.search._limit = 25*(page)
+        this.search._start = 4*(page-1)
+        this.search._limit = 4*(page)
         this.search.mascota = mascota.id
         await this.$axios.get(`/atencion`,{
           params:this.search

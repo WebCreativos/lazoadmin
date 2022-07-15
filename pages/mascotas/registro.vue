@@ -4,8 +4,7 @@
       Nuevo cliente
     </sociosFormComponent>
     <modal-success :action="()=>{
-      this.createSocioModal = false;
-      this.$router.go(-1)
+      this.createSocioModal = false
       }" v-model="createSocioModal">
       <template v-slot:icon>
         mdi-check

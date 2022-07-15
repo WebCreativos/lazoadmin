@@ -16,7 +16,7 @@
       <v-card-title class="font-weight-light">
         Productos de la consulta
         <v-spacer></v-spacer>
-        <v-btn outlined color="primary" @click="modalProductos = true">
+        <v-btn outlined color="primary" @click="modalProductos = true"  v-if="!readonly">
           AGREGAR PRODUCTO&nbsp;<v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-card-title>
@@ -38,7 +38,7 @@
             $ {{(item.cant && item.precio) ? item.cant*item.precio : 0}}
           </template>
           <template v-slot:item.delete="{ item }">
-            <v-btn small color="red" @click="deleteProduct(item)">
+            <v-btn small color="red" @click="deleteProduct(item)" v-if="!readonly">
               <v-icon color="white">mdi-delete</v-icon>
             </v-btn>
           </template>
@@ -73,6 +73,9 @@
 <script>
   export default {
     props: {
+      readonly:{
+        default:false
+      },
       value: Array
     },
     data() {

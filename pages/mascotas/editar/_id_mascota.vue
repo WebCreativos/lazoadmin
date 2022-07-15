@@ -1,16 +1,16 @@
 <template>
   <v-container fluid>
-    <sociosFormComponent v-if="showForm" :handler="editSocio" v-model="socio"></sociosFormComponent>
+    <mascotasFormComponent v-if="showForm" :handler="editMascota" v-model="mascota"></mascotasFormComponent>
     <modal-success :action="()=>{
-      this.createSocioModal = false;
-      this.$router.go(-1);
-      }" v-model="createSocioModal">
+      this.createMascotaModal = false;
+      this.$router.go(-1)
+      }" v-model="createMascotaModal">
       <template v-slot:icon>
         mdi-check
       </template>
       <template v-slot:title>
         <p class="text-h6 mb-0">
-          <strong>Socio editado correctamente!</strong>
+          <strong>Mascota editado correctamente!</strong>
         </p>
       </template>
     </modal-success>
@@ -23,31 +23,29 @@
     },
     data() {
       return {
-        socio: {
-          user: {},
-          mascotas: [{}],
+        mascota: {
         },
-        createSocioModal: false,
+        createMascotaModal: false,
         showForm: true
       }
     },
     created() {
-        this.getSocio();
+        this.getMascota();
     },
     methods: {
-      getSocio() {
-          this.$axios.get(`/socios/${this.$route.params.id_socio}`)
+      getMascota() {
+          this.$axios.get(`/mascotas/${this.$route.params.id_mascota}`)
             .then(response => {
-                this.socio = response.data
+                this.mascota = response.data
                 this.showForm = false
                 setTimeout(()=>{
                     this.showForm = true
                 },500)
             })
       },
-      editSocio() {
-          this.$axios.put(`/socios/${this.socio.id}`, this.socio).then(response => {
-            this.createSocioModal = true
+      editMascota() {
+          this.$axios.put(`/mascotas/${this.mascota.id}`, this.mascota).then(response => {
+            this.createMascotaModal = true
           })
       },
 

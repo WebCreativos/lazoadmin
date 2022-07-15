@@ -2,128 +2,90 @@
   <v-app>
     <v-navigation-drawer :value="true" class="elevation-2 rounded-r-xl elevation-0" hide-overlay height="99.9%" app
       permanent>
-      <v-app-bar height="120" color="gd-primary-to-right" class="elevation-0" >
+      <v-app-bar height="120" color="gd-primary-to-right" class="elevation-0">
         <v-img src="/logo.png" width="120"></v-img>
       </v-app-bar>
       <v-list>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="100" width="100" class="btn-navigation"
+            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/venta">
-              <v-row dense>
-                <v-col class="col-12 d-flex justify-center">
-                  <v-icon>mdi-cart</v-icon><br>
-                </v-col>
-                <v-col class="col-12 d-flex justify-center">
-                  <span>VENTA</span>
-                </v-col>
-              </v-row>
+              <v-icon>mdi-cart</v-icon><br>
+              <span>VENTA</span>
             </v-btn>
 
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="100" width="100" class="btn-navigation"
+            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/atencion">
-              <v-row dense>
-                <v-col class="col-12 d-flex justify-center">
-                  <v-icon>mdi-doctor</v-icon><br>
-                </v-col>
-                <v-col class="col-12 d-flex justify-center">
-                  <span>ATENCION</span>
-                </v-col>
-              </v-row>
+              <v-icon>mdi-doctor</v-icon><br>
+              <span>ATENCION</span>
             </v-btn>
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="100" width="100" class="btn-navigation"
+            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/productos/listado">
-              <v-row dense>
-                <v-col class="col-12 d-flex justify-center">
-                  <v-icon>mdi-cart-plus</v-icon><br>
-                </v-col>
-                <v-col class="col-12 d-flex justify-center">
-                  <span>PRODUCTOS</span>
-                </v-col>
-              </v-row>
+              <v-icon>mdi-cart-plus</v-icon><br>
+              <span>PRODUCTOS</span>
             </v-btn>
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="100" width="100" class="btn-navigation"
+            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/socios">
-              <v-row dense>
-                <v-col class="col-12 d-flex justify-center">
-                  <v-icon>mdi-account-plus</v-icon><br>
-                </v-col>
-                <v-col class="col-12 d-flex justify-center">
-                  <span>SOCIOS</span>
-                </v-col>
-              </v-row>
+              <v-icon>mdi-account-plus</v-icon><br>
+              <span>SOCIOS</span>
             </v-btn>
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="100" width="100" class="btn-navigation"
+            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+              active-class="btn-navigation-active" to="/mascotas">
+              <v-icon>mdi-dog</v-icon><br>
+              <span>MASCOTAS</span>
+            </v-btn>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-content>
+            <v-btn text color="primary" height="50" width="50"  class="btn-navigation"
               active-class="btn-navigation-active" to="/mensajes">
-              <v-row dense>
-                <v-col class="col-12 d-flex justify-center">
-                  <v-icon>mdi-comment</v-icon><br>
-                </v-col>
-                <v-col class="col-12 d-flex justify-center">
-                  <span>MENSAJES</span>
-                </v-col>
-              </v-row>
+              <v-icon>mdi-comment</v-icon><br>
+              <span>MENSAJES</span>
             </v-btn>
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="100" width="100" class="btn-navigation"
+            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/agenda">
-              <v-row dense>
-                <v-col class="col-12 d-flex justify-center">
-                  <v-icon>mdi-calendar</v-icon><br>
-                </v-col>
-                <v-col class="col-12 d-flex justify-center">
-                  <span>AGENDA</span>
-                </v-col>
-              </v-row>
+              <v-icon>mdi-calendar</v-icon><br>
+              <span>AGENDA</span>
             </v-btn>
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="100" width="100" class="btn-navigation"
+            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/otros">
-              <v-row dense>
-                <v-col class="col-12 d-flex justify-center">
-                  <v-icon>mdi-record</v-icon><br>
-                </v-col>
-                <v-col class="col-12 d-flex justify-center">
-                  <span>OTROS</span>
-                </v-col>
-              </v-row>
+              <v-icon>mdi-record</v-icon><br>
+              <span>OTROS</span>
             </v-btn>
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="100" width="100" class="btn-navigation"
+            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/configuracion">
-              <v-row dense>
-                <v-col class="col-12 d-flex justify-center">
-                  <v-icon>mdi-cog</v-icon><br>
-                </v-col>
-                <v-col class="col-12 d-flex justify-center">
-                  <span>CONFIGURACION</span>
-                </v-col>
-              </v-row>
+              <v-icon>mdi-cog</v-icon><br>
+              <span>CONFIGURACION</span>
             </v-btn>
           </v-list-item-content>
         </v-list-item>
@@ -161,12 +123,19 @@
 
   .btn-navigation {
     border: 1px solid #80808024;
-    border-radius: 30px!important;
+    border-radius: 15px !important;
     padding: 0 !important;
-
+    .v-btn__content {
+      width:100%;
+      justify-content: start;
+      height: 100%;
+      align-items: center;
+      margin-left:40px;
+    }
     span {
       text-transform: capitalize;
       font-weight: 300;
+      margin-left:10px;
     }
   }
 
@@ -175,7 +144,7 @@
       color: white;
     }
 
-    background:linear-gradient(#03989e, #037176);
+    background:linear-gradient(90deg, #03989e, #037176);
     border-color:transparent;
   }
 

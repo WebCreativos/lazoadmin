@@ -2,7 +2,7 @@
   <div>
     <v-card class="rounded-xl">
       <v-toolbar color="gd-primary-to-right" elevation="0">
-        <v-toolbar-title class="white--text font-weight-light">Atenciones de la mascota</v-toolbar-title>
+        <v-toolbar-title class="white--text font-weight-light">Atenciones de la mascota {{value.mascota.nombre}}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn class="mr-2 font-weight-light" :disabled="!value.socio.id || !value.mascota.id || value.id" color="white"
           @click="openModalAtencion(createAtencion, 'NUEVA VISITA')">
@@ -22,7 +22,7 @@
             :items="items.data">
             <template v-slot:item.fecha="{ item }">
               <v-btn outlined small @click="()=>{
-                    openModalAtencion(createAtencion, 'VER VISITA', true);
+                    openModalAtencion(()=>{}, 'VER VISITA', true);
                     atencion = item;
                   }">
                 <v-icon>mdi-magnify</v-icon> &nbsp;{{formatDate(item.fecha)}}
@@ -40,7 +40,7 @@
         </v-card>
       </v-card-text>
       <v-card-actions class="d-flex justify-center" v-if="atencion.mascota">
-          <v-pagination :total-visible="10" :length="Math.ceil(items.length/25)" v-model="page" @input="$emit('changePage',{page:$event,mascota:atencion.mascota})"></v-pagination>
+          <v-pagination :total-visible="10" :length="Math.ceil(items.length/4)" v-model="page" @input="$emit('changePage',{mascota:atencion.mascota,page:$event})"></v-pagination>
       </v-card-actions>
     </v-card>
     <v-dialog v-model="modalData.openModal" width="80%" height="auto">
@@ -51,7 +51,7 @@
           <v-icon color="white">mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
-      <visitas-data-component class="overflow-card" :readonly="modalData.readonly" v-model="atencion"
+      <visitas-data-component class="overflow-card" :openModal="modalData.openModal" :readonly="modalData.readonly" v-model="atencion"
         :handler="modalData.handler">
       </visitas-data-component>
     </v-dialog>
