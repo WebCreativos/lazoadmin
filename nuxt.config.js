@@ -47,8 +47,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    //baseURL: 'https://api.descuentosya.uy/',
-    baseURL: 'http://localhost:1337/'
+    baseURL: 'https://api.descuentosya.uy/',
+    //baseURL: 'http://localhost:1337/'
   },
   auth: {
     autoLogout: true,
