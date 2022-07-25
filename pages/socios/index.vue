@@ -71,7 +71,9 @@
           months: 1,
           client: {}
         },
-        search: {},
+        search: {
+          _sort:'id:desc'
+        },
         sociosList: {
           data: [],
           length: 0

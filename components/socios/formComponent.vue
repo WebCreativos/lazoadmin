@@ -9,18 +9,19 @@
       <v-form ref="form">
         <v-row>
           <v-col class="col-md-12">
-            <v-text-field label="CLIENTE AGREGADO" hide-details :value="setValueCreatedAt(socio.created_at)" outlined
+            <v-text-field label="CLIENTE AGREGADO" :value="setValueCreatedAt(socio.created_at)" outlined
               dense class="rounded-lg"></v-text-field>
+            <v-text-field label="NOMBRE SOCIO" class="rounded-lg" hide-details outlined dense v-model="socio.name">
+            </v-text-field>
           </v-col>
           <v-col class="col-12 col-md-6">
-            <v-text-field label="NOMBRE SOCIO" class="rounded-lg" outlined dense v-model="socio.name">
-            </v-text-field>
-            <v-text-field label="APELLIDO" class="rounded-lg" outlined dense v-model="socio.last_name">
-            </v-text-field>
             <v-text-field label="DOCUMENTO" type="number" class="rounded-lg" outlined dense
               v-model="socio.user.username">
             </v-text-field>
             <v-text-field label="DIRECCION" class="rounded-lg" outlined dense v-model="socio.address">
+            </v-text-field>
+            <v-text-field label="DIRECCION COBRANZA  (Opcional)" v-model="socio.direccion_cobranza" class="rounded-lg"
+              outlined dense>
             </v-text-field>
             <v-text-field label="LOCALIDAD" class="rounded-lg" outlined dense v-model="socio.localidad">
             </v-text-field>
@@ -32,9 +33,6 @@
 
           </v-col>
           <v-col class="col-12 col-md-6">
-            <v-text-field label="DIRECCION COBRANZA  (Opcional)" v-model="socio.direccion_cobranza" class="rounded-lg"
-              outlined dense>
-            </v-text-field>
             <v-text-field label="FECHA AFILIACION (Opcional)" type="date" v-model="socio.afiliacion" class="rounded-lg"
               outlined dense>
             </v-text-field>
@@ -63,6 +61,12 @@
                 v-model="socio.metodo_pago" class="rounded-lg" outlined dense :rules="rules.required">
               </v-select>
             </v-col>
+            <v-col class="col-md-12" v-if="socio.metodo_pago == 'Automatico oca' || socio.metodo_pago == 'Automatico (Otras)'">
+              <v-text-field label="TARJETA"
+                v-model="socio.tarjeta" class="rounded-lg" outlined dense>
+              </v-text-field>
+            </v-col>
+
           </template>
           <v-col class="col-12 col-md-12">
             <v-card outlined dense class="rounded-xl">

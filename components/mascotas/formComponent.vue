@@ -13,16 +13,19 @@
             </v-text-field>
           </v-col>
           <v-col class="col-12 col-md-12">
-            <v-text-field label="RAZA" class="rounded-lg" outlined dense v-model="mascota.raza">
-            </v-text-field>
+            <mascotasRazasComponent v-model="mascota.raza"></mascotasRazasComponent>
           </v-col>
           <v-col class="col-12 col-md-12">
-            <v-text-field label="COLOR" class="rounded-lg" outlined dense v-model="mascota.color">
-            </v-text-field>
+            <mascotasColoresComponent v-model="mascota.color"></mascotasColoresComponent>
           </v-col>
           <v-col class="col-12 col-md-12">
             <v-text-field type="date" label="Fecha de nacimiento" class="rounded-lg" outlined dense
               v-model="mascota.fecha_nac">
+            </v-text-field>
+          </v-col>
+          <v-col class="col-12 col-md-12">
+            <v-text-field type="date" label="Fecha de nacimiento" class="rounded-lg" outlined dense
+              v-model="mascota.deceso">
             </v-text-field>
           </v-col>
 
@@ -34,7 +37,7 @@
                       text:'Hembra',
                       value: 'H'
                     },{
-                      text:'DESCONOCIDO',
+                      text:'INDEFINIDO',
                       value: 'C'
                     }]" class="rounded-lg" outlined dense v-model="mascota.sexo">
             </v-select>
@@ -50,7 +53,7 @@
             </v-select>
           </v-col>
           <v-col class="col-12">
-            <sociosCreateEspeciesComponent v-model="mascota.especie"></sociosCreateEspeciesComponent>
+            <mascotasCreateEspeciesComponent v-model="mascota.especie"></mascotasCreateEspeciesComponent>
           </v-col>
           <v-col class="col-12 col-md-12">
             <v-textarea label="Observaciones" class="rounded-lg" outlined dense v-model="mascota.observaciones">

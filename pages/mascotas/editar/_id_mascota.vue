@@ -24,6 +24,7 @@
     data() {
       return {
         mascota: {
+          especie:{}
         },
         createMascotaModal: false,
         showForm: true

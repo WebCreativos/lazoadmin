@@ -1,8 +1,21 @@
 <template>
   <v-container fluid>
-    <MascotasListComponent @changePage="getSocios($event)" v-model="mascotasList">
+    <MascotasListComponent @changePage="getMascotas($event)" v-model="mascotasList">
       <template v-slot:extraFields>
-        <MascotasFindComponent v-model="search.name_contains"></MascotasFindComponent>
+        <v-row>
+          <v-col class="col-md-5">
+            <MascotasFindComponent v-model="search.nombre_contains"></MascotasFindComponent>
+          </v-col>
+          <v-col class="col-md-5">
+            <mascotasRazasComponent v-model="search.raza"></mascotasRazasComponent>
+          </v-col>
+          <v-col class="col-md-2">
+            <v-btn block color="gd-primary-to-right" @click="getMascotas()"
+              class="white--text rounded-lg font-weight-light">
+              Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
       </template>
       <template v-slot:button="{ item }">
         <v-btn class="gd-primary-to-right font-weight-light rounded-lg white--text" :to="`/mascotas/editar/${item.id}`"
@@ -47,19 +60,15 @@
             this.mascotasList.data = response.data
           })
 
-        await this.$axios.get('/mascotas/count',{params: this.search})
+        await this.$axios.get('/mascotas/count', {
+            params: this.search
+          })
           .then(response => {
             this.mascotasList.length = response.data
           })
       },
     },
     watch: {
-      search: {
-        handler() {
-          this.getSocios()
-        },
-        deep: true
-      },
     }
   }
 

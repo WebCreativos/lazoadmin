@@ -31,7 +31,9 @@
           socio:'SI',
           tipo:'Cliente final',
           user:{},
-          mascotas: [{}],
+          mascotas: [{
+            especie:{}
+          }],
           afiliacion:moment().format('YYYY-MM-DD'),
         },
         createSocioModal: false

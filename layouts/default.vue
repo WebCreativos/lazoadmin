@@ -39,7 +39,7 @@
             <v-btn text color="primary" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/socios">
               <v-icon>mdi-account-plus</v-icon><br>
-              <span>SOCIOS</span>
+              <span>CLIENTES</span>
             </v-btn>
           </v-list-item-content>
         </v-list-item>

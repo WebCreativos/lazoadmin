@@ -2,14 +2,15 @@
   <div>
     <v-card class="rounded-xl">
       <v-toolbar color="gd-primary-to-right" elevation="0">
-        <v-toolbar-title class="white--text font-weight-light">Atenciones de la mascota {{value.mascota.nombre}}</v-toolbar-title>
+        <v-toolbar-title class="white--text font-weight-light">Atenciones de la mascota {{value.mascota.nombre}}
+        </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn class="mr-2 font-weight-light" :disabled="!value.socio.id || !value.mascota.id || value.id" color="white"
-          @click="openModalAtencion(createAtencion, 'NUEVA VISITA')">
+        <v-btn class="mr-2 font-weight-light" :disabled="(!value.socio.id || !value.mascota.id || value.id!=undefined)"
+          color="white" @click="openModalAtencion(createAtencion, 'NUEVA VISITA')">
           Nueva visita
         </v-btn>
         <v-btn class="mr-2 font-weight-light" :disabled="selectedAtencion.length==0" color="white"
-          @click="openModalAtencion(createAtencion, 'ACTUALIZAR VISITA')">
+          @click="openModalAtencion(updateAtencion, 'ACTUALIZAR VISITA')">
           Modificar visita
         </v-btn>
         <v-btn class="font-weight-light" :disabled="selectedAtencion.length==0" color="white" @click="deleteAtencion()">
@@ -19,14 +20,32 @@
       <v-card-text class="pa-4 rounded-lg">
         <v-card outlined class="rounded-xl">
           <v-data-table show-select single-select v-model="selectedAtencion" :headers="headers" hide-default-footer
-            :items="items.data">
+            :items="consultaItems.data">
             <template v-slot:item.fecha="{ item }">
               <v-btn outlined small @click="()=>{
-                    openModalAtencion(()=>{}, 'VER VISITA', true);
+                    openModalAtencion(()=>{}, 'VER VISITA',item, true);
                     atencion = item;
                   }">
                 <v-icon>mdi-magnify</v-icon> &nbsp;{{formatDate(item.fecha)}}
               </v-btn>
+            </template>
+            <template v-slot:item.hora="{ item }">
+              {{formatHour(item.hora)}} 
+            </template>
+            <template v-slot:item.anamnesis="{ item }">
+              <generalButtonShowMoreComponent :value="item.anamnesis"
+                :callback="openModalAtencion.bind(null,()=>{}, 'VER VISITA',item, true)">
+              </generalButtonShowMoreComponent>
+            </template>
+            <template v-slot:item.pronostico="{ item }">
+              <generalButtonShowMoreComponent :value="item.pronostico"
+                :callback="openModalAtencion.bind(null,()=>{}, 'VER VISITA',item, true)">
+              </generalButtonShowMoreComponent>
+            </template>
+            <template v-slot:item.tratamiento="{ item }">
+              <generalButtonShowMoreComponent :value="item.tratamiento"
+                :callback="openModalAtencion.bind(null,()=>{}, 'VER VISITA',item, true)">
+              </generalButtonShowMoreComponent>
             </template>
             <template v-slot:item.hora="{ item }">
               {{formatHour(item.hora)}}
@@ -39,8 +58,8 @@
           </v-data-table>
         </v-card>
       </v-card-text>
-      <v-card-actions class="d-flex justify-center" v-if="atencion.mascota">
-          <v-pagination :total-visible="10" :length="Math.ceil(items.length/4)" v-model="page" @input="$emit('changePage',{mascota:atencion.mascota,page:$event})"></v-pagination>
+      <v-card-actions class="d-flex justify-center">
+        <v-pagination :total-visible="10" v-model="page"></v-pagination>
       </v-card-actions>
     </v-card>
     <v-dialog v-model="modalData.openModal" width="80%" height="auto">
@@ -51,7 +70,7 @@
           <v-icon color="white">mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
-      <visitas-data-component class="overflow-card" :openModal="modalData.openModal" :readonly="modalData.readonly" v-model="atencion"
+      <visitas-data-component class="overflow-card" :openModal="modalData.openModal" :readonly="modalData.readonly"
         :handler="modalData.handler">
       </visitas-data-component>
     </v-dialog>
@@ -59,25 +78,10 @@
 </template>
 
 <script>
+  import _ from 'lodash';
   import moment from 'moment';
   export default {
-    props: {
-      items: {
-        data:[],
-        length:0
-      },
-      value: {
-        default: {
-          files: [],
-          socio: {
-            mascotas: []
-          },
-          mascota: {},
-          productos: [],
-          proximas: []
-        }
-      }
-    },
+    props: {},
     data() {
       return {
         page: 1,
@@ -120,42 +124,28 @@
       }
     },
     methods: {
-      openModalAtencion(fn, title, readonly = false) {
+      openModalAtencion(fn, title, atencion, readonly = false) {
         this.modalData.handler = fn;
         this.modalData.title = title;
         this.modalData.readonly = readonly
         this.modalData.openModal = true;
+        if (atencion) {
+          this.$store.dispatch('atentions/setSingle', atencion)
+        }
       },
-      createAtencion() {
-        this.atencion.hora = `${this.atencion.hora}:00.000`
-        this.$axios.post('/atencion', this.atencion).then(async response => {
-          if (this.atencion.proxima_consulta) {
-            this.addToAgenda()
-          }
-          this.$emit('getAtencionMascota', this.atencion.mascota)
-          await this.updateMascota()
-
-          let uploadFiles = this.atencion.files.filter((file) => file instanceof File)
-          this.uploadFile(response.data.id, uploadFiles)
-          console.log(this.atencion)
-          this.formatAtencion()
-          this.formatModal()
-        }).catch(error => {
-          console.log(error);
-        });
+      async createAtencion() {
+        console.log("aca")
+        await this.$store.dispatch('atentions/create')
+        this.$store.dispatch('atentions/findAll', {page:1,mascota:this.value.mascota.id})
+        this.$store.dispatch('atentions/cleanSelected')
+        this.formatModal()
       },
-      updateAtencion() {
-        this.$axios.put('/atencion/' + this.atencion.id, this.atencion).then(async response => {
-          console.log(this.atencion.mascota)
-
-          let uploadFiles = this.atencion.files.filter((file) => file instanceof File)
-          this.uploadFile(response.data.id, uploadFiles)
-          this.$emit('getAtencionMascota', this.atencion.mascota)
-          this.selectedAtencion = []
-          this.formatModal()
-        }).catch(error => {
-          console.log(error);
-        });
+      async updateAtencion() {
+        console.log("aca")
+        await this.$store.dispatch('atentions/update')
+        this.$store.dispatch('atentions/findAll', {page:1,mascota:this.value.mascota.id})
+        this.selectedAtencion = []
+        this.formatModal()
       },
       deleteAtencion() {
         this.$axios.delete(`/atencion/${this.atencion.id}`)
@@ -226,11 +216,11 @@
 
 
       formatDate(date) {
-        if(!date) return 'Fecha no asignada'
+        if (!date) return 'Fecha no asignada'
         return moment(date).format('DD/MM/YYYY')
       },
       formatHour(hour) {
-        if(!hour) return 'Hora no asignada'
+        if (!hour) return 'Hora no asignada'
         let finalHour = hour.split(':')
         return `${finalHour[0]}:${finalHour[1]}`
       },
@@ -260,25 +250,39 @@
       },
 
     },
+    computed: {
+      value() {
+        let atencion = this.$store.getters['atentions/get']
+        if (atencion) {
+          return atencion
+        }
+        return {}
+      },
+      consultaItems() {
+        return this.$store.getters['atentions/getList']
+      }
+    },
     watch: {
       selectedAtencion(val) {
         if (val.length > 0) {
-          this.atencion = JSON.parse(JSON.stringify(val[0]))
+          this.$store.dispatch('atentions/setSingle', JSON.parse(JSON.stringify(val[0])))
         } else {
-          this.formatAtencion()
+          console.log("aca")
+          this.$store.dispatch('atentions/cleanSelected')
         }
       },
-      "modalData.openModal": function(val) {
+      value: {
+        handler(newValue) {
+          console.log(newValue)
+          this.atencion = _.cloneDeep(newValue)
+        },
+        deep: true
+      },
+      "modalData.openModal": function (val) {
         if (!val) {
           this.formatAtencion()
         }
       },
-      value: {
-        handler(val) {
-          this.atencion = val
-        },
-        deep: true
-      }
 
     },
 

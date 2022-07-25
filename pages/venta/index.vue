@@ -315,6 +315,8 @@
         menu: false
       }
     },
+    mounted() {
+    },
     methods: {
       formatDate() {
         if (this.venta.fecha)

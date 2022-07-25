@@ -24,6 +24,7 @@ export default {
   css: [
     '~/assets/style.scss'
   ],
+  loading: '~/components/general/loadingComponent.vue',
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [

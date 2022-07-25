@@ -45,44 +45,14 @@
           proximas: []
         },
         pageItems:0,
-        consultaItems: {
-          data:[],
-          length:0,
-        },
         search:{}
       }
     },
     created() {},
-    methods: {
-
-
-
-      //add to agenda 
-      async getAtencionMascota(mascota, page = 1) {
-
-        this.search._start = 4*(page-1)
-        this.search._limit = 4*(page)
-        this.search.mascota = mascota.id
-        await this.$axios.get(`/atencion`,{
-          params:this.search
-        })
-          .then(response => {
-            this.consultaItems.data = response.data
-          })
-        await this.$axios.get('/atencion/count', {
-            params: {mascota: mascota.id}
-          })
-          .then(response => {
-            this.consultaItems.length = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
-
-      },
-
-    },
-    watch: {
+    computed: {
+      consultaItems() {
+        return this.$store.getters['atentions/get']
+      }
     }
   }
 

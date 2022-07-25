@@ -35,7 +35,8 @@
             <v-textarea outlined :readonly="readonly" v-model="atencion.tratamiento" label="Tratamiento"></v-textarea>
           </v-col>
           <v-col class="col-12">
-            <v-textarea outlined :readonly="readonly" v-model="atencion.referencias_caja" label="Referencias de la caja"></v-textarea>
+            <v-textarea outlined :readonly="readonly" v-model="atencion.referencias_caja"
+              label="Referencias de la caja"></v-textarea>
           </v-col>
 
           <v-col class="col-12">
@@ -83,7 +84,8 @@
           </v-col>
 
           <v-col class="col-12">
-            <visitas-productos-component :readonly="readonly" v-model="atencion.productos"></visitas-productos-component>
+            <visitas-productos-component :readonly="readonly" v-model="atencion.productos">
+            </visitas-productos-component>
           </v-col>
           <v-col class="col-12">
             <visitasProximaComponent :readonly="readonly" v-model="atencion.proximas"></visitasProximaComponent>
@@ -101,6 +103,7 @@
 </template>
 
 <script>
+  import _ from 'lodash';
   import visitasProductosComponent from './visitasProductosComponent.vue';
   import createReferenciasComponent from './createReferenciasComponent.vue';
   import moment from 'moment';
@@ -111,10 +114,9 @@
     },
 
     props: {
-      openModal:{
-        default:false
+      openModal: {
+        default: false
       },
-      value: Object,
       handler: Function,
       readonly: {
         default: false,
@@ -123,26 +125,34 @@
     },
     data() {
       return {
-        atencion: this.value,
+        atencion: {
+          files: [],
+          socio: {
+            mascotas: []
+          },
+          mascota: {},
+          productos: [],
+          proximas: []
+        },
         proximaConsulta: 'No',
         rules: {
           required: [value => !!value || 'Este campo es requerido.'],
         }
       }
     },
-    created() {},
     mounted() {
-            if(!this.atencion.id) {
-          this.atencion.fecha = moment().format('YYYY-MM-DD');
-          this.atencion.hora = moment().format('HH:MM');
-          this.$forceUpdate()
-        }
-  
+      this.atencion = _.cloneDeep(this.$store.getters['atentions/get'])
+      if (!this.atencion.id) {
+        this.atencion.fecha = moment().format('YYYY-MM-DD');
+        this.atencion.hora = moment().format('HH:MM');
+        this.$forceUpdate()
+      }
+
     },
     methods: {
       checkHandler() {
         if (!this.$refs.form.validate()) return
-        this.$emit('input', this.atencion)
+        this.$store.dispatch('atentions/setSingle',this.atencion)
         this.handler();
 
       },
@@ -155,15 +165,20 @@
       },
 
     },
+    computed:{
+      value() {
+        return this.$store.getters['atentions/get']
+      }
+    },
     watch: {
       value: {
         handler(newValue) {
-          this.atencion = newValue
+          this.atencion = _.cloneDeep(newValue)
         },
         deep: true
       },
-      openModal(value){
-        if(!this.atencion.id) {
+      openModal(value) {
+        if (!this.atencion.id) {
           this.atencion.fecha = moment().format('YYYY-MM-DD');
           this.atencion.hora = moment().format('HH:MM');
           this.$forceUpdate()

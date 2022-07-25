@@ -40,8 +40,9 @@
           </v-col>
           <v-col class="col-md-4 col-12">
             <v-card outlined class="rounded-xl">
-              <v-data-table show-select single-select v-model="selectedMascota" :items-per-page="6" :page="pagePets"
-                :items="value.socio.mascotas" hide-default-footer :headers="headersMascotas">
+              <v-data-table show-select single-select @input="getAtentionsPet($event)"
+                :items-per-page="6" :page="pagePets" :items="value.socio.mascotas" hide-default-footer
+                :headers="headersMascotas">
                 <template v-slot:item.nombre="{ item }">
                   <v-btn outlined block small :to="`/mascotas/editar/${item.id}`">
                     <div class="d-flex justify-space-between align-center" style="width:100%">
@@ -51,7 +52,7 @@
                 </template>
               </v-data-table>
               <v-card-actions class="d-flex justify-center">
-                <v-pagination v-model="pagePets" :length="Math.round(sociosMascotas()/6)"></v-pagination>
+                <v-pagination v-model="pagePets"></v-pagination>
               </v-card-actions>
               <v-card-text>
                 <v-textarea hide-details class="mt-3" label="Observaciones" outlined
@@ -72,7 +73,7 @@
               class="rounded-lg white--text"> </v-text-field>
             <v-select :items="[{
                       text:'Macho',
-                      value: 'Macho'
+                      value: 'M'
                     },{
                       text:'Hembra',
                       value: 'H'
@@ -102,7 +103,8 @@
           </v-btn>
         </v-toolbar>
         <v-card-text class="pa-4 overflow-card">
-          <sociosFormComponent :handler="createSocio" :openModal="createSocioModal" v-model="socio"></sociosFormComponent>
+          <sociosFormComponent :handler="createSocio" :openModal="createSocioModal" v-model="socio">
+          </sociosFormComponent>
         </v-card-text>
         <v-divider></v-divider>
       </v-card>
@@ -110,10 +112,7 @@
     <v-dialog v-model="listSociosModal">
       <SociosListSociosComponent v-model="sociosList" @changePage="getSocios($event)">
         <template v-slot:button="{ item }">
-          <v-btn outlined @click="($e)=>{
-            $emit('input', {...value,socio:item});
-            listSociosModal = false;
-        }" color="primary">
+          <v-btn outlined @click="setSocio(item)" color="primary">
             AGREGAR
           </v-btn>
         </template>
@@ -129,29 +128,12 @@
 <script>
   import moment from 'moment';
   export default {
-    props: {
-      value: {
-        default: {
-          files: [],
-          socio: {
-            mascotas: []
-          },
-          mascota: {},
-          productos: [],
-          proximas: []
-        }
-      }
-    },
     data() {
       return {
         pagePets: 1,
         createSocioModal: false,
         listSociosModal: false,
         searchSocios: {},
-        sociosList: {
-          data: [],
-          length: 0
-        },
         socio: {
           suc: 'CASA CENTRAL',
           socio: 'SI',
@@ -167,7 +149,6 @@
           text: "Paciente",
           value: "nombre"
         }],
-        selectedMascota: [],
         pageItems: 0,
 
       }
@@ -176,22 +157,21 @@
       this.getSocios()
     },
     methods: {
+      getAtentionsPet(petSelected) {
+        if (petSelected.length > 0) {
+          let search = {
+            page: 1,
+            mascota: petSelected[0].id
+          }
+          this.$store.dispatch('atentions/setMascota',petSelected[0])
+          this.$store.dispatch('atentions/findAll', search)
+        } else {
+          this.$store.dispatch('atentions/setMascota',{})
+          this.$store.dispatch('atentions/cleanAll')
+        }
+      },
       async getSocios(page = 1) {
-        this.searchSocios._start = (page - 1) * 25;
-        this.searchSocios._limit = page * 25;
-        this.sociosList.data = []
-        await this.$axios.get('/socios', {
-            params: this.searchSocios
-          })
-          .then(response => {
-            this.sociosList.data = response.data
-          })
-
-        await this.$axios.get('/socios/count')
-          .then(response => {
-            this.sociosList.length = response.data
-            console.log(this.sociosList)
-          })
+        this.$store.dispatch('socios/findAll', {page:page})
 
       },
       async createSocio() {
@@ -222,8 +202,12 @@
           console.log(error);
         });
       },
+      setSocio(socio) {
+        this.$store.dispatch('atentions/setSocio', socio)
+        this.listSociosModal = false
+      },
       sociosMascotas() {
-        if(this.value.socio.mascotas!= undefined){
+        if (this.value.socio.mascotas != undefined) {
           return this.value.socio.mascotas
         }
         return []
@@ -246,27 +230,16 @@
           return monthsDate + ' meses'
         }
       },
-
+    },
+    computed: {
+      sociosList() {
+        return this.$store.getters['socios/getList']
+      },
+      value() {
+        return this.$store.getters['atentions/get']
+      }
     },
     watch: {
-      selectedMascota(val) {
-        if (val.length == 0) {
-          this.$emit('input', {
-            ...this.value,
-            mascota: {}
-          })
-          this.consultaItems = []
-        } else {
-          let edad = moment().diff(this.value.mascota.fecha_nac, 'years')
-          this.$emit('input', {
-            ...this.value,
-            mascota: val[0],
-            edad: edad
-          })
-          this.$emit('mascota', val)
-          this.$emit('getAtencionMascota', val[0])
-        }
-      },  
       searchSocios: {
         handler() {
           this.getSocios()

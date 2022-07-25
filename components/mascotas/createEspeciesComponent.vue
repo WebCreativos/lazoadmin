@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-input>
-      <v-select solo dense hide-details :items="especiesList" label="Nombre del especie" class="rounded-r-0"
-        item-text="nombre" item-value="id" return-object v-model="selectedespecie">
+      <v-select solo dense hide-details :items="especiesList" label="Nombre de la especie" class="rounded-r-0"
+        item-text="nombre" item-value="id" return-object  v-model="selectedespecie">
       </v-select>
       <v-btn class="rounded-l-0 rounded-r-lg" height="40" color="primary" @click="showespeciesModal = true">
         <v-icon>mdi-plus</v-icon>
@@ -43,7 +43,7 @@
         especie: {
           nombre: ""
         },
-        selectedespecie: parseInt(this.value),
+        selectedespecie: {},
         especiesList: [],
         showespeciesModal: false
       }
@@ -52,6 +52,7 @@
       this.getespecies()
     },
     mounted() {
+      this.selectedespecie = this.value
     },
     methods: {
       addEspecie() {
@@ -72,7 +73,8 @@
     },
     watch: {
       selectedespecie(val) {
-        this.$emit('input', val.id)
+        if(val.id)
+          this.$emit('input', val.id)
       }
     }
   }

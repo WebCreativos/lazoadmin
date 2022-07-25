@@ -55,6 +55,7 @@
     },
     methods: {
       addReferencia() {
+        if(!this.checkReferencia()) return
         this.$axios.post(`/referencias`, this.referencia)
           .then((data) => {
             this.referencia.nombre = ""
@@ -72,6 +73,15 @@
               nombre: "Seleccione una referencia"
             })
           })
+      },
+      checkReferencia() {
+        if(this.referencia.nombre == "")
+          return false
+        
+        if(this.referenciasList.find((e)=>e.nombre == this.referencia.nombre))
+          return false
+        
+        return true
       }
     },
     watch: {
