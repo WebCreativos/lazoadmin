@@ -9,6 +9,9 @@
           </v-btn>
         </v-slide-x-reverse-transition>
       </template>
+    <template v-slot:item="data">
+      <b>Nombre:</b> {{data.item.name}} - <b>Direccion:</b> {{data.item.address}} 
+    </template>
     </v-autocomplete>
 </template>
 <script>

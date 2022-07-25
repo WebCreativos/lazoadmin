@@ -86,13 +86,14 @@
     },
     methods: {
       async getSocios(page = 1) {
-        this.search._start = (page - 1) * 25;
-        this.search._limit = page * 25;
+        let search = `?_start=${(page - 1) * 25}&_limit=${page * 25}&_sort=id:desc`;
         this.sociosList.data = []
         this.sociosList.length = 0
-        await this.$axios.get('/socios', {
-            params: this.search
-          })
+        console.log(search)
+        if(this.search.name_contains) {
+          search = `${search}&_where[_or][0][name_contains]=${this.search.name_contains}&_where[_or][1][last_name_contains]=${this.search.name_contains}&_where[_or][2][address_contains]=${this.search.name_contains}&_where[_or][3][user.username_contains]=${this.search.name_contains}`
+        }
+        await this.$axios.get('/socios' + search)
           .then(response => {
             this.sociosList.data = response.data
           })
