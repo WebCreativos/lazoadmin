@@ -135,16 +135,21 @@
       },
       async createAtencion() {
         this.$store.dispatch('atentions/create').then(()=>{
-          this.$store.dispatch('atentions/findAll', {page:1,mascota:this.value.mascota.id})
-          this.$store.dispatch('atentions/cleanSelected')
-          this.formatModal()
+          setTimeout(()=>{
+            this.$store.dispatch('atentions/findAll', {page:1,mascota:this.value.mascota.id})
+            this.$store.dispatch('atentions/cleanSelected')
+            this.formatModal()
+          }, 1000);
         })
       },
       async updateAtencion() {
         this.$store.dispatch('atentions/update').then(()=>{
-        this.$store.dispatch('atentions/findAll', {page:1,mascota:this.value.mascota.id})
-        this.selectedAtencion = []
-        this.formatModal()
+          setTimeout(()=>{
+            this.$store.dispatch('atentions/findAll', {page:1,mascota:this.value.mascota.id})
+            this.selectedAtencion = []
+            this.formatModal()
+          }, 1000);
+
         })
       },
       deleteAtencion() {
