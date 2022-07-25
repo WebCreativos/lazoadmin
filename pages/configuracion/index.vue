@@ -11,6 +11,9 @@
           <v-card-text>
             <configuracionColoresComponent></configuracionColoresComponent>
           </v-card-text>
+          <v-card-text>
+            <configuracionRazasComponent></configuracionRazasComponent>
+          </v-card-text>
 
           <v-card-text>
             <configuracionReferenciasComponent></configuracionReferenciasComponent>
