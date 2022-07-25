@@ -83,19 +83,16 @@
                     </v-text-field>
                   </v-col>
                   <v-col class="col-12 col-md-12">
-                    <v-text-field label="RAZA" class="rounded-lg" outlined dense v-model="socio.mascotas[index].raza">
-                    </v-text-field>
+                      <mascotasRazasComponent v-model="socio.mascotas[index].raza"></mascotasRazasComponent>
                   </v-col>
                   <v-col class="col-12 col-md-12">
-                    <v-text-field label="COLOR" class="rounded-lg" outlined dense v-model="socio.mascotas[index].color">
-                    </v-text-field>
+            <mascotasColoresComponent v-model="socio.mascotas[index].color"></mascotasColoresComponent>
                   </v-col>
                   <v-col class="col-12 col-md-12">
                     <v-text-field type="date" label="Fecha de nacimiento" class="rounded-lg" outlined dense
                       v-model="socio.mascotas[index].fecha_nac">
                     </v-text-field>
                   </v-col>
-
                   <v-col class="col-12 col-md-12">
                     <v-select label="SEXO" :items="[{
                       text:'Macho',
