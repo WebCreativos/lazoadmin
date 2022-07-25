@@ -49,6 +49,8 @@
     },
     methods: {
       async getMascotas(page = 1) {
+        if(this.search.raza == 'Seleccione una opcion')
+          this.$delete(this.search,'raza')
         this.search._start = (page - 1) * 25;
         this.search._limit = page * 25;
         this.mascotasList.data = []

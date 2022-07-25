@@ -65,6 +65,7 @@
         this.$axios.get('/razas')
           .then((data) => {
             this.razasList = data.data
+            this.razasList.unshift({value:'',nombre:'Seleccione una opcion'})
           })
       }
     },
