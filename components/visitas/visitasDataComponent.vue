@@ -84,7 +84,7 @@
           </v-col>
 
           <v-col class="col-12">
-            <visitas-productos-component :readonly="readonly" v-model="atencion.productos">
+            <visitas-productos-component  v-if="!readonly" :readonly="readonly" v-model="atencion.productos">
             </visitas-productos-component>
           </v-col>
           <v-col class="col-12">
