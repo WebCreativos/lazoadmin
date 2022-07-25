@@ -73,7 +73,8 @@
     },
     watch: {
       selectedespecie(val) {
-        this.$emit('input', val.id)
+        if(val!=undefined)
+          this.$emit('input', val.id)
       }
     }
   }
