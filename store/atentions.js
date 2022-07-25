@@ -32,6 +32,7 @@ export const actions = {
   }, params) {
     commit('cleanAtentionList')
     var search = {
+      fecha_lte: moment().format('YYYY-MM-DD'),
       _start: (params.page - 1) * 10,
       _limit: (params.page) * 10,
       ...params
