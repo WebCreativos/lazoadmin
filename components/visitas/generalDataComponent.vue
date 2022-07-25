@@ -171,7 +171,7 @@
         }
       },
       async getSocios(page = 1) {
-        this.$store.dispatch('socios/findAll', {page:page})
+        this.$store.dispatch('socios/findAll', {page:page, name:this.searchSocios.name_contains})
 
       },
       async createSocio() {

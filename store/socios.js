@@ -19,19 +19,14 @@ export const state = () => ({
       commit
     }, params) {
       commit('cleanSociosList')
-      var search = {
-        _sort:'fecha_afiliacion:DESC',
-        _start: (params.page - 1) * 25,
-        _limit: (params.page) * 25,
-        ...params
+      let search = `?_start=${(params.page - 1) * 25}&_limit=${params.page * 25}&_sort=id:desc`;
+      if(params.name_contains) {
+        search = `${search}&_where[_or][0][name_contains]=${params.name_contains}&_where[_or][1][last_name_contains]=${params.name_contains}&_where[_or][2][address_contains]=${params.name_contains}&_where[_or][3][user.username_contains]=${params.name_contains}`
       }
-  
-      delete search['page']
+
       const {
         data: data
-      } = await this.$axios.get(`/socios`, {
-        params: search
-      })
+      } = await this.$axios.get(`/socios` + search)
   
       const {
         data: length
