@@ -13,8 +13,12 @@
           @click="openModalAtencion(updateAtencion, 'ACTUALIZAR VISITA')">
           Modificar visita
         </v-btn>
-        <v-btn class="font-weight-light" :disabled="selectedAtencion.length==0" color="white" @click="deleteAtencion()">
+        <v-btn class="font-weight-light mr-2" :disabled="selectedAtencion.length==0" color="white"
+          @click="deleteAtencion()">
           Eliminar visita
+        </v-btn>
+        <v-btn outlined :disabled="!value.mascota.id" class="white--text font-weight-light" @click="exportData()">
+          Descargar&nbsp;<v-icon>mdi-download</v-icon>
         </v-btn>
       </v-toolbar>
       <v-card-text class="pa-4 rounded-lg">
@@ -30,7 +34,7 @@
               </v-btn>
             </template>
             <template v-slot:item.hora="{ item }">
-              {{formatHour(item.hora)}} 
+              {{formatHour(item.hora)}}
             </template>
             <template v-slot:item.anamnesis="{ item }">
               <generalButtonShowMoreComponent :value="item.anamnesis"
@@ -80,6 +84,10 @@
 <script>
   import _ from 'lodash';
   import moment from 'moment';
+  import {
+    json2excel,
+  } from 'js2excel';
+
   export default {
     props: {},
     data() {
@@ -134,24 +142,64 @@
         }
       },
       async createAtencion() {
-        this.$store.dispatch('atentions/create').then(()=>{
-          setTimeout(()=>{
-            this.$store.dispatch('atentions/findAll', {page:1,mascota:this.value.mascota.id})
+        this.$store.dispatch('atentions/create').then(() => {
+          setTimeout(() => {
+            this.$store.dispatch('atentions/findAll', {
+              page: 1,
+              mascota: this.value.mascota.id
+            })
             this.$store.dispatch('atentions/cleanSelected')
             this.formatModal()
           }, 1000);
         })
       },
       async updateAtencion() {
-        this.$store.dispatch('atentions/update').then(()=>{
-          setTimeout(()=>{
-            this.$store.dispatch('atentions/findAll', {page:1,mascota:this.value.mascota.id})
+        this.$store.dispatch('atentions/update').then(() => {
+          setTimeout(() => {
+            this.$store.dispatch('atentions/findAll', {
+              page: 1,
+              mascota: this.value.mascota.id
+            })
             this.selectedAtencion = []
             this.formatModal()
           }, 1000);
 
         })
       },
+
+      exportData() {
+        this.$axios.get('/atencion', {
+          params: {
+            mascota: this.value.mascota.id
+          }
+        },).then((items) => {
+          let data = items.data.map((item) => {
+            return {
+              Fecha: this.formatDate(item.fecha),
+              Hora: this.formatHour(item.hora),
+              EOG: item.EOG,
+              Mascota: item.mascota.nombre,
+              Referencias: item.referencias,
+              Anamnesis: item.anamnesis,
+              Pronostico: item.pronostico,
+              Tratamiento: item.tratamiento
+            }
+          })
+          try {
+            json2excel({
+              data,
+              name: 'Consultas - ' + this.value.mascota.nombre,
+              formateDate: 'yyyy/mm/dd'
+            });
+          } catch (e) {
+            console.error('export error');
+          }
+
+        })
+
+      },
+
+
       deleteAtencion() {
         this.$axios.delete(`/atencion/${this.atencion.id}`)
           .then(() => {
