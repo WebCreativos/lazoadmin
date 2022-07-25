@@ -181,7 +181,9 @@
     },
     methods: {
       addMascota() {
-        this.$set(this.socio.mascotas, this.socio.mascotas.length, {});
+        this.$set(this.socio.mascotas, this.socio.mascotas.length, {
+          color:{},especie:{},raza:{}
+        });
       },
       deleteMascota() {
         this.$delete(this.socio.mascotas, this.socio.mascotas.length - 1);
