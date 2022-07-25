@@ -134,18 +134,18 @@
         }
       },
       async createAtencion() {
-        console.log("aca")
-        await this.$store.dispatch('atentions/create')
-        this.$store.dispatch('atentions/findAll', {page:1,mascota:this.value.mascota.id})
-        this.$store.dispatch('atentions/cleanSelected')
-        this.formatModal()
+        this.$store.dispatch('atentions/create').then(()=>{
+          this.$store.dispatch('atentions/findAll', {page:1,mascota:this.value.mascota.id})
+          this.$store.dispatch('atentions/cleanSelected')
+          this.formatModal()
+        })
       },
       async updateAtencion() {
-        console.log("aca")
-        await this.$store.dispatch('atentions/update')
+        this.$store.dispatch('atentions/update').then(()=>{
         this.$store.dispatch('atentions/findAll', {page:1,mascota:this.value.mascota.id})
         this.selectedAtencion = []
         this.formatModal()
+        })
       },
       deleteAtencion() {
         this.$axios.delete(`/atencion/${this.atencion.id}`)
