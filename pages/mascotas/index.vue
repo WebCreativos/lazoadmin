@@ -22,6 +22,9 @@
           color="primary">
           EDITAR
         </v-btn>
+        <v-btn class="font-weight-light rounded-lg white--text" color="red" @click="deleteMascota(item.id)">
+          ELIMINAR
+        </v-btn>
       </template>
     </MascotasListComponent>
   </v-container>
@@ -69,6 +72,15 @@
             this.mascotasList.length = response.data
           })
       },
+      deleteMascota(id) {
+        let confirm = window.confirm('Esta seguro que desea eliminar esta mascota?')
+        if (confirm) {
+          this.$axios.delete('/mascotas/' + id)
+            .then(response => {
+              this.getMascotas()
+            })
+        }
+      }
     },
     watch: {
     }

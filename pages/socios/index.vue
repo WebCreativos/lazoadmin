@@ -20,6 +20,9 @@
           color="primary">
           EDITAR
         </v-btn>
+        <v-btn class="font-weight-light rounded-lg white--text" color="red" @click="deleteSocio(item.id)">
+          ELIMINAR
+        </v-btn>
       </template>
     </SociosListSociosComponent>
     <v-dialog v-model="openModalPaymentServices">
@@ -102,6 +105,15 @@
           .then(response => {
             this.sociosList.length = response.data
           })
+      },
+      deleteSocio(id) {
+        let confirm = window.confirm('Esta seguro que desea eliminar este cliente?')
+        if (confirm) {
+          this.$axios.delete('/socios/' + id)
+            .then(response => {
+              this.getSocios()
+            })
+        }
       },
       payServices() {
         this.dataPayment.client.payment_date = moment(this.dataPayment.client.payment_date ?? new Date()).add(this.dataPayment.months, 'months').format('YYYY-MM-DD')
