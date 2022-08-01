@@ -4,7 +4,7 @@ export default {
   mode:'spa',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - frontend',
+    titleTemplate: 'Lazo - Administracion',
     title: 'frontend',
     htmlAttrs: {
       lang: 'en'
@@ -16,7 +16,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/icon.png' }
     ]
   },
 
@@ -47,8 +47,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://api.descuentosya.uy/',
-    //baseURL: 'http://localhost:1337/'
+    //baseURL: 'https://api.zoodevelopment.net/',
+    baseURL: 'http://localhost:1337/'
   },
   auth: {
     autoLogout: true,
@@ -78,7 +78,11 @@ export default {
       user: "/"
     }
   },
-
+  pwa: {
+    icon: {
+      source:'~/icon.png',
+    }
+  },  
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],

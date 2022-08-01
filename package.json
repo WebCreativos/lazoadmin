@@ -12,7 +12,7 @@
     "@nuxtjs/auth": "^4.8.4",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/onesignal": "^3.0.0-beta.16",
-    "@nuxtjs/pwa": "^3.0.0-0",
+    "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.15.1",
     "js2excel": "^1.0.1",
     "lodash": "^4.17.21",

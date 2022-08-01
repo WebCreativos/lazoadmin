@@ -17,7 +17,7 @@
                         outlined label="Cliente activo" class="font-weight-light" v-model="cliente_activo"></v-select>
                     </v-col>
                     -->
-                    <v-col class="col-12 col-md-4">
+                    <v-col class="col-12 col-md-3">
                       <v-menu ref="menu" class="calendar" v-model="menu" transition="scale-transition" offset-y
                         min-width="290px" :close-on-content-click="false">
                         <template v-slot:activator="{ on }">
@@ -39,14 +39,18 @@
                         </v-card>
                       </v-menu>
                     </v-col>
-                    <v-col class="col-md-4">
+                    <v-col class="col-md-3">
                       <v-select outlined dense
                         :items="['Efectivo','Factura','Boleta',{value:'NotaCredito',text:'Nota de credito'},{value:'NotaDebito',text:'Nota de debito'}]"
                         :rules="rules.required" v-model="venta.tipo" label="Tipo"></v-select>
                     </v-col>
-                    <v-col class="col-md-4">
+                    <v-col class="col-md-3">
                       <v-text-field label="Numero de factura (Manual)" outlined dense v-model="venta.codigo" type="number"></v-text-field>
                     </v-col>
+                    <v-col class="col-md-3">
+                      <v-text-field label="Vendedor" outlined dense v-model="venta.vendedor" type="text"></v-text-field>
+                    </v-col>
+
                   </v-row>
                 </v-col>
               </v-row>

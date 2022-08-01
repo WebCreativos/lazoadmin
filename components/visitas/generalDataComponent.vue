@@ -11,8 +11,6 @@
               <v-col class="col-md-12 col-12">
                 <v-text-field label="NOMBRE" readonly outlined dense filled v-model="value.socio.name"
                   class="rounded-lg white--text"> </v-text-field>
-                <v-text-field label="APELLIDO" readonly outlined dense filled v-model="value.socio.last_name"
-                  class="rounded-lg white--text"> </v-text-field>
                 <v-text-field label="NRO CLIENTE" readonly outlined filled dense v-model="value.socio.id"
                   class="rounded-lg white--text"> </v-text-field>
                 <v-text-field label="DIRECCION" readonly outlined dense filled v-model="value.socio.address"

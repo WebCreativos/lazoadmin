@@ -197,7 +197,8 @@
           return {
             Fecha: this.formatDate(item.fecha),
             Hora: this.formatHour(item.hora),
-            Cliente: `${item.socio.name} ${item.socio.last_name}`,
+            Cliente: `${item.socio.name}`,
+            Telefono: `${item.socio.phone}`,
             Mascota: item.mascota.nombre,
             Motivo: item.referencias?.nombre,
           }
