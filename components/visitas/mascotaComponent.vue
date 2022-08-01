@@ -143,6 +143,9 @@
       },
       async createAtencion() {
         this.$store.dispatch('atentions/create').then(() => {
+          if(this.value.fecha_proxima_consulta) {
+            this.addToAgenda()
+          }
           setTimeout(() => {
             this.$store.dispatch('atentions/findAll', {
               page: 1,
@@ -155,6 +158,9 @@
       },
       async updateAtencion() {
         this.$store.dispatch('atentions/update').then(() => {
+          if(this.value.fecha_proxima_consulta) {
+            this.addToAgenda()
+          }
           setTimeout(() => {
             this.$store.dispatch('atentions/findAll', {
               page: 1,
@@ -236,27 +242,27 @@
       },
 
       addToAgenda() {
-        if (this.atencion.hora_proxima_consulta)
-          this.atencion.hora_proxima_consulta = this.atencion.hora_proxima_consulta + ':00.00'
+        if (this.value.hora_proxima_consulta)
+          this.value.hora_proxima_consulta = this.value.hora_proxima_consulta + ':00.00'
 
         var agenda = {
           type: 'consulta',
           consulta: {
-            socio: this.atencion.socio,
+            socio: this.value.socio,
             tipo_consulta: 'Consulta'
           },
-          fecha: this.atencion.fecha_proxima_consulta,
-          hora: this.atencion.hora_proxima_consulta,
-          titulo: 'Nueva consulta para ' + this.atencion.mascota.nombre,
-          detalles: this.atencion.proxima_consulta,
-          referencias: this.atencion.proxima_referencia
+          fecha: this.value.fecha_proxima_consulta,
+          hora: this.value.hora_proxima_consulta,
+          titulo: 'Nueva consulta para ' + this.value.mascota.nombre,
+          detalles: this.value.proxima_consulta,
+          referencias: this.value.proxima_referencia
         }
 
         this.$axios.post('/agendas', agenda).then(data => {
           //clone atencion 
           let proximaAtencion = {
-            socio: this.atencion.socio,
-            mascota: this.atencion.mascota,
+            socio: this.value.socio,
+            mascota: this.value.mascota,
             fecha: agenda.fecha,
             hora: agenda.hora ?? "07:00:00.00",
             detalles: agenda.detalles,

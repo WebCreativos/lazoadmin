@@ -38,15 +38,17 @@
           </v-col>
           <v-col class="col-md-4 col-12">
             <v-card outlined class="rounded-xl">
-              <v-data-table show-select single-select @input="getAtentionsPet($event)"
-                :items-per-page="6" :page="pagePets" :items="value.socio.mascotas" hide-default-footer
-                :headers="headersMascotas">
+              <v-data-table show-select single-select @input="getAtentionsPet($event)" :items-per-page="6"
+                :page="pagePets" :items="value.socio.mascotas" hide-default-footer :headers="headersMascotas">
                 <template v-slot:item.nombre="{ item }">
                   <v-btn outlined block small :to="`/mascotas/editar/${item.id}`">
                     <div class="d-flex justify-space-between align-center" style="width:100%">
                       {{item.nombre}}<v-icon>mdi-pen</v-icon>
                     </div>
                   </v-btn>
+                </template>
+                <template v-slot:item.state="{ item }">
+                  {{setState(item)}}
                 </template>
               </v-data-table>
               <v-card-actions class="d-flex justify-center">
@@ -144,6 +146,9 @@
           text: 'ID Paciente',
           value: 'id',
         }, {
+          text: '',
+          value: 'state'
+        }, {
           text: "Paciente",
           value: "nombre"
         }],
@@ -161,15 +166,18 @@
             page: 1,
             mascota: petSelected[0].id
           }
-          this.$store.dispatch('atentions/setMascota',petSelected[0])
+          this.$store.dispatch('atentions/setMascota', petSelected[0])
           this.$store.dispatch('atentions/findAll', search)
         } else {
-          this.$store.dispatch('atentions/setMascota',{})
+          this.$store.dispatch('atentions/setMascota', {})
           this.$store.dispatch('atentions/cleanAll')
         }
       },
       async getSocios(page = 1) {
-        this.$store.dispatch('socios/findAll', {page:page, name:this.searchSocios.name_contains})
+        this.$store.dispatch('socios/findAll', {
+          page: page,
+          name: this.searchSocios.name_contains
+        })
 
       },
       async createSocio() {
@@ -209,6 +217,20 @@
           return this.value.socio.mascotas
         }
         return []
+      },
+      setState(mascota) {
+        let ActualDate = moment()
+        if (mascota.deceso != "1000-01-01") {
+          if (ActualDate.isAfter(mascota.deceso)) {
+            return '#'
+          } else {
+          }
+        }
+        if(mascota.socio == "SI") {
+          return 'SOCIO'
+        } else {
+          return 'NO SOCIO'
+        }
       },
       setSocioName(mascota) {
         if (!mascota.socio) return
