@@ -258,7 +258,7 @@
             socio: this.atencion.socio,
             mascota: this.atencion.mascota,
             fecha: agenda.fecha,
-            hora: agenda.hora,
+            hora: agenda.hora ?? "07:00:00.00",
             detalles: agenda.detalles,
             referencias: agenda.referencias,
           }
