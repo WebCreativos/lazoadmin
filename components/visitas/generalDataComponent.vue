@@ -52,7 +52,7 @@
                 </template>
               </v-data-table>
               <v-card-actions class="d-flex justify-center">
-                <v-pagination v-model="pagePets"></v-pagination>
+                <v-pagination v-model="pagePets" :length="cantPets()"></v-pagination>
               </v-card-actions>
               <v-card-text>
                 <v-textarea hide-details class="mt-3" label="Observaciones" outlined
@@ -179,6 +179,13 @@
           name: this.searchSocios.name_contains
         })
 
+      },
+      cantPets() {
+        if(this.value?.socio?.mascotas?.length > 0) {
+          return Math.ceil(this.value.socio.mascotas.length/6)
+        } else {
+          return 0
+        }
       },
       async createSocio() {
         if (!this.socio.user.username) {
