@@ -63,7 +63,7 @@
         </v-card>
       </v-card-text>
       <v-card-actions class="d-flex justify-center">
-        <v-pagination :total-visible="10" :length="Math.ceil(value.length/10)" v-model="page"></v-pagination>
+        <v-pagination :total-visible="10" :length="Math.ceil(consultaItems.length/10)" v-model="page"></v-pagination>
       </v-card-actions>
     </v-card>
     <v-dialog v-model="modalData.openModal" width="80%" height="auto">
@@ -333,11 +333,18 @@
     watch: {
       selectedAtencion(val) {
         if (val.length > 0) {
-          this.$store.dispatch('atentions/setSingle', JSON.parse(JSON.stringify(val[0])))
+          let atencion = JSON.parse(JSON.stringify(val[0]))
+          delete atencion.socio
+          this.$store.dispatch('atentions/setSingle', atencion)
         } else {
-          console.log("aca")
           this.$store.dispatch('atentions/cleanSelected')
         }
+      },
+      page(val){
+            this.$store.dispatch('atentions/findAll', {
+              page: val,
+              mascota: this.value.mascota.id
+            })
       },
       value: {
         handler(newValue) {
