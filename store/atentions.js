@@ -195,8 +195,8 @@ export const mutations = {
   },
 
   setSingle(state, atention) {
-    console.log(atention.hora,'hora')
-    state.atention = atention
+    state.atention = {...state.atention,...atention}
+    console.log(state.atention);
     state.atention.hora = moment(atention.hora,'HH:mm').format('HH:mm:ss.SSS')
   },
 

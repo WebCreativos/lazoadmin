@@ -70,7 +70,7 @@
       <v-toolbar color="primary" class="elevation-0 white--text font-weight-thin">
         <v-toolbar-title>{{modalData.title}}</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon @click="modalData.openModal = false">
+        <v-btn icon @click="closeModalAtencion()">
           <v-icon color="white">mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
@@ -138,8 +138,14 @@
         this.modalData.readonly = readonly
         this.modalData.openModal = true;
         if (atencion) {
+          delete atencion.socio
+          console.log(atencion)
           this.$store.dispatch('atentions/setSingle', atencion)
         }
+      },
+      closeModalAtencion(){
+        this.modalData.openModal = false;
+        this.$store.dispatch('atentions/setSingle', {id:undefined})
       },
       async createAtencion() {
         this.$store.dispatch('atentions/create').then(() => {
@@ -312,6 +318,7 @@
     computed: {
       value() {
         let atencion = this.$store.getters['atentions/get']
+        console.log(atencion)
         if (atencion) {
           return atencion
         }
