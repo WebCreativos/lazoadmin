@@ -163,8 +163,8 @@
         let finalHour = hour.split(':')
         return `${finalHour[0]}:${finalHour[1]}`
       },
-      showModalAtencion(value) {
-        this.atencion = value
+      showModalAtencion(atencion) {
+        this.$store.dispatch('atentions/setSingle', atencion)
         this.openAtencionModal = true
       },
       exportData() {
