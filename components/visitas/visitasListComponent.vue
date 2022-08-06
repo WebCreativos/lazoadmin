@@ -113,6 +113,8 @@
         }
         if(this.search.fecha) {
           query = `${query}&_where[fecha]=${this.search.fecha}`
+        } else {
+          query = `${query}&_where[fecha_lte]=${moment().format('YYYY-MM-DD')}`
         }
         this.$axios.get(`/atencion?${query}`)
           .then((data) =>{
