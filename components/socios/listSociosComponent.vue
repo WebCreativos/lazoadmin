@@ -49,7 +49,7 @@
             text: 'DNI',
             value: 'user.username'
           }, {
-            text: 'Ultima cuota paga',
+            text: 'Ultima mes cubierto',
             value: 'payment_date'
           },
           {
@@ -65,7 +65,7 @@
     methods: {
       formatDate(date) {
         if (date && date != '1000-01-01') {
-          return moment(date).format('DD/MM/YYYY')
+          return moment(date).format('MM/YYYY')
         } else {
           return 'Pago aun no realizado'
         }
