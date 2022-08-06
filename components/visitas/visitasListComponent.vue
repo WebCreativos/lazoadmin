@@ -97,7 +97,10 @@
         search: {}
       }
     },
-    created() {
+    created(){
+              this.getAtenciones()
+    },
+    mounted() {
       this.$root.$on('generatedSale',()=>{
         this.getAtenciones()
       })
