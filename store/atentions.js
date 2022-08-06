@@ -42,7 +42,10 @@ export const actions = {
     const {
       data: data
     } = await this.$axios.get(`/atencion`, {
-      params: search
+      params: {
+        ...search,
+        _sort:'fecha:desc'
+      }
     })
 
     const {

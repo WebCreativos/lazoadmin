@@ -25,7 +25,7 @@
             </v-text-field>
             <v-text-field label="LOCALIDAD" class="rounded-lg" outlined dense v-model="socio.localidad">
             </v-text-field>
-            <v-text-field label="RAZON SOCIAL (Opcional)" type="number" v-model="socio.rut" class="rounded-lg" outlined
+            <v-text-field label="RUT (Opcional)" type="number" v-model="socio.rut" class="rounded-lg" outlined
               dense>
             </v-text-field>
             <v-select label="TIPO" :items="['Cliente final']" v-model="socio.tipo" class="rounded-lg" outlined dense>

@@ -135,7 +135,7 @@
         this.search._limit = 25*(this.items.page)
         this.items.data = []
         await this.$axios.get('/atencion', {
-            params: this.search
+            params: {...this.search,_sort:'fecha:desc'}
           })
           .then(response => {
             this.items.data = response.data

@@ -245,6 +245,11 @@
           this.search.fecha_gte = moment().startOf('month').format('YYYY-MM-DD')
           this.search.fecha_lte = moment().endOf('month').format('YYYY-MM-DD')
         }
+        //remove one day with moment
+        if(this.search.fecha)
+          this.search.fecha = moment(this.search.fecha).subtract(1, "days").format("YYYY-MM-DD")
+
+
         this.$axios.get('/agendas', {
           params: this.search
         }).then(data => {

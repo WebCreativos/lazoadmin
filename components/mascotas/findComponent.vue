@@ -39,7 +39,7 @@
         // Lazily load input items
         const query = `?_where[_or][0][nombre_contains]=${val}`
         this.$axios
-          .get(`/mascotas/${query}`)
+          .get(`/mascotas/search/${query}`)
           .then(data => {
             this.mascotas = data.data;
           })
