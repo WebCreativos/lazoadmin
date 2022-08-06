@@ -98,7 +98,9 @@
       }
     },
     created() {
-      this.getAtenciones()
+      this.$root.$on('generatedSale',()=>{
+        this.getAtenciones()
+      })
     },
     methods: {
       formatDate(date) {
