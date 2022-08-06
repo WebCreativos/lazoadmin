@@ -87,7 +87,10 @@
         }
         this.search.fecha_lte = moment().format('YYYY-MM-DD')
         this.$axios.get('/ventas',{
-          params:this.search
+          params:{
+            ...this.search,
+            _sort:'fecha:desc'
+          }
         })
           .then(response => {
             this.ventas = response.data
