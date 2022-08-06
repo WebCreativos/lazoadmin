@@ -36,6 +36,7 @@
 </template>
 
 <script>
+  import moment from 'moment';
   export default {
     data() {
       return {
@@ -69,6 +70,11 @@
     created(){
       this.getVentas()
     },
+    mounted(){
+      this.$root.$on('generatedSale',()=>{
+        this.getVentas()
+      })
+    },
     methods: {
       checkTotal(productos) {
         return productos.reduce((a, b) => {
@@ -79,6 +85,7 @@
         if(this.search.codigo == '') {
           this.$delete(this.search,'codigo')
         }
+        this.search.fecha_lte = moment().format('YYYY-MM-DD')
         this.$axios.get('/ventas',{
           params:this.search
         })

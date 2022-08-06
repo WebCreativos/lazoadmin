@@ -400,6 +400,7 @@
                 cliente: {},
                 productos: []
               },
+                    this.$root.$emit('generatedSale');
               setTimeout(() => {
                 this.showVentasList = true
               }, 500);
