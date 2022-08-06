@@ -92,9 +92,6 @@
           text: "Anamnesis",
           value: "anamnesis"
         }, {
-          text: "Pronostico",
-          value: "pronostico"
-        }, {
           text: "Tratamiento",
           value: "tratamiento"
         }],

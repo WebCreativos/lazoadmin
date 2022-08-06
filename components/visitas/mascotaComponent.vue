@@ -120,9 +120,6 @@
           text: "Anamnesis",
           value: "anamnesis"
         }, {
-          text: "Pronostico",
-          value: "pronostico"
-        }, {
           text: "Examenes",
           value: "examenes"
         }, {
