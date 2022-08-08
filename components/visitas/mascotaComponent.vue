@@ -212,7 +212,10 @@
       deleteAtencion() {
         this.$axios.delete(`/atencion/${this.atencion.id}`)
           .then(() => {
-            this.$emit('getAtencionMascota', this.atencion.mascota)
+            this.$store.dispatch('atentions/findAll', {
+              page: 1,
+              mascota: this.value.mascota.id
+            })
             this.selectedAtencion = []
           })
       },

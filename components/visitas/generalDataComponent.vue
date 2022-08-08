@@ -32,6 +32,11 @@
                       <v-icon>mdi-plus</v-icon> cliente
                     </v-btn>
                   </v-col>
+                  <v-col class="col-12">
+                    <v-btn block class="white--text" color="gd-primary-to-right font-weight-light rounded-lg" :disabled="!value.socio.id" :to="`/socios/editar/${value.socio.id}`">
+                      <v-icon>mdi-pencil</v-icon> Editar cliente
+                    </v-btn>
+                  </v-col>
                 </v-row>
               </v-col>
             </v-row>
