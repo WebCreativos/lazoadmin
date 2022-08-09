@@ -114,7 +114,7 @@
           return moment(date).format('DD/MM/YYYY')
         return "Seleccione una fecha"
       },
-      getAtenciones() {
+      async getAtenciones() {
         var query = "estado=Pendiente"
         if (this.search.search) {
           query =
