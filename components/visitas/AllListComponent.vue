@@ -32,7 +32,7 @@
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
-        <v-data-table :headers="headers" hide-default-footer :items="items.data">
+        <v-data-table :headers="headers" hide-default-footer :items="items.data" :items-per-page="25">
           <template v-slot:item.fecha="{ item }">
               <v-btn outlined small @click="showModalAtencion(item)">
                 <v-icon>mdi-magnify</v-icon> &nbsp;{{formatDate(item.fecha)}}

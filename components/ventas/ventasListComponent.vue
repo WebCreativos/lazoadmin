@@ -20,7 +20,7 @@
     <v-card-text>
       <v-card outlined class="rounded-xl">
         <v-card-text>
-          <v-data-table hide-default-footer :headers="headers" :items="ventas">
+          <v-data-table hide-default-footer :headers="headers" :items="ventas" :items-per-page="-1">
             <template v-slot:item.cliente="{ item }">
               {{item.cliente.nombre}} {{item.cliente.nombre}}
             </template>
