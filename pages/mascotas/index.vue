@@ -4,7 +4,7 @@
       <template v-slot:extraFields>
         <v-row>
           <v-col class="col-md-5">
-            <MascotasFindComponent v-model="search.nombre_contains"></MascotasFindComponent>
+            <v-text-field v-model="search.nombre_contains" label="Nombre" outlined dense></v-text-field>
           </v-col>
           <v-col class="col-md-5">
             <mascotasRazasComponent v-model="search.raza"></mascotasRazasComponent>

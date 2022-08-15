@@ -46,6 +46,7 @@
             })
       },
       editSocio() {
+          this.$delete(this.socio,'published_at')
           this.$axios.put(`/socios/${this.socio.id}`, this.socio).then(response => {
             this.createSocioModal = true
           })

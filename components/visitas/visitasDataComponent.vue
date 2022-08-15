@@ -40,11 +40,11 @@
           </v-col>
 
           <v-col class="col-12">
-            <v-select outlined :readonly="readonly" v-model="proximaConsulta" :items="['Si','No']"
+            <v-select outlined :readonly="readonly" v-model="atencion.proxima_consulta" :items="['Si','No']"
               label="Tendra proxima consulta?"></v-select>
           </v-col>
           <v-col class="col-12">
-            <v-card class="rounded-lg" outlined v-show="proximaConsulta == 'Si'">
+            <v-card class="rounded-lg" outlined v-show="atencion.proxima_consulta == 'Si'">
               <v-card-title class="font-weight-light">Proxima consulta</v-card-title>
               <v-card-text>
                 <v-row>
