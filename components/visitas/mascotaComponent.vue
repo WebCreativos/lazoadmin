@@ -41,8 +41,8 @@
                 :callback="openModalAtencion.bind(null,()=>{}, 'VER VISITA',item, true)">
               </generalButtonShowMoreComponent>
             </template>
-            <template v-slot:item.pronostico="{ item }">
-              <generalButtonShowMoreComponent :value="item.pronostico"
+            <template v-slot:item.EOG="{ item }">
+              <generalButtonShowMoreComponent :value="item.EOG"
                 :callback="openModalAtencion.bind(null,()=>{}, 'VER VISITA',item, true)">
               </generalButtonShowMoreComponent>
             </template>

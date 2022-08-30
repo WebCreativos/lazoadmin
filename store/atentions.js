@@ -65,8 +65,6 @@ export const actions = {
       if (state.atention.proxima_consulta) {
         dispatch('addToAgenda')
       }
-      await dispatch('updateMascota')
-
       let uploadFiles = state.atention.files.filter((file) => file instanceof File)
 
       dispatch('uploadFile',{id:response.data.id, files:uploadFiles})

@@ -48,12 +48,30 @@
         search:{}
       }
     },
-    created() {},
+    created() {
+      this.$store.dispatch('atentions/cleanAll')
+      this.$store.dispatch('atentions/cleanSingle')
+      this.$store.dispatch('atentions/cleanSelected')
+      this.checkHiperLinks()
+    },
+    methods:{
+      checkHiperLinks(){
+        if(this.$route.query.socio){
+          this.$axios.get(`/socios/${this.$route.query.socio}`).then(data=>{
+            this.$store.dispatch('atentions/setSocio', data.data)
+            if(this.$route.query.mascota) {
+              let hiperLinkPet = data.data.mascotas.find((p)=>p.id == this.$route.query.mascota)
+              this.$store.dispatch('atentions/setMascota', hiperLinkPet)
+            }
+          })
+        }
+      }
+    },
     computed: {
       consultaItems() {
         return this.$store.getters['atentions/get']
       }
-    }
+    },
   }
 
 </script>

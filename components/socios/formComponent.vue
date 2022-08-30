@@ -16,7 +16,7 @@
           </v-col>
           <v-col class="col-12 col-md-6">
             <v-text-field label="DOCUMENTO" type="number" class="rounded-lg" outlined dense
-              v-model="socio.user.username">
+              v-model="socio.doc">
             </v-text-field>
             <v-text-field label="DIRECCION" class="rounded-lg" outlined dense v-model="socio.address">
             </v-text-field>
@@ -40,15 +40,11 @@
             </v-select>
             <v-select label="SUCURSAL" :items="['CASA CENTRAL']" v-model="socio.suc" class="rounded-lg" outlined dense>
             </v-select>
-            <v-text-field label="TELEFONO" type="number" class="rounded-lg" outlined dense v-model="socio.phone">
+            <v-text-field label="TELEFONO" type="text" class="rounded-lg" outlined dense v-model="socio.phone">
             </v-text-field>
             <v-text-field label="CORREO  (Opcional)" type="email" class="rounded-lg" outlined dense
               v-model="socio.email">
             </v-text-field>
-
-            <v-text-field label="PASSWORD" class="rounded-lg" outlined dense v-model="socio.user.password">
-            </v-text-field>
-
           </v-col>
           <template v-if="socio.socio == 'Si'">
             <v-col class="col-md-6">

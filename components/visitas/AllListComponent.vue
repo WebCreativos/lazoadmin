@@ -41,6 +41,9 @@
           <template v-slot:item.socio.name="{ item }">
             {{item.socio.name}} {{item.socio.last_name}}
           </template>
+          <template v-slot:item.clientName="{ item }">
+            {{clientName(item.mascota)}}
+          </template>
 
           <template v-slot:item.hora="{ item }">
             {{formatHour(item.hora)}}
@@ -82,6 +85,9 @@
         }, {
           text: "EOG",
           value: "EOG"
+        }, {
+          text: "Nombre del cliente",
+          value: "socio.name"
         }, {
           text: "Nombre de la mascota",
           value: "mascota.nombre"
@@ -163,6 +169,11 @@
       showModalAtencion(atencion) {
         this.$store.dispatch('atentions/setSingle', atencion)
         this.openAtencionModal = true
+      },
+      clientName(pet){
+        if(pet.socios){
+          return pet.socios[0].name
+        }
       },
       exportData() {
         console.log(this.items)

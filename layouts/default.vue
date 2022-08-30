@@ -16,15 +16,36 @@
 
           </v-list-item-content>
         </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
-              active-class="btn-navigation-active" to="/atencion">
-              <v-icon>mdi-doctor</v-icon><br>
-              <span>ATENCION</span>
-            </v-btn>
-          </v-list-item-content>
-        </v-list-item>
+
+        <v-list-group no-action append-icon="">
+            <template v-slot:activator>
+              <v-list-item-content>
+                    <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+                  active-class="btn-navigation-active">
+                  <v-icon>mdi-doctor</v-icon><br>
+                  <span>ATENCIONES</span>
+                </v-btn>
+              </v-list-item-content>
+            </template>
+            <v-list-item class="pl-12" to="/atencion">
+              <v-list-item-content>
+                <v-btn text color="primary" height="50" width="50" to="/atencion" class="btn-navigation"
+                  active-class="btn-navigation-active"  exact>
+                  <v-icon>mdi-doctor</v-icon>
+                  <span>Nueva atencion</span>
+                </v-btn>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item class="pl-12" link to="/atencion/antiguo" >
+              <v-list-item-content>
+                <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+                  active-class="btn-navigation-active" to="/atencion/antiguo"  exact>
+                  <v-icon>mdi-format-list-bulleted</v-icon>
+                  <span>Cons. antiguas</span>
+                </v-btn>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
         <v-list-item>
           <v-list-item-content>
             <v-btn text color="primary" height="50" width="50" class="btn-navigation"

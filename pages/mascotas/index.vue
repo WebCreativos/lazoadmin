@@ -3,11 +3,15 @@
     <MascotasListComponent @changePage="getMascotas($event)" v-model="mascotasList">
       <template v-slot:extraFields>
         <v-row>
-          <v-col class="col-md-5">
+          <v-col class="col-md-4">
             <v-text-field v-model="search.nombre_contains" label="Nombre" outlined dense></v-text-field>
           </v-col>
-          <v-col class="col-md-5">
+          <v-col class="col-md-4">
             <mascotasRazasComponent v-model="search.raza"></mascotasRazasComponent>
+          </v-col>
+          <v-col class="col-md-2 col-sm-2 col-12">
+            <v-switch class="mt-0" hide-details v-model="search.old_pet" default="false" label="Masc. antigua">
+            </v-switch>
           </v-col>
           <v-col class="col-md-2">
             <v-btn block color="gd-primary-to-right" @click="getMascotas()"
@@ -52,8 +56,8 @@
     },
     methods: {
       async getMascotas(page = 1) {
-        if(this.search.raza == 'Seleccione una opcion')
-          this.$delete(this.search,'raza')
+        if (this.search.raza == 'Seleccione una opcion')
+          this.$delete(this.search, 'raza')
         this.search._start = (page - 1) * 25;
         this.search._limit = page * 25;
         this.mascotasList.data = []
@@ -82,8 +86,7 @@
         }
       }
     },
-    watch: {
-    }
+    watch: {}
   }
 
 </script>

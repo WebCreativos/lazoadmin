@@ -44,7 +44,7 @@
     <v-card-text>
       <v-card outlined class="rounded-xl">
         <v-card-text>
-          <v-data-table hide-default-footer :headers="headers" :items="atenciones" :items-per-page="25">
+          <v-data-table hide-default-footer :headers="headers" :items="atenciones" :items-per-page="-1">
             <template v-slot:item.actions="{ item }">
               <slot name="button" :item="item"></slot>
             </template>
@@ -59,6 +59,7 @@
   </v-card>
 </template>
 <script>
+  var qs = require('qs');
   import moment from 'moment'
   export default {
     data() {
@@ -115,27 +116,54 @@
         return "Seleccione una fecha"
       },
       async getAtenciones() {
-        var query = "estado=Pendiente"
+        var query = "estado=Pendiente&_sort:fecha:desc"
+        let params = {
+          estado: 'Pendiente',
+          _where: {
+            _or: []
+          }
+        }
         if (this.search.search) {
-          query =
-            `&_where[_or][0][socio.name_contains]=${this.search.search}&_where[_or][1][mascota.nombre_contains]=${this.search.search}`
+          console.log(params._where._or)
+          params._where._or.push({
+            'socio.name_contains': this.search.search
+          })
+          params._where._or.push({
+            'mascota.nombre_contains': this.search.search
+          })
         }
         if (this.search.fecha) {
-          query = `${query}&_where[fecha]=${this.search.fecha}`
+          params._where = {
+            ...params._where,
+            fecha: this.search.fecha
+          }
         } else {
-          query = `${query}&_where[fecha_lte]=${moment().format('YYYY-MM-DD')}`
+          params._where = {
+            ...params._where,
+            fecha: moment().format('YYYY-MM-DD')
+          }
         }
-        await this.$axios.get(`/atencion?${query}`)
+
+        await this.$axios.get(`/atencion`, {
+            params: {
+              ...params,
+              _sort: 'fecha:desc'
+            },
+            paramsSerializer: params => {
+              return qs.stringify(params, {
+                arrayFormat: 'brackets'
+              })
+            }
+          })
           .then((data) => {
             this.atenciones = data.data
           })
-        await this.$axios.get(`/atencion/count?${query}`)
-          .then((data) => {
-            this.atenciones.length = data.data
-          })
       },
-      page: {
 
+    },
+    watch: {
+      page() {
+        this.getAtenciones()
       }
 
     }

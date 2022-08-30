@@ -1,6 +1,6 @@
 <template>
   <div v-if="value">
-    <span v-show="value.length>100">
+    <span v-show="value.length>50">
       {{value.substr(0,50)}}...&nbsp;
       <a @click="callback()">
         Ver mas

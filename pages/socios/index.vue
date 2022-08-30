@@ -2,7 +2,21 @@
   <v-container fluid>
     <SociosListSociosComponent @changePage="getSocios($event)" v-model="sociosList">
       <template v-slot:extraFields>
-        <SociosFindSociosComponent v-model="search.name_contains"></SociosFindSociosComponent>
+        <v-row>
+          <v-col class="col-md-11 col-sm-10 col-12">
+            <SociosFindSociosComponent v-model="search.name_contains"></SociosFindSociosComponent>
+
+          </v-col>
+          <v-col class="col-md-1 col-sm-2 col-12">
+            <v-switch
+            class="mt-0"
+            hide-details
+      v-model="search.old_client"
+      default="false"
+      label="C. antiguo"
+    ></v-switch>
+          </v-col>
+        </v-row>
       </template>
       <template v-slot:buttonTitle>
         <v-btn to="/socios/registro" class="font-weight-light rounded-lg white--text" color="gd-primary-to-right">
@@ -75,7 +89,8 @@
           client: {}
         },
         search: {
-          _sort:'id:desc'
+          _sort:'id:desc',
+          old_client: false
         },
         sociosList: {
           data: [],
@@ -89,7 +104,7 @@
     },
     methods: {
       async getSocios(page = 1) {
-        let search = `?_start=${(page - 1) * 25}&_limit=${page * 25}&_sort=id:desc`;
+        let search = `?_start=${(page - 1) * 25}&_limit=${page * 25}&_sort=id:desc&old_client=${this.search.old_client}`;
         this.sociosList.data = []
         this.sociosList.length = 0
         console.log(search)

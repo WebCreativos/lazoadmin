@@ -2,7 +2,7 @@
   <v-card class="rounded-xl">
     <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text font-weight-thin">
       <v-toolbar-title>
-        MAscotas
+        Mascotas
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <slot name="buttonTitle"></slot>
@@ -12,8 +12,13 @@
     </v-card-title>
     <v-card-text>
       <v-data-table :items="value.data" :headers="headers" :items-per-page="-1" hide-default-footer>
-        <template v-slot:item.payment_date="{ item }">
-          {{formatDate(item.payment_date)}}
+        <template v-slot:item.nombre="{ item }" >
+          <router-link v-if="item.socios.length>0" small block text :to="`/atencion/?mascota=${item.id}&socio=${item.socios[0].id}`">
+            {{ item.nombre }}
+          </router-link>
+          <span v-else>
+            {{ item.nombre }}
+          </span>
         </template>
         <template v-slot:item.actions="{ item }">
           <slot name="button" :item="item"></slot>

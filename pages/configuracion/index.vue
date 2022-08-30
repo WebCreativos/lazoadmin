@@ -46,24 +46,43 @@
                   </template>
 
                   <template v-slot:item.permisos.atencion={item}>
-                    <v-icon color="success" v-if="item.permisos.atencion">mdi-check</v-icon>
+                    <v-icon color="success" v-if="item.permisos && item.permisos.atencion">mdi-check</v-icon>
                     <v-icon color="red" v-else>mdi-close</v-icon>
                   </template>
                   <template v-slot:item.permisos.socios={item}>
-                    <v-icon color="success" v-if="item.permisos.socios">mdi-check</v-icon>
+                    <v-icon color="success" v-if="item.permisos && item.permisos.socios">mdi-check</v-icon>
                     <v-icon color="red" v-else>mdi-close</v-icon>
                   </template>
 
                   <template v-slot:item.permisos.agenda={item}>
-                    <v-icon color="success" v-if="item.permisos.agenda">mdi-check</v-icon>
+                    <v-icon color="success" v-if="item.permisos && item.permisos.agenda">mdi-check</v-icon>
                     <v-icon color="red" v-else>mdi-close</v-icon>
                   </template>
 
                   <template v-slot:item.permisos.venta={item}>
-                    <v-icon color="success" v-if="item.permisos.venta">mdi-check</v-icon>
+                    <v-icon color="success" v-if="item.permisos && item.permisos.venta">mdi-check</v-icon>
                     <v-icon color="red" v-else>mdi-close</v-icon>
                   </template>
 
+                </v-data-table>
+              </v-card-text>
+            </v-card>
+
+          </v-card-text>
+          <v-card-text>
+            <v-card class="rounded-xl" outlined>
+              <v-toolbar color="gd-primary-to-right white--text" class="elevation-0">
+                <v-toolbar-title class="font-weight-light">
+                  Logs
+                </v-toolbar-title>
+              </v-toolbar>
+              <v-card-text>
+                <v-data-table :items="logsList" :headers="headerLogs" hide-default-footer>
+                  <template v-slot:item.eventType={item}>
+                    <v-chip v-if="item.eventType=='Create'" color="success" class="white--text font-weight-regular" label>Nuevo registro</v-chip>
+                    <v-chip v-else-if="item.eventType=='Update'" color="blue" class="white--text font-weight-regular" label>Registro actualizado</v-chip>
+                    <v-chip v-else-if="item.eventType=='Delete'" color="red" class="white--text font-weight-regular" label>Registro eliminado</v-chip>
+                    </template>
                 </v-data-table>
               </v-card-text>
             </v-card>
@@ -240,6 +259,22 @@
           text: 'Editar',
           align: 'right'
         }],
+        headerLogs:[
+          {
+            value: 'eventLevel',
+            text: 'Nivel de evento',
+          },{
+            value: 'collectionName',
+            text: 'Coleccion',
+          },{
+            value: 'eventType',
+            text: 'Tipo de evento',
+          },{
+            value: 'eventDate',
+            text: 'Fecha',
+          }
+        ],
+        logsList:[],
         users: [],
         searchFacturas: {},
         searchConsultas: {}
@@ -249,6 +284,7 @@
     created() {
       this.getConfiguracion()
       this.getUsers()
+      this.getLogs()
       this.searchFacturas.fecha_gte = moment().startOf('month').format('YYYY-MM-DD')
       this.searchFacturas.fecha_lte = moment().endOf('month').format('YYYY-MM-DD')
       this.searchConsultas.fecha_gte = moment().startOf('month').format('YYYY-MM-DD')
@@ -260,6 +296,15 @@
         this.$axios.get('/configuracions')
           .then(response => {
             this.configuracion = response.data[response.data.length - 1] || {}
+          })
+          .catch(error => {
+            console.log(error);
+          })
+      },
+      getLogs(){
+        this.$axios.get('/logs')
+          .then(response => {
+            this.logsList = response.data
           })
           .catch(error => {
             console.log(error);

@@ -33,7 +33,8 @@
                     </v-btn>
                   </v-col>
                   <v-col class="col-12">
-                    <v-btn block class="white--text" color="gd-primary-to-right font-weight-light rounded-lg" :disabled="!value.socio.id" :to="`/socios/editar/${value.socio.id}`">
+                    <v-btn block class="white--text" color="gd-primary-to-right font-weight-light rounded-lg"
+                      :disabled="!value.socio.id" :to="`/socios/editar/${value.socio.id}`">
                       <v-icon>mdi-pencil</v-icon> Editar cliente
                     </v-btn>
                   </v-col>
@@ -186,8 +187,8 @@
 
       },
       cantPets() {
-        if(this.value?.socio?.mascotas?.length > 0) {
-          return Math.ceil(this.value.socio.mascotas.length/6)
+        if (this.value ?.socio ?.mascotas ?.length > 0) {
+          return Math.ceil(this.value.socio.mascotas.length / 6)
         } else {
           return 0
         }
@@ -235,10 +236,9 @@
         if (mascota.deceso != "1000-01-01") {
           if (ActualDate.isAfter(mascota.deceso)) {
             return '#'
-          } else {
-          }
+          } else {}
         }
-        if(mascota.socio == "SI") {
+        if (mascota.socio == "S") {
           return 'SOCIO'
         } else {
           return 'NO SOCIO'
@@ -246,7 +246,7 @@
       },
       setSocioName(mascota) {
         if (!mascota.socio) return
-        return mascota.socio + ' es socio'
+        return (mascota.socio=='S')?  'Si': 'No' + ' es socio'
       },
       checkDate(date) {
         if (date == "1000-01-01") return "-"
