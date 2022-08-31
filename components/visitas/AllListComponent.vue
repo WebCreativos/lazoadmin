@@ -38,9 +38,6 @@
                 <v-icon>mdi-magnify</v-icon> &nbsp;{{formatDate(item.fecha)}}
               </v-btn>
           </template>
-          <template v-slot:item.socio.name="{ item }">
-            {{item.socio.name}} {{item.socio.last_name}}
-          </template>
           <template v-slot:item.clientName="{ item }">
             {{clientName(item.mascota)}}
           </template>
@@ -87,7 +84,7 @@
           value: "EOG"
         }, {
           text: "Nombre del cliente",
-          value: "socio.name"
+          value: "mascota.socio.name"
         }, {
           text: "Nombre de la mascota",
           value: "mascota.nombre"
@@ -115,7 +112,7 @@
           value: "hora"
         }, {
           text: "Nombre del cliente",
-          value: "socio.name"
+          value: "mascota.socio.name"
         }, {
           text: "Nombre de la mascota",
           value: "mascota.nombre"

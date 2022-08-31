@@ -1,4 +1,5 @@
 import moment from 'moment'
+import _ from 'lodash'
 export const state = () => ({
   atention: {
     files: [],
@@ -61,7 +62,9 @@ export const actions = {
   },
 
   async create({dispatch, commit, state }) {
-    await this.$axios.post('/atencion', state.atention).then(async response => {
+    var atention = _.cloneDeep(state.atention)
+    delete atention.files
+    await this.$axios.post('/atencion', atention).then(async response => {
       if (state.atention.proxima_consulta) {
         dispatch('addToAgenda')
       }
@@ -75,7 +78,10 @@ export const actions = {
   },
 
   update({dispatch, commit, state }) {
-    this.$axios.put('/atencion/' + state.atention.id, state.atention).then(async response => {
+    var atention = _.cloneDeep(state.atention)
+    delete atention.files
+    console.log(atention)
+    this.$axios.put('/atencion/' + state.atention.id, atention).then(async response => {
       let uploadFiles = state.atention.files.filter((file) => file instanceof File)
       dispatch('uploadFile',{id:response.data.id, files:uploadFiles})
     }).catch(error => {
@@ -223,7 +229,6 @@ export const mutations = {
 
     }
   },
-
 
   setSocio(state, socio) {
     state.atention.socio = socio
