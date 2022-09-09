@@ -37,7 +37,11 @@
       getMascota() {
           this.$axios.get(`/mascotas/${this.$route.params.id_mascota}`)
             .then(response => {
+
                 this.mascota = response.data
+                if(!response.data.especie) {
+                  this.mascota.especie = {}
+                }
                 this.showForm = false
                 setTimeout(()=>{
                     this.showForm = true

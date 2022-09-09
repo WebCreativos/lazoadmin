@@ -4,6 +4,13 @@
       <v-toolbar-title class="white--text font-weight-light">
         Mascotas
       </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn color="red" v-if="mascota.id" @click="deletePet()" class="white--text font-weight-bold rounded-lg">
+        Borrar
+        <v-icon>
+          mdi-delete
+        </v-icon>
+      </v-btn>
     </v-toolbar>
     <v-card-text>
       <v-form ref="form">
@@ -21,6 +28,11 @@
           <v-col class="col-12 col-md-12">
             <v-text-field type="date" label="Fecha de nacimiento" class="rounded-lg" outlined dense
               v-model="mascota.fecha_nac">
+            </v-text-field>
+          </v-col>
+          <v-col class="col-12 col-md-12">
+            <v-text-field type="date" label="Fecha de deceso" class="rounded-lg" outlined dense
+              v-model="mascota.deceso">
             </v-text-field>
           </v-col>
           <v-col class="col-12 col-md-12">
@@ -108,23 +120,25 @@
       checkHandler() {
         if (!this.$refs.form.validate()) return
         // DATE TO ISO FORMAT MOMENT 
-        if (this.mascota.deceso) {
-          this.mascota.deceso = moment(this.mascota.deceso).toISOString()
-        } else {
+        if (!this.mascota.deceso) {
           this.$delete(this.mascota, 'deceso')
-        }
-
-        if (this.mascota.fecha_nac) {
-          this.mascota.fecha_nac = moment(this.mascota.fecha_nac).toISOString()
-        } else {
+        } 
+        if (!this.mascota.fecha_nac) {
           this.$delete(this.mascota, 'fecha_nac')
-        }
-
-
+        } 
         this.$emit('input', this.mascota)
         this.handler();
       },
 
+    },
+    deletePet() {
+      let confirm = confirm("Esta seguro que desea eliminar esta mascota?")
+      if (confirm) {
+        this.$axios.delete(`/mascotas/${this.mascota.id}`)
+          .then(()=>{
+            this.$router.go(-1)
+          })
+      }
     },
     watch: {},
   }
