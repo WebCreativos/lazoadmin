@@ -105,12 +105,6 @@
     methods: {
       async getSocios(page = 1) {
         let search = `?_start=${(page - 1) * 25}&_limit=${page * 25}&_sort=id:desc`;
-        if(this.search.old_client!=false) {
-          search += `&old_client=true`
-        }
-        else {
-          search += `&old_client!=true`
-        }
         this.sociosList.data = []
         this.sociosList.length = 0
         console.log(search)
