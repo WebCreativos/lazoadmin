@@ -129,9 +129,7 @@
         this.$emit('input', this.mascota)
         this.handler();
       },
-
-    },
-    deletePet() {
+      deletePet() {
       let confirm = confirm("Esta seguro que desea eliminar esta mascota?")
       if (confirm) {
         this.$axios.delete(`/mascotas/${this.mascota.id}`)
@@ -139,6 +137,7 @@
             this.$router.go(-1)
           })
       }
+    },
     },
     watch: {},
   }
