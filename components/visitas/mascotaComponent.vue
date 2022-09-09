@@ -9,10 +9,6 @@
           color="white" @click="openModalAtencion(createAtencion, 'NUEVA VISITA')">
           Nueva visita
         </v-btn>
-        <v-btn class="mr-2 font-weight-light" :disabled="selectedAtencion.length==0" color="white"
-          @click="openModalAtencion(updateAtencion, 'ACTUALIZAR VISITA')">
-          Modificar visita
-        </v-btn>
         <v-btn class="font-weight-light mr-2" :disabled="selectedAtencion.length==0" color="white"
           @click="deleteAtencion()">
           Eliminar visita
@@ -58,8 +54,15 @@
               <v-icon color="success" v-if="item.files.length>0">mdi-check</v-icon>
               <v-icon color="red" v-else>mdi-close</v-icon>
             </template>
+            <template v-slot:item.update="{item}">
+              <v-btn outlined small class="mr-2 font-weight-light" color="black"
+                @click="openModalAtencion(updateAtencion, 'ACTUALIZAR VISITA',item)">
+                Modificar
+              </v-btn>
+            </template>
             <template v-slot:item.actions="{ item }">
-              <v-btn outlined @click="()=>{openChangeAtentionsModal = true; dataMoveAtention.atencion = item.id}" small>Cambiar a otra mascota</v-btn>
+              <v-btn outlined class="font-weight-light" @click="()=>{openChangeAtentionsModal = true; dataMoveAtention.atencion = item.id}" small>
+                Cambiar a otra mascota</v-btn>
             </template>
           </v-data-table>
         </v-card>
@@ -91,7 +94,8 @@
               <SociosFindSociosComponent returnObject v-model="dataMoveSocio"></SociosFindSociosComponent>
             </v-col>
             <v-col class="col-6">
-              <v-select outlined dense :items="dataMoveMascotas" item-value="id" item-text="nombre" v-model="dataMoveAtention.mascota" label="Mascota"></v-select>
+              <v-select outlined dense :items="dataMoveMascotas" item-value="id" item-text="nombre"
+                v-model="dataMoveAtention.mascota" label="Mascota"></v-select>
             </v-col>
           </v-row>
         </v-card-text>
@@ -128,10 +132,9 @@
           readonly: false,
           openModal: false
         },
-        dataMoveAtention:{
-        },
-        dataMoveSocio:{},
-        dataMoveMascotas:[],
+        dataMoveAtention: {},
+        dataMoveSocio: {},
+        dataMoveMascotas: [],
         successChangeMascota: false,
         atencion: this.value,
         openChangeAtentionsModal: false,
@@ -161,6 +164,9 @@
           text: "Tratamiento",
           value: "tratamiento"
         }, {
+          text: "Modificar",
+          value: "update"
+        }, {
           text: "Acciones",
           value: "actions"
         }],
@@ -178,13 +184,13 @@
           this.$store.dispatch('atentions/setSingle', atencion)
         }
       },
-      closeModalAtencion(){
+      closeModalAtencion() {
         this.modalData.openModal = false;
-        this.$store.dispatch('atentions/setSingle', {id:undefined})
+        this.$store.dispatch('atentions/cleanSelected')
       },
       async createAtencion() {
         this.$store.dispatch('atentions/create').then(() => {
-          if(this.value.fecha_proxima_consulta) {
+          if (this.value.fecha_proxima_consulta) {
             this.addToAgenda()
           }
           setTimeout(() => {
@@ -199,7 +205,7 @@
       },
       async updateAtencion() {
         this.$store.dispatch('atentions/update').then(() => {
-          if(this.value.fecha_proxima_consulta) {
+          if (this.value.fecha_proxima_consulta) {
             this.addToAgenda()
           }
           setTimeout(() => {
@@ -213,9 +219,11 @@
 
         })
       },
-      changeAtentionPet(){
-        this.$axios.put(`/atencion/${this.dataMoveAtention.atencion}`,{mascota:this.dataMoveAtention.mascota})
-          .then(()=>{
+      changeAtentionPet() {
+        this.$axios.put(`/atencion/${this.dataMoveAtention.atencion}`, {
+            mascota: this.dataMoveAtention.mascota
+          })
+          .then(() => {
             this.successChangeMascota = true
             this.$store.dispatch('atentions/findAll', {
               page: 1,
@@ -229,7 +237,7 @@
           params: {
             mascota: this.value.mascota.id
           }
-        },).then((items) => {
+        }, ).then((items) => {
           let data = items.data.map((item) => {
             return {
               Fecha: this.formatDate(item.fecha),
@@ -371,7 +379,7 @@
           return atencion
         }
         return {
-          length:0
+          length: 0
         }
       },
       consultaItems() {
@@ -379,42 +387,47 @@
       }
     },
     watch: {
-      dataMoveSocio:{
-        handler(){
-          if(this.dataMoveSocio!=null){
+      dataMoveSocio: {
+        handler() {
+          if (this.dataMoveSocio != null) {
             this.dataMoveMascotas = this.dataMoveSocio.mascotas
           }
         },
-        deep:true
+        deep: true
       },
-      },
-      selectedAtencion(val) {
+    },
+    selectedAtencion: {
+      handler() {
         if (val.length > 0) {
           let atencion = JSON.parse(JSON.stringify(val[0]))
           delete atencion.socio
+          console.log(atencion)
           this.$store.dispatch('atentions/setSingle', atencion)
         } else {
           this.$store.dispatch('atentions/cleanSelected')
         }
+
       },
-      page(val){
-            this.$store.dispatch('atentions/findAll', {
-              page: val,
-              mascota: this.value.mascota.id
-            })
+      deep: true
+    },
+    page(val) {
+      this.$store.dispatch('atentions/findAll', {
+        page: val,
+        mascota: this.value.mascota.id
+      })
+    },
+    value: {
+      handler(newValue) {
+        console.log(newValue)
+        this.atencion = _.cloneDeep(newValue)
       },
-      value: {
-        handler(newValue) {
-          console.log(newValue)
-          this.atencion = _.cloneDeep(newValue)
-        },
-        deep: true
-      },
-      "modalData.openModal": function (val) {
-        if (!val) {
-          this.formatAtencion()
-        }
-      },
+      deep: true
+    },
+    "modalData.openModal": function (val) {
+      if (!val) {
+        this.formatAtencion()
+      }
+    },
 
   }
 

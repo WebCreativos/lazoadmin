@@ -3,10 +3,12 @@
     <v-card>
       <v-card-text class="overflow-card">
         <v-row>
+            <!--
           <v-col class="col-12">
             <v-text-field type="text" label="SOCIO" readonly outlined filled dense
               :value="setSocioName(atencion.mascota)" class="rounded-lg white--text"> </v-text-field>
           </v-col>
+            -->
           <v-col class="col-12">
             <v-text-field outlined :readonly="readonly" type="date" v-model="atencion.fecha" label="Fecha">
             </v-text-field>
@@ -161,7 +163,6 @@
       },
       setSocioName(mascota) {
         if (!mascota.socio) return
-        return mascota.socio + ' es socio'
       },
 
     },
