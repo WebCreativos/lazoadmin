@@ -62,6 +62,9 @@
   var qs = require('qs');
   import moment from 'moment'
   export default {
+    props:{
+      estado:'Pendiente'
+    },
     data() {
       return {
         headers: [{
@@ -118,7 +121,7 @@
       async getAtenciones() {
         var query = "estado=Pendiente&_sort:fecha:desc"
         let params = {
-          estado: 'Pendiente',
+          estado: this.estado,
           _where: {
             _or: []
           }

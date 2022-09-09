@@ -1,9 +1,8 @@
 <template>
   <div>
     <v-input>
-      <v-select outlined dense hide-details :items="razasList" label="Raza"
-        item-text="nombre" item-value="nombre"  v-model="selectedRaza">
-      </v-select>
+      <v-autocomplete hide-details dense :items="razasList" label="Raza" item-text="nombre" item-value="nombre" chips outlined
+        v-model="selectedRaza"></v-autocomplete>
     </v-input>
     <v-dialog v-model="showrazasModal">
       <v-card width="800">
@@ -20,8 +19,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn class="white--text" color="gd-primary-to-right font-weight-light rounded-lg"
-            @click="addRaza()">
+          <v-btn class="white--text" color="gd-primary-to-right font-weight-light rounded-lg" @click="addRaza()">
             AGREGAR
           </v-btn>
         </v-card-actions>
@@ -65,7 +63,10 @@
         this.$axios.get('/razas')
           .then((data) => {
             this.razasList = data.data
-            this.razasList.unshift({value:'',nombre:'Seleccione una opcion'})
+            this.razasList.unshift({
+              value: '',
+              nombre: 'Seleccione una opcion'
+            })
           })
       }
     },

@@ -5,6 +5,7 @@
         Mascotas
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn @click="openChangeSociosModal = true" outlined color="white" class="mr-3">CAMBIAR DE SOCIO</v-btn>
       <v-btn color="red" v-if="mascota.id" @click="deletePet()" class="white--text font-weight-bold rounded-lg">
         Borrar
         <v-icon>
@@ -86,7 +87,25 @@
         Guardar
       </v-btn>
     </v-card-actions>
-
+    <v-dialog width="500" v-model="openChangeSociosModal">
+      <v-card>
+        <v-toolbar color="primary" elevation="0">
+          Seleccione el socio
+        </v-toolbar>
+        <v-card-text class="py-4">
+          <SociosFindSociosComponent returnObject v-model="data"></SociosFindSociosComponent>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="gd-primary white--text" @click="changeSocio()">
+            Cambiar socio
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-snackbar color="success" v-model="successChangeSocios">
+      Socio cambiado correctamente
+    </v-snackbar>
   </v-card>
 </template>
 
@@ -99,7 +118,10 @@
     },
     data() {
       return {
+        data:{},
         mascota: this.value,
+        openChangeSociosModal: false,
+        successChangeSocios:false,
         rules: {
           required: [value => !!value || 'Este campo es requerido'],
         },
@@ -128,6 +150,19 @@
         } 
         this.$emit('input', this.mascota)
         this.handler();
+      },
+      changeSocio(){
+        console.log({
+          mascota: this.mascota.id,
+          socio: this.data
+        })
+        this.$axios.post('/mascotas/changeSocio', {
+          mascota: this.mascota.id,
+          socio: this.data.id
+        }).then(res => {
+          this.successChangeSocios = true
+          this.openChangeSociosModal = false
+        })
       },
       deletePet() {
       let confirm = confirm("Esta seguro que desea eliminar esta mascota?")

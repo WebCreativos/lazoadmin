@@ -5,6 +5,16 @@
         Colores
       </v-toolbar-title>
     </v-toolbar>
+    <v-card-title>
+      <v-row>
+        <v-col class="col-md-9">
+          <v-text-field dense outlined label="Color" v-model="color.nombre" />
+        </v-col>
+        <v-col class="col-md-3">
+          <v-btn color="gd-primary-to-right" block height="38" class="white--text" large @click="addColor()">GUARDAR</v-btn>
+        </v-col>
+      </v-row>
+    </v-card-title>
     <v-card-text>
       <v-data-table :items="coloresList" :headers="headers" :page="page" hide-default-footer>
         <template v-slot:item.default={item}>
@@ -39,6 +49,7 @@
         rules: {
           required: [value => !!value || 'Required.']
         },
+        color:{},
         headers: [{
             text: 'Nombre',
             align: 'left',
@@ -67,6 +78,17 @@
             console.log(error);
           });
       },
+      addColor(){
+        this.$axios.post('/colores',this.color)
+          .then(response => {
+            this.getColores()
+            this.color = {}
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      },
+      },
       deleteColor(id) {
         this.$axios.delete('/colores/' + id)
           .then(response => {
@@ -77,7 +99,6 @@
           });
       }
     }
-  }
 
 </script>
 

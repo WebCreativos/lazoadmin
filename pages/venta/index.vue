@@ -218,6 +218,13 @@
 
           </visitasListComponent>
         </v-card-text>
+        <v-card-text class="mt-3">
+          <visitasListComponent estado="Finalizada">
+            <template v-slot:title>
+              Consultas Finalizadas
+            </template>
+          </visitasListComponent>
+        </v-card-text>
 
       </v-card>
     </v-dialog>

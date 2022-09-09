@@ -1,9 +1,8 @@
 <template>
   <div>
     <v-input>
-      <v-select outlined dense hide-details :items="coloresList" label="Color"
-        item-text="nombre" item-value="nombre"  v-model="selectedColor">
-      </v-select>
+      <v-autocomplete hide-details dense :items="coloresList" label="Color"
+        item-text="nombre" item-value="nombre" chips outlined v-model="selectedColor"></v-autocomplete>
     </v-input>
     <v-dialog v-model="showcoloresModal">
       <v-card width="800">

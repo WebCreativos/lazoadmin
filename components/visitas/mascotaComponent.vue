@@ -58,7 +58,9 @@
               <v-icon color="success" v-if="item.files.length>0">mdi-check</v-icon>
               <v-icon color="red" v-else>mdi-close</v-icon>
             </template>
-
+            <template v-slot:item.actions="{ item }">
+              <v-btn outlined @click="()=>{openChangeAtentionsModal = true; dataMoveAtention.atencion = item.id}" small>Cambiar a otra mascota</v-btn>
+            </template>
           </v-data-table>
         </v-card>
       </v-card-text>
@@ -78,6 +80,33 @@
         :handler="modalData.handler">
       </visitas-data-component>
     </v-dialog>
+    <v-dialog width="500" v-model="openChangeAtentionsModal">
+      <v-card>
+        <v-toolbar color="primary" elevation="0">
+          <v-toolbar-title class="white--text">Seleccione el socio</v-toolbar-title>
+        </v-toolbar>
+        <v-card-text class="py-4">
+          <v-row>
+            <v-col class="col-6">
+              <SociosFindSociosComponent returnObject v-model="dataMoveSocio"></SociosFindSociosComponent>
+            </v-col>
+            <v-col class="col-6">
+              <v-select outlined dense :items="dataMoveMascotas" item-value="id" item-text="nombre" v-model="dataMoveAtention.mascota" label="Mascota"></v-select>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="gd-primary white--text" @click="changeAtentionPet()">
+            Cambiar mascota
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-snackbar color="success" v-model="successChangeMascota">
+      Mascota cambiada correctamente
+    </v-snackbar>
+
   </div>
 </template>
 
@@ -99,7 +128,13 @@
           readonly: false,
           openModal: false
         },
+        dataMoveAtention:{
+        },
+        dataMoveSocio:{},
+        dataMoveMascotas:[],
+        successChangeMascota: false,
         atencion: this.value,
+        openChangeAtentionsModal: false,
         createAtencionModal: false,
         updateAtencionModal: false,
         openAtencionModal: false,
@@ -125,6 +160,9 @@
         }, {
           text: "Tratamiento",
           value: "tratamiento"
+        }, {
+          text: "Acciones",
+          value: "actions"
         }],
       }
     },
@@ -175,7 +213,17 @@
 
         })
       },
-
+      changeAtentionPet(){
+        this.$axios.put(`/atencion/${this.dataMoveAtention.atencion}`,{mascota:this.dataMoveAtention.mascota})
+          .then(()=>{
+            this.successChangeMascota = true
+            this.$store.dispatch('atentions/findAll', {
+              page: 1,
+              mascota: this.value.mascota.id
+            })
+            this.openChangeAtentionsModal = false
+          })
+      },
       exportData() {
         this.$axios.get('/atencion', {
           params: {
@@ -331,6 +379,15 @@
       }
     },
     watch: {
+      dataMoveSocio:{
+        handler(){
+          if(this.dataMoveSocio!=null){
+            this.dataMoveMascotas = this.dataMoveSocio.mascotas
+          }
+        },
+        deep:true
+      },
+      },
       selectedAtencion(val) {
         if (val.length > 0) {
           let atencion = JSON.parse(JSON.stringify(val[0]))
@@ -358,8 +415,6 @@
           this.formatAtencion()
         }
       },
-
-    },
 
   }
 
