@@ -32,21 +32,6 @@
             <template v-slot:item.hora="{ item }">
               {{formatHour(item.hora)}}
             </template>
-            <template v-slot:item.anamnesis="{ item }">
-              <generalButtonShowMoreComponent :value="item.anamnesis"
-                :callback="openModalAtencion.bind(null,()=>{}, 'VER VISITA',item, true)">
-              </generalButtonShowMoreComponent>
-            </template>
-            <template v-slot:item.EOG="{ item }">
-              <generalButtonShowMoreComponent :value="item.EOG"
-                :callback="openModalAtencion.bind(null,()=>{}, 'VER VISITA',item, true)">
-              </generalButtonShowMoreComponent>
-            </template>
-            <template v-slot:item.tratamiento="{ item }">
-              <generalButtonShowMoreComponent :value="item.tratamiento"
-                :callback="openModalAtencion.bind(null,()=>{}, 'VER VISITA',item, true)">
-              </generalButtonShowMoreComponent>
-            </template>
             <template v-slot:item.hora="{ item }">
               {{formatHour(item.hora)}}
             </template>
