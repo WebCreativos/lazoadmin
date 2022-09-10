@@ -165,8 +165,8 @@
         })
       },
       deletePet() {
-      let confirm = confirm("Esta seguro que desea eliminar esta mascota?")
-      if (confirm) {
+      let c = confirm("Esta seguro que desea eliminar esta mascota?")
+      if (c) {
         this.$axios.delete(`/mascotas/${this.mascota.id}`)
           .then(()=>{
             this.$router.go(-1)
