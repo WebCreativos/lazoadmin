@@ -47,8 +47,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    //baseURL: 'https://api.zoodevelopment.net/',
-    baseURL: 'http://localhost:1338/' 
+    baseURL: 'https://api.zoodevelopment.net/',
+    //baseURL: 'http://localhost:1338/' 
   },
   auth: {
     autoLogout: true,
