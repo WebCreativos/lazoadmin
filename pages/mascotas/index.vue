@@ -3,17 +3,23 @@
     <MascotasListComponent @changePage="getMascotas($event)" v-model="mascotasList">
       <template v-slot:extraFields>
         <v-row>
-          <v-col class="col-md-4">
+          <v-col class="col-md-3">
             <v-text-field v-model="search.nombre_contains" label="Nombre" outlined dense></v-text-field>
           </v-col>
-          <v-col class="col-md-4">
+          <v-col class="col-md-3">
+            <v-text-field v-model="search.nro_chip" label="Nro Chip" outlined dense></v-text-field>
+          </v-col>
+          <v-col class="col-md-3">
             <mascotasRazasComponent v-model="search.raza"></mascotasRazasComponent>
           </v-col>
+          <!--
+
           <v-col class="col-md-2 col-sm-2 col-12">
             <v-switch class="mt-0" hide-details v-model="search.old_pet" default="false" label="Masc. antigua">
             </v-switch>
           </v-col>
-          <v-col class="col-md-2">
+          -->
+          <v-col class="col-md-3">
             <v-btn block color="gd-primary-to-right" @click="getMascotas()"
               class="white--text rounded-lg font-weight-light">
               Buscar&nbsp;<v-icon>mdi-magnify</v-icon>

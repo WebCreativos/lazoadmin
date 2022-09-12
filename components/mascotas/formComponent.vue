@@ -63,8 +63,8 @@
             <mascotasCreateEspeciesComponent v-model="mascota.especie"></mascotasCreateEspeciesComponent>
           </v-col>
           <v-col class="col-12 col-md-12">
-            <v-textarea label="Numero de chip" class="rounded-lg" outlined dense v-model="mascota.nro_chip">
-            </v-textarea>
+            <v-text-field label="Numero de chip" class="rounded-lg" outlined dense v-model="mascota.nro_chip">
+            </v-text-field>
           </v-col>
           <v-col class="col-12 col-md-12">
             <v-textarea label="Observaciones" class="rounded-lg" outlined dense v-model="mascota.observaciones">
