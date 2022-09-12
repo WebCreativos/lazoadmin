@@ -147,8 +147,12 @@ export const actions = {
       error => {
         console.log(error);
       });
-  },
 
+      
+  },
+  updatePetInSociosList({commit},{index,pet}) {
+    commit('mudatePetInSociosList',{index,pet})
+    },
 
   async cleanAll({
     commit
@@ -191,6 +195,11 @@ async setSingle({
 
 //private methods
 export const mutations = {
+  async mudatePetInSociosList(state,{index,pet}) {
+    console.log(state.atention.socio.mascotas[index])
+    state.atention.socio.mascotas[index] = pet
+    console.log(state.atention.socio.mascotas[index])
+  },
   async setAtentionList(state, data) {
     state.atentionList = data
   },

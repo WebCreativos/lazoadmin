@@ -44,10 +44,10 @@
           </v-col>
           <v-col class="col-md-4 col-12">
             <v-card outlined class="rounded-xl">
-              <v-data-table show-select single-select @input="getAtentionsPet($event)" :items-per-page="6"
+              <v-data-table show-select single-select v-if="!refreshPetTable" @input="getAtentionsPet($event)" :items-per-page="6"
                 :page="pagePets" :items="value.socio.mascotas" hide-default-footer :headers="headersMascotas">
                 <template v-slot:item.nombre="{ item }">
-                  <v-btn outlined block small :to="`/mascotas/editar/${item.id}`">
+                  <v-btn outlined block small @click="updateMascotasModal = true;selectedPet = item">
                     <div class="d-flex justify-space-between align-center" style="width:100%">
                       {{item.nombre}}<v-icon>mdi-pen</v-icon>
                     </div>
@@ -128,7 +128,9 @@
         </template>
       </SociosListSociosComponent>
     </v-dialog>
-
+    <v-dialog v-model="updateMascotasModal">
+        <MascotasFormComponent v-model="selectedPet" :handler="updatePet"></MascotasFormComponent>
+    </v-dialog>
   </div>
 </template>
 
@@ -140,6 +142,9 @@
         pagePets: 1,
         createSocioModal: false,
         listSociosModal: false,
+        updateMascotasModal:false,
+        selectedPet:{},
+        refreshPetTable:false,
         searchSocios: {},
         socio: {
           suc: 'CASA CENTRAL',
@@ -177,6 +182,21 @@
               value: '',
               nombre: 'Seleccione una opcion'
             })
+          })
+      },
+      updatePet() {
+        this.$axios.put('/mascotas/'+this.selectedPet.id, this.selectedPet)
+          .then((data) => {
+            this.updateMascotasModal = false
+            const findIndex = this.value.socio.mascotas.findIndex((item) => item.id === data.data.id)
+            this.$store.dispatch('atentions/updatePetInSociosList', {
+              index: findIndex,
+              pet: data.data
+            })
+            this.refreshPetTable = true 
+            setTimeout(() => {
+              this.refreshPetTable = false
+            }, 500);
           })
       },
       getAtentionsPet(petSelected) {

@@ -13,7 +13,7 @@
         </v-icon>
       </v-btn>
     </v-toolbar>
-    <v-card-text>
+    <v-card-text class="py-3">
       <v-form ref="form">
         <v-row>
           <v-col class="col-12 col-md-12">
@@ -129,7 +129,10 @@
     created() {},
     mounted() {
       if (this.value) {
-        this.mascota = this.value
+        this.mascota = JSON.parse(JSON.stringify(this.value))
+        if(this.mascota.socio == null) {
+          this.mascota.socio = 'NO'
+        }
         if (this.mascota.fecha_nac == '1000-01-01') {
           this.$delete(this.mascota, 'fecha_nac')
         }
