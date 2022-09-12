@@ -1,8 +1,11 @@
 <template>
   <div>
     <v-input>
-      <v-autocomplete hide-details dense :items="razasList" label="Raza" item-text="nombre" item-value="nombre" chips outlined
+      <v-autocomplete hide-details dense :items="razasList" class="rounded-r-0" label="Raza" item-text="nombre" item-value="nombre" chips outlined
         v-model="selectedRaza"></v-autocomplete>
+        <v-btn class="rounded-l-0 rounded-r-lg" height="40" color="primary" @click="showrazasModal = true">
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
     </v-input>
     <v-dialog v-model="showrazasModal">
       <v-card width="800">
@@ -55,6 +58,7 @@
           .then((data) => {
             this.raza.nombre = ""
             this.showrazasModal = false
+            this.razasList.push(data.data)
             this.selectedRaza = data.data.id
             this.getrazas()
           })
