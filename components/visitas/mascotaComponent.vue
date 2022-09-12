@@ -33,13 +33,20 @@
               {{formatHour(item.hora)}}
             </template>
             <template v-slot:item.EOG="{ item }">
-              {{item.EOG.substring(0, 20)}}
+              <span v-if="item.EOG">
+                {{item.EOG.substring(0, 20)}}
+              </span>
             </template>
             <template v-slot:item.anamnesis="{ item }">
-              {{item.anamnesis.substring(0, 20)}}
+              <span v-if="item.anamnesis">
+                {{item.anamnesis.substring(0, 20)}}
+              </span>
             </template>
             <template v-slot:item.tratamiento="{ item }">
-              {{item.tratamiento.substring(0, 20)}}
+              <span v-if="item.tratamiento">
+                {{item.tratamiento.substring(0, 20)}}
+              </span>
+
             </template>
             <template v-slot:item.examenes="{ item }">
               <v-icon color="success" v-if="item.files.length>0">mdi-check</v-icon>
