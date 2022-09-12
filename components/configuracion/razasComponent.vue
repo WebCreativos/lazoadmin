@@ -71,7 +71,7 @@
     },
     methods: {
       getrazas() {
-        this.$axios.get('/razas')
+        this.$axios.get('/razas/?_limit=-1')
           .then(response => {
             this.razasList = response.data;
           })

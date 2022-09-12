@@ -73,8 +73,9 @@
           <v-col class="col-md-4 col-12">
             <v-text-field label="NOMBRE" readonly v-model="value.mascota.nombre" outlined dense
               class="rounded-lg white--text"> </v-text-field>
-            <v-text-field label="RAZA" readonly v-model="value.mascota.raza" outlined dense
-              class="rounded-lg white--text"> </v-text-field>
+              {{value.mascota.raza}}
+            <v-select label="RAZA" readonly v-model="value.mascota.raza" item-text="nombre" item-value="id" :items="razasList" outlined dense
+              class="rounded-lg white--text"> </v-select> 
             <v-text-field label="COLOR" readonly outlined v-model="value.mascota.color" dense
               class="rounded-lg white--text"> </v-text-field>
             <v-select :items="[{
@@ -148,6 +149,7 @@
           mascotas: [{}],
           afiliacion: moment().format('YYYY-MM-DD'),
         },
+        razasList:[],
         headersMascotas: [{
           text: 'ID Paciente',
           value: 'id',
@@ -164,8 +166,19 @@
     },
     created() {
       this.getSocios()
+      this.getRazas()
     },
     methods: {
+      getRazas() {
+        this.$axios.get('/razas')
+          .then((data) => {
+            this.razasList = data.data
+            this.razasList.unshift({
+              value: '',
+              nombre: 'Seleccione una opcion'
+            })
+          })
+      },
       getAtentionsPet(petSelected) {
         if (petSelected.length > 0) {
           let search = {

@@ -37,12 +37,6 @@
             </v-text-field>
           </v-col>
           <v-col class="col-12 col-md-12">
-            <v-text-field type="date" label="Deceso" class="rounded-lg" outlined dense
-              v-model="mascota.deceso">
-            </v-text-field>
-          </v-col>
-
-          <v-col class="col-12 col-md-12">
             <v-select label="SEXO" :items="[{
                       text:'Macho',
                       value: 'M'

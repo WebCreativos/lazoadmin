@@ -55,7 +55,7 @@
     },
     methods: {
       getespecies() {
-        this.$axios.get('/especies')
+        this.$axios.get('/especies?_limit=-1')
           .then(response => {
             this.especiesList = response.data;
           })
