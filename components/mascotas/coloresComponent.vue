@@ -2,7 +2,7 @@
   <div>
     <v-input>
       <v-autocomplete hide-details dense :items="coloresList" label="Color"
-        item-text="nombre" item-value="nombre" class="rounded-r-0" chips outlined v-model="selectedColor"></v-autocomplete>
+        item-text="nombre" small-chips item-value="nombre" class="rounded-r-0" chips outlined v-model="selectedColor"></v-autocomplete>
         <v-btn class="rounded-l-0 rounded-r-lg" height="40" depressed color="primary" @click="showcoloresModal = true">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
@@ -55,7 +55,7 @@
     },
     methods: {
       addColor() {
-        this.$axios.post(`/colores`, this.color)
+        this.$axios.post(`/colores/`, this.color)
           .then((data) => {
             this.color.nombre = ""
             this.showcoloresModal = false
@@ -65,7 +65,7 @@
           })
       },
       getColores() {
-        this.$axios.get('/colores')
+        this.$axios.get('/colores/?_limit=-1')
           .then((data) => {
             this.coloresList = data.data
           })
