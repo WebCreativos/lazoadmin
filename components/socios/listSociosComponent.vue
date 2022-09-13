@@ -13,7 +13,7 @@
     <v-card-text>
       <v-card outlined>
         <v-card-text class="pt-0">
-          <v-data-table dense header-props="" :items="value.data" :headers="headers" :items-per-page="-1" hide-default-footer>
+          <v-data-table dense :items="value.data" :headers="headers" :items-per-page="-1" hide-default-footer>
             <template v-slot:item.name="{ item }">
               <router-link small block text :to="`/atencion/?socio=${item.id}`">
                 {{ item.name }}

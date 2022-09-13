@@ -46,7 +46,8 @@
             </v-btn>
           </v-col>
           <v-col class="pa-2">
-            <v-btn block small class="font-weight-light rounded-lg white--text" color="red" @click="deleteSocio(item.id)">
+            <v-btn block small class="font-weight-light rounded-lg white--text" color="red"
+              @click="deleteSocio(item.id)">
               ELIMINAR
             </v-btn>
           </v-col>
@@ -90,6 +91,7 @@
 <script>
   import modalSuccess from '~/components/modalSuccess.vue';
   import moment from 'moment';
+  var qs = require('qs');
   export default {
     components: {
       modalSuccess
@@ -118,22 +120,56 @@
     },
     methods: {
       async getSocios(page = 1) {
-        let search = `?_start=${(page - 1) * 25}&_limit=${page * 25}&_sort=id:desc`;
         this.sociosList.data = []
         this.sociosList.length = 0
-        console.log(search)
-        if (this.search.name_contains) {
-          search =
-            `${search}&_where[_or][0][name_contains]=${this.search.name_contains}&_where[_or][1][last_name_contains]=${this.search.name_contains}&_where[_or][2][address_contains]=${this.search.name_contains}&_where[_or][3][user.username_contains]=${this.search.name_contains}`
+
+        let params = {
+          _where: {
+            _or: []
+          }
         }
-        await this.$axios.get('/socios' + search)
+        if (this.search.name_contains) {
+          params._where._or.push({
+            'name_contains': this.search.name_contains
+          })
+          params._where._or.push({
+            'address_contains': this.search.name_contains
+          })
+          params._where._or.push({
+            'user.username_contains': this.search.name_contains
+          })
+        }
+        if(this.search.old_client){
+          params.old_client = this.search.old_client
+        }
+        console.log(params)
+        await this.$axios.get('/socios', {
+            params: {
+              ...params,
+              _start: (page - 1) * 25,
+              _limit: page * 25,
+              _sort: 'id:desc',
+            },
+            paramsSerializer: params => {
+              return qs.stringify(params, {
+                arrayFormat: 'indices'
+              })
+            },
+
+          })
           .then(response => {
             console.log(response)
             this.sociosList.data = response.data
           })
 
         await this.$axios.get('/socios/count', {
-            params: this.search
+            params: params,
+            paramsSerializer: params => {
+              return qs.stringify(params, {
+                arrayFormat: 'indices'
+              })
+            },
+
           })
           .then(response => {
             this.sociosList.length = response.data
