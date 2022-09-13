@@ -73,9 +73,8 @@
           <v-col class="col-md-4 col-12">
             <v-text-field label="NOMBRE" readonly v-model="value.mascota.nombre" outlined dense
               class="rounded-lg white--text"> </v-text-field>
-              {{value.mascota.raza}}
-            <v-select label="RAZA" readonly v-model="value.mascota.raza" item-text="nombre" item-value="id" :items="razasList" outlined dense
-              class="rounded-lg white--text"> </v-select> 
+            <v-text-field label="RAZA" readonly v-model="value.mascota.raza" outlined dense
+              class="rounded-lg white--text"> </v-text-field> 
             <v-text-field label="COLOR" readonly outlined v-model="value.mascota.color" dense
               class="rounded-lg white--text"> </v-text-field>
             <v-select :items="[{
