@@ -11,24 +11,28 @@
       <slot name="extraFields"></slot>
     </v-card-title>
     <v-card-text>
-      <v-data-table :items="value.data" :headers="headers" :items-per-page="-1" hide-default-footer>
-        <template v-slot:item.name="{ item }" >
-          <router-link small block text :to="`/atencion/?socio=${item.id}`">
-            {{ item.name }}
-          </router-link>
-        </template>
-        <template v-slot:item.payment_date="{ item }">
-          {{formatDate(item.payment_date)}}
-        </template>
-        <template v-slot:item.actions="{ item }">
-          <slot name="button" :item="item"></slot>
-        </template>
-      </v-data-table>
+      <v-card outlined>
+        <v-card-text class="pt-0">
+          <v-data-table dense header-props="" :items="value.data" :headers="headers" :items-per-page="-1" hide-default-footer>
+            <template v-slot:item.name="{ item }">
+              <router-link small block text :to="`/atencion/?socio=${item.id}`">
+                {{ item.name }}
+              </router-link>
+            </template>
+            <template v-slot:item.payment_date="{ item }">
+              {{formatDate(item.payment_date)}}
+            </template>
+            <template v-slot:item.actions="{ item }">
+              <slot name="button" :item="item"></slot>
+            </template>
+          </v-data-table>
+        </v-card-text>
+      </v-card>
     </v-card-text>
-      <v-card-actions class="d-flex justify-center">
-        <v-pagination :total-visible="10" :length="Math.ceil(value.length/25)" v-model="page" 
+    <v-card-actions class="d-flex justify-center">
+      <v-pagination :total-visible="10" :length="Math.ceil(value.length/25)" v-model="page"
         @input="$emit('changePage',page)"></v-pagination>
-      </v-card-actions>
+    </v-card-actions>
 
   </v-card>
 </template>
@@ -60,11 +64,11 @@
           {
             text: 'Acciones',
             value: 'actions',
-            align: 'right'
+            align: 'center'
           }
         ],
         search: "",
-        page:1
+        page: 1
       }
     },
     methods: {
@@ -81,5 +85,7 @@
 </script>
 
 <style>
-
-</style>g
+.v-data-table-header{
+  height: 50px;
+}
+</style>

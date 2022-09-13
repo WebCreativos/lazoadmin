@@ -2,21 +2,27 @@
   <v-container fluid>
     <SociosListSociosComponent @changePage="getSocios($event)" v-model="sociosList">
       <template v-slot:extraFields>
-        <v-row>
-          <v-col class="col-md-11 col-sm-10 col-12">
-            <SociosFindSociosComponent v-model="search.name_contains"></SociosFindSociosComponent>
+        <v-card outlined width="100%" class="rounded-lg">
+          <v-card-text>
+            <v-row>
+              <v-col class="col-md-6 col-sm-6 col-12">
+                <SociosFindSociosComponent hideDetails v-model="search.name_contains"></SociosFindSociosComponent>
 
-          </v-col>
-          <v-col class="col-md-1 col-sm-2 col-12">
-            <v-switch
-            class="mt-0"
-            hide-details
-      v-model="search.old_client"
-      default="false"
-      label="C. antiguo"
-    ></v-switch>
-          </v-col>
-        </v-row>
+              </v-col>
+              <v-col class="col-md-3 col-sm-3 col-12 d-flex align-center">
+                <v-switch class="mt-0" inset hide-details v-model="search.old_client" default="false"
+                  label="Cliente antiguo">
+                </v-switch>
+              </v-col>
+              <v-col class="col-md-3">
+                <v-btn block color="gd-primary-to-right" @click="getSocios()"
+                  class="white--text rounded-lg font-weight-light">
+                  Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
       </template>
       <template v-slot:buttonTitle>
         <v-btn to="/socios/registro" class="font-weight-light rounded-lg white--text" color="gd-primary-to-right">
@@ -24,19 +30,27 @@
         </v-btn>
       </template>
       <template v-slot:button="{ item }">
-        <v-btn class="gd-primary-to-right font-weight-light rounded-lg white--text" @click="()=>{
+        <v-row no-gutters>
+          <v-col class="pa-2">
+            <v-btn block small class="gd-primary-to-right font-weight-light rounded-lg white--text" @click="()=>{
           openModalPaymentServices = true;
           dataPayment.client = item
           }" color="primary">
-          VALIDAR PAGO
-        </v-btn>
-        <v-btn class="gd-primary-to-right font-weight-light rounded-lg white--text" :to="`/socios/editar/${item.id}`"
-          color="primary">
-          EDITAR
-        </v-btn>
-        <v-btn class="font-weight-light rounded-lg white--text" color="red" @click="deleteSocio(item.id)">
-          ELIMINAR
-        </v-btn>
+              VALIDAR PAGO
+            </v-btn>
+          </v-col>
+          <v-col class="pa-2">
+            <v-btn block small class="gd-primary-to-right font-weight-light rounded-lg white--text"
+              :to="`/socios/editar/${item.id}`" color="primary">
+              EDITAR
+            </v-btn>
+          </v-col>
+          <v-col class="pa-2">
+            <v-btn block small class="font-weight-light rounded-lg white--text" color="red" @click="deleteSocio(item.id)">
+              ELIMINAR
+            </v-btn>
+          </v-col>
+        </v-row>
       </template>
     </SociosListSociosComponent>
     <v-dialog v-model="openModalPaymentServices">
@@ -89,7 +103,7 @@
           client: {}
         },
         search: {
-          _sort:'id:desc',
+          _sort: 'id:desc',
           old_client: false
         },
         sociosList: {
@@ -108,8 +122,9 @@
         this.sociosList.data = []
         this.sociosList.length = 0
         console.log(search)
-        if(this.search.name_contains) {
-          search = `${search}&_where[_or][0][name_contains]=${this.search.name_contains}&_where[_or][1][last_name_contains]=${this.search.name_contains}&_where[_or][2][address_contains]=${this.search.name_contains}&_where[_or][3][user.username_contains]=${this.search.name_contains}`
+        if (this.search.name_contains) {
+          search =
+            `${search}&_where[_or][0][name_contains]=${this.search.name_contains}&_where[_or][1][last_name_contains]=${this.search.name_contains}&_where[_or][2][address_contains]=${this.search.name_contains}&_where[_or][3][user.username_contains]=${this.search.name_contains}`
         }
         await this.$axios.get('/socios' + search)
           .then(response => {
@@ -117,7 +132,9 @@
             this.sociosList.data = response.data
           })
 
-        await this.$axios.get('/socios/count',{params: this.search})
+        await this.$axios.get('/socios/count', {
+            params: this.search
+          })
           .then(response => {
             this.sociosList.length = response.data
           })
@@ -132,7 +149,8 @@
         }
       },
       payServices() {
-        this.dataPayment.client.payment_date = moment(this.dataPayment.client.payment_date ?? new Date()).add(this.dataPayment.months, 'months').format('YYYY-MM-DD')
+        this.dataPayment.client.payment_date = moment(this.dataPayment.client.payment_date || new Date()).add(this
+          .dataPayment.months, 'months').format('YYYY-MM-DD')
         this.$axios.put(`/socios/${this.dataPayment.client.id}`, this.dataPayment.client).then(response => {
           this.openModalPaymentServices = false;
           this.openAlertPayment = false
@@ -140,14 +158,7 @@
         })
       }
     },
-    watch: {
-      search: {
-        handler() {
-          this.getSocios()
-        },
-        deep: true
-      },
-    }
+    watch: {}
   }
 
 </script>

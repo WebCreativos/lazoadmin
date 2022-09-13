@@ -34,7 +34,7 @@
 
     </v-card-text>
     <v-card-actions class="d-flex justify-center">
-      <v-pagination v-model="page" :length="Math.round(razasList.length/10)"></v-pagination>
+      <v-pagination total-visible="10" v-model="page" :length="Math.round(razasList.length/10)"></v-pagination>
     </v-card-actions>
   </v-card>
 

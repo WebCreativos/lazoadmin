@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-input>
-      <v-autocomplete small-chips hide-details dense :items="razasList" class="rounded-r-0" label="Raza" item-text="nombre" item-value="nombre"  outlined
+    <v-input hide-details>
+      <v-autocomplete small-chips hide-details dense :items="razasList" :class="(!hideAddMore)?'rounded-r-0':''" label="Raza" item-text="nombre" item-value="nombre"  outlined
         v-model="selectedRaza"></v-autocomplete>
-        <v-btn class="rounded-l-0 rounded-r-lg" depressed height="40" color="primary" @click="showrazasModal = true">
+        <v-btn class="rounded-l-0 rounded-r-lg" v-if="!hideAddMore" depressed height="40" color="primary" @click="showrazasModal = true">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-input>
@@ -34,7 +34,11 @@
 <script>
   export default {
     props: {
-      value: null
+      value: null,
+      hideAddMore:{
+        type:Boolean,
+        default:false
+      }
     },
     data() {
       return {

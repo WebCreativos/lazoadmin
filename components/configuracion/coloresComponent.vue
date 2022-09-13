@@ -33,7 +33,7 @@
 
     </v-card-text>
     <v-card-actions class="d-flex justify-center">
-      <v-pagination v-model="page" :length="Math.round(coloresList.length/10)"></v-pagination>
+      <v-pagination v-model="page" total-visible="10" :length="Math.round(coloresList.length/10)"></v-pagination>
     </v-card-actions>
   </v-card>
 

@@ -118,7 +118,7 @@
     <v-dialog v-model="listSociosModal">
       <SociosListSociosComponent v-model="sociosList" @changePage="getSocios($event)">
         <template v-slot:button="{ item }">
-          <v-btn outlined @click="setSocio(item)" color="primary">
+          <v-btn small class="my-3 gd-primary font-weight-light white--text" @click="setSocio(item)">
             AGREGAR
           </v-btn>
         </template>

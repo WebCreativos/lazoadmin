@@ -2,30 +2,46 @@
   <v-container fluid>
     <MascotasListComponent @changePage="getMascotas($event)" v-model="mascotasList">
       <template v-slot:extraFields>
-        <v-row>
-          <v-col class="col-md-3">
-            <v-text-field v-model="search.nombre_contains" label="Nombre" outlined dense></v-text-field>
-          </v-col>
-          <v-col class="col-md-3">
-            <v-text-field v-model="search.nro_chip" label="Nro Chip" outlined dense></v-text-field>
-          </v-col>
-          <v-col class="col-md-3">
-            <mascotasRazasComponent v-model="search.raza"></mascotasRazasComponent>
-          </v-col>
-          <!--
+        <v-card outlined width="100%" class="rounded-lg">
+          <v-card-text>
+            <v-row>
+              <v-col class="col-md-9">
+                <v-text-field v-model="search.nombre_contains" hide-details label="Nombre" outlined dense>
+                </v-text-field>
+              </v-col>
+              <v-col class="col-md-3">
+                <v-btn block color="gd-primary-to-right" @click="getMascotas()"
+                  class="white--text rounded-lg font-weight-light">
+                  Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
+                </v-btn>
+              </v-col>
+
+              <!--
 
           <v-col class="col-md-2 col-sm-2 col-12">
             <v-switch class="mt-0" hide-details v-model="search.old_pet" default="false" label="Masc. antigua">
             </v-switch>
           </v-col>
           -->
-          <v-col class="col-md-3">
-            <v-btn block color="gd-primary-to-right" @click="getMascotas()"
-              class="white--text rounded-lg font-weight-light">
-              Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
+            </v-row>
+            <v-row v-if="showExtraFilters">
+              <v-col class="col-md-6">
+                <v-text-field v-model="search.nro_chip" hide-details label="Nro Chip" outlined dense></v-text-field>
+              </v-col>
+              <v-col class="col-md-6">
+                <mascotasRazasComponent hideAddMore v-model="search.raza"></mascotasRazasComponent>
+              </v-col>
+            </v-row>
+
+          </v-card-text>
+          <v-card-actions class="d-flex justify-center">
+            <v-btn small outlined @click="showExtraFilters = !showExtraFilters">
+              <span v-show="!showExtraFilters">VER MAS FILTROS</span>
+              <span v-show="showExtraFilters">VER MENOS FILTROS</span>
             </v-btn>
-          </v-col>
-        </v-row>
+
+          </v-card-actions>
+        </v-card>
       </template>
       <template v-slot:button="{ item }">
         <v-btn class="gd-primary-to-right font-weight-light rounded-lg white--text" :to="`/mascotas/editar/${item.id}`"
@@ -49,6 +65,7 @@
     },
     data() {
       return {
+        showExtraFilters: false,
         search: {},
         mascotasList: {
           data: [],

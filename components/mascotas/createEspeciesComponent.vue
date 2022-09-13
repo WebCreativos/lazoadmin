@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-input>
-      <v-select outlined dense hide-details :items="especiesList" label="Nombre de la especie" class="rounded-r-0"
+      <v-autocomplete small-chips outlined dense hide-details :items="especiesList" label="Nombre de la especie" class="rounded-r-0"
         item-text="nombre" item-value="id" return-object  v-model="selectedespecie">
-      </v-select>
+      </v-autocomplete>
       <v-btn class="rounded-l-0 rounded-r-lg" depressed height="40" color="primary" @click="showespeciesModal = true">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
