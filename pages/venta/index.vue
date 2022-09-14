@@ -64,12 +64,8 @@
                     <v-col class="col-12">
                       <SociosFindSociosComponent v-model="findedClient"></SociosFindSociosComponent>
                     </v-col>
-                    <v-col class="col-md-6 col-12">
+                    <v-col class="col-md-12 col-12">
                       <v-text-field outlined label="Nombre" v-model="venta.cliente.nombre">
-                      </v-text-field>
-                    </v-col>
-                    <v-col class="col-md-6 col-12">
-                      <v-text-field outlined label="Apellido" v-model="venta.cliente.apellido">
                       </v-text-field>
                     </v-col>
                     <v-col class="col-md-12 col-12">
@@ -349,6 +345,10 @@
             productos: item.productos,
             item: item
           }
+          if(item.socio) {
+            this.venta.cliente.nombre  = item.socio.name
+            this.venta.cliente.direccion  = item.socio.address
+          }
           if (item.referencias_caja) {
             this.referenciaConsulta = item.referencias_caja
           }
@@ -392,6 +392,8 @@
       createVenta() {
         if (!this.$refs.form.validate() && this.venta.productos.length == 0) return
         if (this.venta.tipo == 'Efectivo') {
+          let c = confirm("Esta seguro que desea agregar venta?")
+          if (!c) return
           this.venta.productos.filter(async (pr) => {
             if (pr.tipo == 'consulta') {
               let cons = pr.item
@@ -427,7 +429,6 @@
       findedClient(val) {
         this.venta.cliente.direccion = val.address
         this.venta.cliente.nombre = val.name
-        this.venta.cliente.apellido = val.last_name
         this.getSocios(val)
       }
     }

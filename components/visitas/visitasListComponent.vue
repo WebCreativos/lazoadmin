@@ -63,7 +63,10 @@
   import moment from 'moment'
   export default {
     props:{
-      estado:'Pendiente'
+      estado:{
+        type:String,
+        default:'Pendiente'
+      }
     },
     data() {
       return {
