@@ -6,9 +6,9 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn @click="openChangeSociosModal = true" outlined color="white" class="mr-3">CAMBIAR DE SOCIO</v-btn>
-      <v-btn color="red" v-if="mascota.id" @click="deletePet()" class="white--text font-weight-bold rounded-lg">
+      <v-btn color="white" v-if="mascota.id" @click="deletePet()" outlined class="white--text font-weight-bold">
         Borrar
-        <v-icon>
+        <v-icon color="red">
           mdi-delete
         </v-icon>
       </v-btn>
@@ -175,7 +175,14 @@
       }
     },
     },
-    watch: {},
+    watch: {
+      value:{
+        handler(val){
+          this.mascota = JSON.parse(JSON.stringify(val))
+        },
+        deep: true
+      }
+    },
   }
 
 </script>
