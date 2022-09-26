@@ -59,8 +59,21 @@
               </v-btn>
             </template>
             <template v-slot:item.actions="{ item }">
-              <v-btn outlined class="font-weight-light" @click="()=>{openChangeAtentionsModal = true; dataMoveAtention.atencion = item.id}" small>
-                Cambiar a otra mascota</v-btn>
+              <v-row no-gutters>
+                <v-col class="col-12">
+                  <v-btn outlined block class="font-weight-light"
+                    @click="()=>{openChangeAtentionsModal = true; dataMoveAtention.atencion = item.id}" small>
+                    Cambiar a otra mascota</v-btn>
+
+                </v-col>
+                <v-col class="col-12 mt-2">
+                  <v-btn depressed block color="red" class="font-weight-light white--text" @click="deleteAtencion(item)" small>
+                    Eliminar atencion&nbsp;<v-icon>mdi-delete</v-icon>
+                  </v-btn>
+
+                </v-col>
+              </v-row>
+
             </template>
           </v-data-table>
         </v-card>
@@ -217,6 +230,28 @@
 
         })
       },
+      deleteAtencion(item) {
+        let c = confirm('¿Está seguro de eliminar la atención?')
+        if (c) {
+          console.log("hola")
+          return
+          this.$store.dispatch('atentions/delete', item.id).then(() => {
+            this.$store.dispatch('atentions/findAll', {
+              page: 1,
+              mascota: this.value.mascota.id
+            })
+          })
+        }
+        this.$store.dispatch('atentions/delete', item.id).then(() => {
+          setTimeout(() => {
+            this.$store.dispatch('atentions/findAll', {
+              page: 1,
+              mascota: this.value.mascota.id
+            })
+            this.selectedAtencion = []
+          }, 1000);
+        })
+      },
       changeAtentionPet() {
         this.$axios.put(`/atencion/${this.dataMoveAtention.atencion}`, {
             mascota: this.dataMoveAtention.mascota
@@ -260,18 +295,6 @@
 
         })
 
-      },
-
-
-      deleteAtencion() {
-        this.$axios.delete(`/atencion/${this.atencion.id}`)
-          .then(() => {
-            this.$store.dispatch('atentions/findAll', {
-              page: 1,
-              mascota: this.value.mascota.id
-            })
-            this.selectedAtencion = []
-          })
       },
       formatAtencion() {
         let atencion = JSON.parse(JSON.stringify(this.atencion))

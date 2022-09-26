@@ -89,6 +89,12 @@ export const actions = {
     });
   },
 
+  async delete({commit}, id) {
+    await this.$axios.delete('/atencion/' + id).then(response => {
+    }).catch(error => {
+      console.log(error);
+    });
+  },
 
   async uploadFile({state},uploadFile) {
     if (uploadFile.files.length == 0) return
