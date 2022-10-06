@@ -133,6 +133,7 @@
         if(this.mascota.socio == null) {
           this.mascota.socio = 'NO'
         }
+        this.mascota.socio = this.mascota.socio.toUpperCase()
         if (this.mascota.fecha_nac == '1000-01-01') {
           this.$delete(this.mascota, 'fecha_nac')
         }

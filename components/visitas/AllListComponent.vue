@@ -45,6 +45,11 @@
           <template v-slot:item.hora="{ item }">
             {{formatHour(item.hora)}}
           </template>
+          <template v-slot:item.EOG="{ item }">
+            <span v-if="item.EOG">
+              {{item.EOG.substring(0,30)}}...
+            </span>
+          </template>
         </v-data-table>
       </v-card-text>
       <v-card-actions class="d-flex justify-center">
@@ -164,8 +169,15 @@
         return `${finalHour[0]}:${finalHour[1]}`
       },
       showModalAtencion(atencion) {
-        this.$store.dispatch('atentions/setSingle', atencion)
-        this.openAtencionModal = true
+        this.atencion = {}
+        this.atencion = atencion
+        this.$forceUpdate()
+        this.$axios.get('/socios/'+atencion.socio.id)
+          .then((data)=>{
+            this.$store.dispatch('atentions/setSocio', data.data)
+            this.$store.dispatch('atentions/setMascota', {})
+            this.openAtencionModal = true
+          })
       },
       clientName(pet){
         if(pet.socios){

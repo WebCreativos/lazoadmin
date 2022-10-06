@@ -52,7 +52,6 @@
       this.getespecies()
     },
     mounted() {
-      this.selectedespecie = this.value
     },
     methods: {
       addEspecie() {
@@ -68,6 +67,12 @@
         this.$axios.get('/especies/?_limit=-1')
           .then((data) => {
             this.especiesList = data.data
+            this.selectedespecie.id = this.value 
+            if(Number.isInteger(parseInt(this.value))) {
+              this.selectedespecie = this.especiesList.find((especie) => especie.id == this.value)
+            } else {
+              this.selectedespecie = this.value
+            } 
           })
       }
     },

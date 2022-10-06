@@ -43,7 +43,7 @@
         referencia: {
           nombre: ""
         },
-        selectedreferencia: parseInt(this.value),
+        selectedreferencia: {},
         referenciasList: [],
         showreferenciasModal: false
       }
@@ -68,6 +68,10 @@
         this.$axios.get('/referencias')
           .then((data) => {
             this.referenciasList = data.data
+            console.log(this.value)
+            if(this.value.id) {
+              this.selectedreferencia = this.referenciasList.find((referencia) => referencia.id == this.value.id)
+            } 
             this.referenciasList.unshift({
               id: null,
               nombre: "Seleccione una referencia"

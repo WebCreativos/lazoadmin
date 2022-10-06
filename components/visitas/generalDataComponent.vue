@@ -116,19 +116,31 @@
       </v-card>
     </v-dialog>
     <v-dialog v-model="listSociosModal">
-      <SociosListSociosComponent v-model="sociosList" @changePage="getSocios($event)">
+      <SociosListSociosComponent icon v-model="sociosList" @changePage="getSocios($event)">
         <template v-slot:button="{ item }">
           <v-btn small class="my-3 gd-primary font-weight-light white--text" @click="setSocio(item)">
             AGREGAR
           </v-btn>
         </template>
         <template v-slot:extraFields>
-          <SociosFindSociosComponent v-model="searchSocios.name_contains"></SociosFindSociosComponent>
+          <v-row>
+            <v-col class="col-md-5 col-12">
+              <SociosFindSociosComponent v-model="searchSocios.name_contains"></SociosFindSociosComponent>
+            </v-col>
+            <v-col class="col-md-5 col-12">
+              <v-text-field outlined dense label="Direccion" v-model="searchSocios.direccion_contains"></v-text-field>
+            </v-col>
+            <v-col class="col-md-2 col-12">
+              <v-btn block depressed height="40" color="gd-primary" @click="getSocios()">
+                <v-icon color="white">mdi-magnify</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         </template>
       </SociosListSociosComponent>
     </v-dialog>
     <v-dialog v-model="updateMascotasModal">
-        <MascotasFormComponent :value="selectedPet" :handler="updatePet"></MascotasFormComponent>
+        <MascotasFormComponent :value="selectedPet" @input="selectedPet = $event" :handler="updatePet"></MascotasFormComponent>
     </v-dialog>
   </div>
 </template>
@@ -219,7 +231,9 @@
       async getSocios(page = 1) {
         this.$store.dispatch('socios/findAll', {
           page: page,
-          name: this.searchSocios.name_contains
+          _sort:'id:desc',
+          name_contains: this.searchSocios.name_contains,
+          address_contains: this.searchSocios.direccion_contains
         })
 
       },
@@ -306,15 +320,6 @@
       },
       value() {
         return this.$store.getters['atentions/get']
-      }
-    },
-    watch: {
-      searchSocios: {
-        handler() {
-          this.getSocios()
-        },
-        deep: true
-
       }
     },
 

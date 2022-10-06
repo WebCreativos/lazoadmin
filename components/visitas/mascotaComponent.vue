@@ -5,7 +5,7 @@
         <v-toolbar-title class="white--text font-weight-light">Atenciones de la mascota {{value.mascota.nombre}}
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn class="mr-2 font-weight-light" :disabled="(!value.socio.id || !value.mascota.id || value.id!=undefined)"
+        <v-btn class="mr-2 font-weight-light" :disabled="(!value.socio.id || !value.mascota.id)"
           color="white" @click="openModalAtencion(createAtencion, 'NUEVA VISITA')">
           Nueva visita
         </v-btn>
@@ -64,13 +64,6 @@
                   <v-btn outlined block class="font-weight-light"
                     @click="()=>{openChangeAtentionsModal = true; dataMoveAtention.atencion = item.id}" small>
                     Cambiar a otra mascota</v-btn>
-
-                </v-col>
-                <v-col class="col-12 mt-2">
-                  <v-btn depressed block color="red" class="font-weight-light white--text" @click="deleteAtencion(item)" small>
-                    Eliminar atencion&nbsp;<v-icon>mdi-delete</v-icon>
-                  </v-btn>
-
                 </v-col>
               </v-row>
 
@@ -82,7 +75,7 @@
         <v-pagination :total-visible="10" :length="Math.ceil(consultaItems.length/10)" v-model="page"></v-pagination>
       </v-card-actions>
     </v-card>
-    <v-dialog v-model="modalData.openModal" width="80%" height="auto">
+    <v-dialog v-model="modalData.openModal" width="40%" height="auto">
       <v-toolbar color="primary" class="elevation-0 white--text font-weight-thin">
         <v-toolbar-title>{{modalData.title}}</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -191,8 +184,13 @@
         this.modalData.openModal = true;
         if (atencion) {
           delete atencion.socio
-          console.log(atencion)
           this.$store.dispatch('atentions/setSingle', atencion)
+        } else {
+          if(this.consultaItems.data.length > 0) {
+            console.log(this.consultaItems.data[this.consultaItems.data.length-1]?.peso)
+            let peso = this.consultaItems.data[this.consultaItems.data.length-1]?.peso
+            this.$store.dispatch('atentions/setSingle', {peso:peso})
+          }
         }
       },
       closeModalAtencion() {
