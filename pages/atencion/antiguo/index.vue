@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card class="rounded-xl">
-      <v-toolbar color="teal darken-4" elevation="0">
+      <v-toolbar color="teal darken-3" elevation="0">
         <v-toolbar-title class="white--text font-weight-light">Consultas antiguas</v-toolbar-title>
       </v-toolbar>
       <v-card-title>
@@ -20,7 +20,7 @@
             <v-row>
               <v-col class="col-9">
                 <v-btn block @click="getAtencions()"
-                  class="teal darken-4 font-weight-light rounded-lg white--text" color="teal darken-4">
+                  class="teal darken-3 font-weight-light rounded-lg white--text" color="teal darken-3">
                   BUSCAR
                 </v-btn>
               </v-col>

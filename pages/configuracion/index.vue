@@ -3,7 +3,7 @@
     <v-row>
       <v-col class="col-12">
         <v-card class="rounded-xl">
-          <v-toolbar color="teal darken-4" class="elevation-0 white--text">
+          <v-toolbar color="teal darken-3" class="elevation-0 white--text">
             <v-toolbar-title class="font-weight-light">
               Configuracion
             </v-toolbar-title>
@@ -26,18 +26,18 @@
           </v-card-text>
           <v-card-text>
             <v-card class="rounded-xl" outlined>
-              <v-toolbar color="teal darken-4 white--text" class="elevation-0">
+              <v-toolbar color="teal darken-3 white--text" class="elevation-0">
                 <v-toolbar-title class="font-weight-light">
                   Usuarios
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn class="white--text font-weight-light rounded-lg" color="teal darken-4"
+                <v-btn class="white--text font-weight-light rounded-lg" color="teal darken-3"
                   @click="openModalUsers = true">Agregar</v-btn>
               </v-toolbar>
               <v-card-text>
                 <v-data-table :items="users" :headers="headers" hide-default-footer>
                   <template v-slot:item.edit={item}>
-                    <v-btn class="white--text font-weight-light rounded-lg" color="teal darken-4" @click="()=>{
+                    <v-btn class="white--text font-weight-light rounded-lg" color="teal darken-3" @click="()=>{
                         openModalEditUsers = true;
                         user = item;
                     }">
@@ -71,7 +71,7 @@
           </v-card-text>
           <v-card-text>
             <v-card class="rounded-xl" outlined>
-              <v-toolbar color="teal darken-4 white--text" class="elevation-0">
+              <v-toolbar color="teal darken-3 white--text" class="elevation-0">
                 <v-toolbar-title class="font-weight-light">
                   Logs
                 </v-toolbar-title>
@@ -90,11 +90,11 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="teal darken-4" @click="changeConfiguracion()"
+            <v-btn color="teal darken-3" @click="changeConfiguracion()"
               class="white--text font-weight-light rounded-lg">Guardar configuraciones</v-btn>
           </v-card-actions>
           <!-- 
-          <v-toolbar color="teal darken-4" class="elevation-0 white--text">
+          <v-toolbar color="teal darken-3" class="elevation-0 white--text">
             <v-toolbar-title class="font-weight-light">
               Exportar informacion
             </v-toolbar-title>
@@ -103,7 +103,7 @@
             <v-row>
               <v-col class="col-md-12 col-12">
                 <v-card class="rounded-xl">
-                  <v-toolbar color="teal darken-4" class="elevation-0 white--text">
+                  <v-toolbar color="teal darken-3" class="elevation-0 white--text">
                     <v-toolbar-title class="font-weight-light">Consultas</v-toolbar-title>
                   </v-toolbar>
                   <v-card-text>
@@ -120,14 +120,14 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="teal darken-4" @click="generateConsultas()"
+                    <v-btn color="teal darken-3" @click="generateConsultas()"
                       class="white--text font-weight-light rounded-lg">Exportar</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-col>
               <v-col class="col-md-12 col-12">
                 <v-card class="rounded-xl">
-                  <v-toolbar color="teal darken-4" class="elevation-0 white--text">
+                  <v-toolbar color="teal darken-3" class="elevation-0 white--text">
                     <v-toolbar-title class="font-weight-light">Facturas</v-toolbar-title>
                   </v-toolbar>
                   <v-card-text>
@@ -144,7 +144,7 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="teal darken-4" @click="changeConfiguracion()"
+                    <v-btn color="teal darken-3" @click="changeConfiguracion()"
                       class="white--text font-weight-light rounded-lg">Exportar</v-btn>
                   </v-card-actions>
 
@@ -153,12 +153,12 @@
               </v-col>
               <v-col class="col-md-12 col-12">
                 <v-card class="rounded-xl">
-                  <v-toolbar color="teal darken-4" class="elevation-0 white--text">
+                  <v-toolbar color="teal darken-3" class="elevation-0 white--text">
                     <v-toolbar-title class="font-weight-light">Debitos</v-toolbar-title>
                   </v-toolbar>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="teal darken-4" @click="changeConfiguracion()"
+                    <v-btn color="teal darken-3" @click="changeConfiguracion()"
                       class="white--text font-weight-light rounded-lg">Exportar</v-btn>
                   </v-card-actions>
                 </v-card>
@@ -179,7 +179,7 @@
     <v-dialog v-model="openModalUsers">
       <info-user-component v-model="user">
         <template v-slot:header>
-          <v-toolbar class="mb-3 elevation-0" color="teal darken-4">
+          <v-toolbar class="mb-3 elevation-0" color="teal darken-3">
             <v-toolbar-title class="white--text">Agregar usuarios</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn icon @click="openModalUsers = false" color="white">
@@ -188,14 +188,14 @@
           </v-toolbar>
         </template>
         <template v-slot:button>
-          <v-btn depressed color="teal darken-4" @click="addUser()">Agregar</v-btn>
+          <v-btn depressed color="teal darken-3" @click="addUser()">Agregar</v-btn>
         </template>
       </info-user-component>
     </v-dialog>
     <v-dialog v-model="openModalEditUsers">
       <info-user-component v-model="user">
         <template v-slot:header>
-          <v-toolbar class="mb-3 elevation-0" color="teal darken-4">
+          <v-toolbar class="mb-3 elevation-0" color="teal darken-3">
             <v-toolbar-title class="white--text">Editar usuario</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn icon @click="()=>{
@@ -207,7 +207,7 @@
           </v-toolbar>
         </template>
         <template v-slot:button>
-          <v-btn depressed color="teal darken-4" @click="updateUser()">Editar</v-btn>
+          <v-btn depressed color="teal darken-3" @click="updateUser()">Editar</v-btn>
         </template>
       </info-user-component>
     </v-dialog>

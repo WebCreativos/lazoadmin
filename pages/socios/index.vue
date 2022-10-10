@@ -15,7 +15,7 @@
                 </v-switch>
               </v-col>
               <v-col class="col-md-3">
-                <v-btn block color="teal darken-4" @click="getSocios()"
+                <v-btn block color="teal darken-3" @click="getSocios()"
                   class="white--text rounded-lg font-weight-light">
                   Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
                 </v-btn>
@@ -25,23 +25,23 @@
         </v-card>
       </template>
       <template v-slot:buttonTitle>
-        <v-btn to="/socios/registro" class="font-weight-light rounded-lg white--text" color="teal darken-4">
+        <v-btn to="/socios/registro" class="font-weight-light rounded-lg white--text" color="teal darken-3">
           AGREGAR SOCIO
         </v-btn>
       </template>
       <template v-slot:button="{ item }">
         <v-row no-gutters>
           <v-col class="pa-2">
-            <v-btn block small class="teal darken-4 font-weight-light rounded-lg white--text" @click="()=>{
+            <v-btn block small class="teal darken-3 font-weight-light rounded-lg white--text" @click="()=>{
           openModalPaymentServices = true;
           dataPayment.client = item
-          }" color="teal darken-4">
+          }" color="teal darken-3">
               VALIDAR PAGO
             </v-btn>
           </v-col>
           <v-col class="pa-2">
-            <v-btn block small class="teal darken-4 font-weight-light rounded-lg white--text"
-              :to="`/socios/editar/${item.id}`" color="teal darken-4">
+            <v-btn block small class="teal darken-3 font-weight-light rounded-lg white--text"
+              :to="`/socios/editar/${item.id}`" color="teal darken-3">
               EDITAR
             </v-btn>
           </v-col>
@@ -56,7 +56,7 @@
     </SociosListSociosComponent>
     <v-dialog v-model="openModalPaymentServices">
       <v-card width="600">
-        <v-toolbar color="teal darken-4 font-weight-light" elevation="0">
+        <v-toolbar color="teal darken-3 font-weight-light" elevation="0">
           <v-toolbar-title class="white--text">Pagar servicios</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon @click="openModalPaymentServices = false">
@@ -69,7 +69,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="teal darken-4" class="font-weight-light white--text rounded-lg"
+          <v-btn color="teal darken-3" class="font-weight-light white--text rounded-lg"
             @click="openAlertPayment = true">Pagar servicios</v-btn>
         </v-card-actions>
       </v-card>

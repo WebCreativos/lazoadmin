@@ -5,7 +5,7 @@
         {{title}}
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn color="teal darken-4" class="white--text rounded-lg font-weight-light mr-2">
+      <v-btn color="teal darken-3" class="white--text rounded-lg font-weight-light mr-2">
         Escanear codigo
         &nbsp;&nbsp;
         <v-icon>mdi-barcode</v-icon>
@@ -20,7 +20,7 @@
           </v-text-field>
         </v-col>
         <v-col class="col-md-2">
-          <v-btn block color="teal darken-4" @click="getProducts()"
+          <v-btn block color="teal darken-3" @click="getProducts()"
             class="white--text rounded-lg font-weight-light">
             Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
           </v-btn>

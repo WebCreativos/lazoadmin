@@ -3,10 +3,10 @@
     <v-row>
       <v-col class="col-12">
         <v-card class="rounded-xl">
-          <v-toolbar class="elevation-0 teal darken-4 font-weight-thin white--text">
+          <v-toolbar class="elevation-0 teal darken-3 font-weight-thin white--text">
             <v-toolbar-title>Mensajes</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn color="teal darken-4" class="rounded-lg white--text font-weight-light"
+            <v-btn color="teal darken-3" class="rounded-lg white--text font-weight-light"
               @click="modalMessage = true">
               AGREGAR MENSAJE
             </v-btn>
@@ -31,7 +31,7 @@
     </v-row>
     <v-dialog v-model="modalMessage" persistent width="500">
       <v-card>
-        <v-toolbar color="teal darken-4" class="elevation-0">
+        <v-toolbar color="teal darken-3" class="elevation-0">
           <v-toolbar-title class="white--text font-weight-light">AGREGAR MENSAJE</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon @click="modalMessage = false">

@@ -16,7 +16,7 @@
       <v-card-title class="font-weight-light">
         Productos de la consulta
         <v-spacer></v-spacer>
-        <v-btn outlined color="teal darken-4" @click="modalProductos = true"  v-if="!readonly">
+        <v-btn outlined color="teal darken-3" @click="modalProductos = true"  v-if="!readonly">
           AGREGAR PRODUCTO&nbsp;<v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-card-title>

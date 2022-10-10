@@ -1,6 +1,6 @@
 <template>
   <v-card class="rounded-xl" outlined>
-    <v-toolbar color="teal darken-4" class="elevation-0 white--text">
+    <v-toolbar color="teal darken-3" class="elevation-0 white--text">
       <v-toolbar-title class="font-weight-light">
         Cuotas
       </v-toolbar-title>
@@ -27,7 +27,7 @@
             </v-row>
           </v-col>
           <v-col class="col-md-2 col-12">
-            <v-btn color="teal darken-4" @click="createCuota()" block
+            <v-btn color="teal darken-3" @click="createCuota()" block
               class="rounded-lg white--text font-weight-light">Guardar</v-btn>
           </v-col>
         </v-row>
@@ -42,7 +42,7 @@
         </template>
 
         <template v-slot:item.actions={item}>
-          <v-btn small class="white--text font-weight-light rounded-lg" @click="setDefaultCuota(item)" color="teal darken-4">
+          <v-btn small class="white--text font-weight-light rounded-lg" @click="setDefaultCuota(item)" color="teal darken-3">
             Cuota base <v-icon>mdi-check</v-icon>
           </v-btn>
           <v-btn small class="white--text font-weight-light rounded-lg" color="red" @click="deleteCuota(item.id)">

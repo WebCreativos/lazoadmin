@@ -4,7 +4,7 @@
     <v-row>
       <v-col class="col-12 col-md-12">
         <v-card class="rounded-xl">
-          <v-toolbar color="teal darken-4" elevation="0" class="white--text">
+          <v-toolbar color="teal darken-3" elevation="0" class="white--text">
             <v-toolbar-title class="font-weight-light">Nueva atencion</v-toolbar-title>
           </v-toolbar>
           <v-card-text class="pa-4 rounded-lg">
@@ -26,13 +26,13 @@
                   <v-col class="col-12 d-flex justify-space-between">
                     <v-row>
                       <v-col class="col-6">
-                        <v-btn block class="white--text" color="teal darken-4 font-weight-light rounded-lg"
+                        <v-btn block class="white--text" color="teal darken-3 font-weight-light rounded-lg"
                           @click="()=>{
                       openModalListSocios = true
                       }">BUSCAR</v-btn>
                       </v-col>
                       <v-col class="col-6">
-                        <v-btn block class="white--text" color="teal darken-4 font-weight-light rounded-lg"
+                        <v-btn block class="white--text" color="teal darken-3 font-weight-light rounded-lg"
                           @click="()=>{
                       createSocioModal = true;
                       }">
@@ -88,7 +88,7 @@
       </v-col>
       <v-col class="col-12">
         <v-card class="rounded-xl">
-          <v-toolbar color="teal darken-4" elevation="0">
+          <v-toolbar color="teal darken-3" elevation="0">
             <v-toolbar-title class="white--text font-weight-light">Atenciones de la mascota</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn class="mr-2 font-weight-light"
@@ -138,7 +138,7 @@
     </v-row>
     <v-dialog v-model="createSocioModal" width="80%" height="auto">
       <v-card>
-        <v-toolbar class="elevation-0" color="teal darken-4">
+        <v-toolbar class="elevation-0" color="teal darken-3">
           <v-toolbar-title class="white--text font-weight-thin">Nuevo cliente</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon @click.native="createSocioModal = false">
@@ -157,7 +157,7 @@
           <v-btn outlined @click="($e)=>{
             atencion.socio = item;
             openModalListSocios = false;
-        }" color="teal darken-4">
+        }" color="teal darken-3">
             AGREGAR
           </v-btn>
         </template>
@@ -167,7 +167,7 @@
       </SociosListSociosComponent>
     </v-dialog>
     <v-dialog v-model="modalAtencion" width="80%" height="auto" persistent>
-      <v-toolbar color="teal darken-4" class="elevation-0 white--text font-weight-thin">
+      <v-toolbar color="teal darken-3" class="elevation-0 white--text font-weight-thin">
         <v-toolbar-title>NUEVA VISITA</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon @click="modalAtencion = false">
@@ -180,7 +180,7 @@
           }"></visitas-data-component>
     </v-dialog>
     <v-dialog v-model="modalUpdateAtencion" width="80%" height="auto" persistent>
-      <v-toolbar color="teal darken-4" class="elevation-0 white--text font-weight-thin">
+      <v-toolbar color="teal darken-3" class="elevation-0 white--text font-weight-thin">
         <v-toolbar-title>EDITAR VISITA</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon @click="modalUpdateAtencion = false">
@@ -194,7 +194,7 @@
 
 
     <v-dialog v-model="openAtencionModal" width="80%" height="auto" persistent>
-      <v-toolbar color="teal darken-4" class="elevation-0 white--text font-weight-thin">
+      <v-toolbar color="teal darken-3" class="elevation-0 white--text font-weight-thin">
         <v-toolbar-title>VER VISITA</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon @click="openAtencionModal = false">

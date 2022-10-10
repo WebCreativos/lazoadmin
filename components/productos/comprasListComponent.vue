@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="rounded-xl">
-      <v-toolbar elevation="0" color="teal darken-4">
+      <v-toolbar elevation="0" color="teal darken-3">
         <v-toolbar-title class="font-weight-light white--text">
           Compras de mercaderia
         </v-toolbar-title>
@@ -21,7 +21,7 @@
           </template>
 
           <template v-slot:item.actions="{ item }">
-            <v-btn small color="teal darken-4" @click="openModalProducts(item)"
+            <v-btn small color="teal darken-3" @click="openModalProducts(item)"
               class="white--text font-weight-light rounded-lg">
               <v-icon>mdi-magnify</v-icon> Ver compra
             </v-btn>
@@ -31,7 +31,7 @@
     </v-card>
     <v-dialog persistent v-model="productosCompraModal">
       <v-card class="rounded-xl">
-        <v-toolbar color="teal darken-4" class="elevation-0">
+        <v-toolbar color="teal darken-3" class="elevation-0">
           <v-toolbar-title class="font-weight-light white--text">
             Detalles de la compra
           </v-toolbar-title>
@@ -60,7 +60,7 @@
                 <v-text-field type="number" class="rounded-r-0" label="Monto entregado"
                   prepend-inner-icon="mdi-currency-usd" dense hide-details v-model="compra.entrega" outlined>
                 </v-text-field>
-                <v-btn class="font-weight-light rounded-l-0 white--text" height="40" color="teal darken-4"
+                <v-btn class="font-weight-light rounded-l-0 white--text" height="40" color="teal darken-3"
                   @click="updateProduct()" depressed>
                   Actualizar&nbsp;<v-icon>mdi-save</v-icon>
                 </v-btn>
@@ -68,7 +68,7 @@
             </v-col>
             <v-col class="col-12">
               <v-card class="rounded-xl" outlined>
-                <v-toolbar elevation="0" color="teal darken-4">
+                <v-toolbar elevation="0" color="teal darken-3">
                   <v-toolbar-title class="font-weight-light white--text">
                     Productos
                   </v-toolbar-title>

@@ -8,7 +8,7 @@
               Agenda
             </template>
             <template v-slot:buttons>
-              <v-btn color="teal darken-4" class="rounded-lg white--text font-weight-light"
+              <v-btn color="teal darken-3" class="rounded-lg white--text font-weight-light"
                 @click="modalAgenda = true">
                 AGREGAR EVENTO&nbsp;&nbsp;<v-icon>mdi-calendar</v-icon>
               </v-btn>
@@ -28,7 +28,7 @@
               </v-col>
 
               <v-col class="col-md-3">
-                <v-btn block color="teal darken-4" @click="getAgendas()"
+                <v-btn block color="teal darken-3" @click="getAgendas()"
                   class="white--text rounded-lg font-weight-light">
                   Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
                 </v-btn>
@@ -83,7 +83,7 @@
     </v-row>
     <v-dialog v-model="modalAgenda">
       <v-card min-width="800px">
-        <v-toolbar color="teal darken-4" class="elevation-0 white--text font-weight-thin">
+        <v-toolbar color="teal darken-3" class="elevation-0 white--text font-weight-thin">
           <v-toolbar-title>AGREGAR EVENTO</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon @click="modalAgenda = false">
@@ -118,14 +118,14 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="teal darken-4" class="white--text font-weight-light" @click="addAgenda()">AGREGAR A LA
+          <v-btn color="teal darken-3" class="white--text font-weight-light" @click="addAgenda()">AGREGAR A LA
             AGENDA</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <v-dialog v-model="modalReschedule">
       <v-card min-width="800px">
-        <v-toolbar color="teal darken-4" class="elevation-0 white--text font-weight-thin">
+        <v-toolbar color="teal darken-3" class="elevation-0 white--text font-weight-thin">
           <v-toolbar-title>AGREGAR SOCIO</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon @click="modalAgenda = false">
@@ -139,14 +139,14 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="teal darken-4" depressed @click="addAgenda()">AGREGAR A LA AGENDA</v-btn>
+          <v-btn color="teal darken-3" depressed @click="addAgenda()">AGREGAR A LA AGENDA</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
     <v-dialog v-model="modalReschedule">
       <v-card min-width="800px">
-        <v-toolbar color="teal darken-4" class="elevation-0 white--text font-weight-thin">
+        <v-toolbar color="teal darken-3" class="elevation-0 white--text font-weight-thin">
           <v-toolbar-title>RE AGENDAR</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon @click="modalAgenda = false">
@@ -160,7 +160,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="teal darken-4" depressed @click="reSchedule()">RE AGENDAR</v-btn>
+          <v-btn color="teal darken-3" depressed @click="reSchedule()">RE AGENDAR</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -180,7 +180,7 @@
     </modal-success>
     <v-dialog v-model="modalCalendar">
       <v-card width="500">
-        <v-toolbar color="teal darken-4" class="elevation-0">
+        <v-toolbar color="teal darken-3" class="elevation-0">
           <v-toolbar-title class="white--text font-weight-light">Buscar en la agenda</v-toolbar-title>
         </v-toolbar>
         <v-card-text class="pa-3">
@@ -188,7 +188,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn depressed color="teal darken-4" @click="getAgendas()">BUSCAR AGENDA</v-btn>
+          <v-btn depressed color="teal darken-3" @click="getAgendas()">BUSCAR AGENDA</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

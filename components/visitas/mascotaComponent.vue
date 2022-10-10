@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="rounded-xl">
-      <v-toolbar color="teal darken-4" elevation="0">
+      <v-toolbar color="teal darken-3" elevation="0">
         <v-toolbar-title class="white--text font-weight-light">Atenciones de la mascota {{value.mascota.nombre}}
         </v-toolbar-title>
         <v-spacer></v-spacer>
@@ -76,7 +76,7 @@
       </v-card-actions>
     </v-card>
     <v-dialog v-model="modalData.openModal" width="40%" height="auto">
-      <v-toolbar color="teal darken-4" class="elevation-0 white--text font-weight-thin">
+      <v-toolbar color="teal darken-3" class="elevation-0 white--text font-weight-thin">
         <v-toolbar-title>{{modalData.title}}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon @click="closeModalAtencion()">
@@ -89,7 +89,7 @@
     </v-dialog>
     <v-dialog width="500" v-model="openChangeAtentionsModal">
       <v-card>
-        <v-toolbar color="teal darken-4" elevation="0">
+        <v-toolbar color="teal darken-3" elevation="0">
           <v-toolbar-title class="white--text">Seleccione el socio</v-toolbar-title>
         </v-toolbar>
         <v-card-text class="py-4">
@@ -105,7 +105,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="teal darken-4 white--text" @click="changeAtentionPet()">
+          <v-btn color="teal darken-3 white--text" @click="changeAtentionPet()">
             Cambiar mascota
           </v-btn>
         </v-card-actions>

@@ -64,7 +64,7 @@
     </v-row>
     <v-dialog v-model="openDialogEditConsulta" persistent>
       <v-card width="600">
-        <v-toolbar color="teal darken-4 elevation-0">
+        <v-toolbar color="teal darken-3 elevation-0">
           <v-toolbar-title class="font-weight-light white--text">Aprobar hora y fecha de la consulta</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon @click="openDialogEditConsulta = false">
@@ -82,7 +82,7 @@
     </v-dialog>
     <v-dialog v-model="dialogAgregarConsulta" persistent>
       <v-card width="600">
-        <v-toolbar color="teal darken-4 elevation-0">
+        <v-toolbar color="teal darken-3 elevation-0">
           <v-toolbar-title class="font-weight-light white--text">Agregar nueva consulta</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon @click="dialogAgregarConsulta = false">

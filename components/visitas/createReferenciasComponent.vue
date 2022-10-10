@@ -4,13 +4,13 @@
       <v-select solo dense hide-details :items="referenciasList" label="Nombre del referencia" class="rounded-r-0"
         item-text="nombre" item-value="id" return-object v-model="selectedreferencia">
       </v-select>
-      <v-btn class="rounded-l-0 rounded-r-lg" height="40" color="teal darken-4" @click="showreferenciasModal = true">
+      <v-btn class="rounded-l-0 rounded-r-lg" height="40" color="teal darken-3" @click="showreferenciasModal = true">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-input>
     <v-dialog v-model="showreferenciasModal">
       <v-card width="800">
-        <v-toolbar color="teal darken-4" elevation="0">
+        <v-toolbar color="teal darken-3" elevation="0">
           <v-toolbar-title class="white--text font-weight-light">Referencias</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon @click="showreferenciasModal = false">
@@ -23,7 +23,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn class="white--text" color="teal darken-4 font-weight-light rounded-lg"
+          <v-btn class="white--text" color="teal darken-3 font-weight-light rounded-lg"
             @click="addReferencia()">
             AGREGAR
           </v-btn>

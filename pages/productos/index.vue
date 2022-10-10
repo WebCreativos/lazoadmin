@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-card class="rounded-xl">
-      <v-toolbar card class="teal darken-4" elevation="0">
+      <v-toolbar card class="teal darken-3" elevation="0">
         <v-toolbar-title class="white--text font-weight-light">AGREGAR PRODUCTO</v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -13,7 +13,7 @@
                 <v-col class="col-12 col-md-6">
                   <v-text-field label="CODIGO" :rules="rules.codigo" type="number" v-model="product.codigo" class="rounded-lg" solo dense>
                   </v-text-field>
-                  <v-card color="teal darken-4" class="rounded-lg elevation-0" height="400">
+                  <v-card color="teal darken-3" class="rounded-lg elevation-0" height="400">
                     <v-card-text>
                       <input id="fileUpload" type="file" @input="onFileChange($event)" ref="file" hidden>
                       <v-btn @click="selectPicture()" block class="mb-5" depressed>CARGAR FOTO</v-btn>
@@ -46,7 +46,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="teal darken-4" class="rounded-lg white--text font-weight-light" depressed large
+        <v-btn color="teal darken-3" class="rounded-lg white--text font-weight-light" depressed large
           @click="createProduct()">
           GUARDAR
         </v-btn>

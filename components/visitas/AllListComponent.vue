@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="rounded-xl">
-      <v-toolbar color="teal darken-4" elevation="0">
+      <v-toolbar color="teal darken-3" elevation="0">
         <v-toolbar-title class="white--text font-weight-light">Consultas</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn outlined class="white--text font-weight-light" @click="exportDataProximas()">
@@ -22,7 +22,7 @@
             </v-input>
           </v-col>
           <v-col class="col-12">
-            <v-btn @click="items.page = 1;getAtenciones()" color="teal darken-4" height="40" depressed
+            <v-btn @click="items.page = 1;getAtenciones()" color="teal darken-3" height="40" depressed
               class="white--text font-weight-light" block>
               Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
             </v-btn>
@@ -57,7 +57,7 @@
       </v-card-actions>
     </v-card>
     <v-dialog v-model="openAtencionModal" width="80%"  height="auto">
-      <v-toolbar color="teal darken-4" class="elevation-0 white--text font-weight-thin">
+      <v-toolbar color="teal darken-3" class="elevation-0 white--text font-weight-thin">
         <v-toolbar-title>VER VISITA</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon @click="openAtencionModal = false">

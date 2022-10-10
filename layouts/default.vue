@@ -143,6 +143,7 @@
       color: white;
     }
     border-color:transparent;
+    background:#00695c!important
   }
 
   .v-navigation-drawer__border {

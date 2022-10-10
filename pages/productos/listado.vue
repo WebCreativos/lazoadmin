@@ -2,23 +2,23 @@
   <v-container fluid>
     <v-row>
       <v-col class="col-12">
-        <ProductosListComponent color="teal darken-4">
+        <ProductosListComponent color="teal darken-3">
           <template v-slot:headerButtons>
-            <v-btn color="teal darken-4" class="rounded-lg white--text font-weight-light" to="/productos">
+            <v-btn color="teal darken-3" class="rounded-lg white--text font-weight-light" to="/productos">
               AGREGAR PRODUCTO
             </v-btn>
             &nbsp;&nbsp;
-            <v-btn color="teal darken-4" class="rounded-lg white--text font-weight-light mr-2"
+            <v-btn color="teal darken-3" class="rounded-lg white--text font-weight-light mr-2"
               @click="openModalHistorial = true">
               Ver historial de productos
             </v-btn>
-            <v-btn color="teal darken-4" class="rounded-lg white--text font-weight-light"
+            <v-btn color="teal darken-3" class="rounded-lg white--text font-weight-light"
               @click="compraModal = true">
               COMPRA DE MERCADERIA
             </v-btn>
           </template>
           <template v-slot:button="{ item }">
-            <v-btn :to="`/productos/editar/${item.id}`" color="teal darken-4"
+            <v-btn :to="`/productos/editar/${item.id}`" color="teal darken-3"
               class="rounded-lg white--text font-weight-light">Editar</v-btn>
           </template>
         </ProductosListComponent>
@@ -29,7 +29,7 @@
       </v-col>
     </v-row>
     <v-dialog v-model="openModalHistorial" persistent width="600">
-      <v-toolbar color="teal darken-4" class="elevation-0">
+      <v-toolbar color="teal darken-3" class="elevation-0">
         <v-toolbar-title class="font-weight-light white--text">
           Historial de productos
         </v-toolbar-title>
