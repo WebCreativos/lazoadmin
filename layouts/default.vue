@@ -163,8 +163,6 @@
     span {
       color: white;
     }
-
-    background:linear-gradient(90deg, #03989e, #037176);
     border-color:transparent;
   }
 
