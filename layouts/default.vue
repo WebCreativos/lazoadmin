@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer :value="true" class="elevation-2 rounded-r-xl elevation-0" hide-overlay height="99.9%" app
+    <v-navigation-drawer :value="true" class="elevation-2 rounded-r-xl elevation-0" style="border-right: 1px solid #0000001a;" hide-overlay height="99.9%" app
       permanent>
       <v-app-bar height="120" color="teal darken-3" class="elevation-0">
       </v-app-bar>
