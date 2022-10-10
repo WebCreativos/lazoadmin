@@ -6,7 +6,7 @@
       </v-app-bar>
       <v-list>
         <v-list-item>
-          <v-list-item-content>
+          <v-list-item-content class="mx-2">
             <v-btn text color="teal darken-3" height="50" width="50" class="btn-navigation elevation-3"
               active-class="btn-navigation-active" to="/venta">
               <v-icon>mdi-cart</v-icon><br>
@@ -16,7 +16,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item to="/atencion">
-              <v-list-item-content>
+              <v-list-item-content class="mx-2">
                 <v-btn text color="teal darken-3" height="50" width="50" to="/atencion" class="btn-navigation elevation-3"
                   active-class="btn-navigation-active"  exact>
                   <v-icon>mdi-doctor</v-icon>
@@ -25,7 +25,7 @@
               </v-list-item-content>
             </v-list-item>
         <v-list-item>
-          <v-list-item-content>
+          <v-list-item-content class="mx-2">
             <v-btn text color="teal darken-3" height="50" width="50" class="btn-navigation elevation-3"
               active-class="btn-navigation-active" to="/productos/listado">
               <v-icon>mdi-cart-plus</v-icon><br>
@@ -34,7 +34,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
-          <v-list-item-content>
+          <v-list-item-content class="mx-2">
             <v-btn text color="teal darken-3" height="50" width="50" class="btn-navigation elevation-3"
               active-class="btn-navigation-active" to="/socios">
               <v-icon>mdi-account-plus</v-icon><br>
@@ -43,7 +43,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
-          <v-list-item-content>
+          <v-list-item-content class="mx-2">
             <v-btn text color="teal darken-3" height="50" width="50" class="btn-navigation elevation-3"
               active-class="btn-navigation-active" to="/mascotas">
               <v-icon>mdi-dog</v-icon><br>
@@ -53,7 +53,7 @@
         </v-list-item>
 
         <v-list-item>
-          <v-list-item-content>
+          <v-list-item-content class="mx-2">
             <v-btn text color="teal darken-3" height="50" width="50"  class="btn-navigation elevation-3"
               active-class="btn-navigation-active" to="/mensajes">
               <v-icon>mdi-comment</v-icon><br>
@@ -62,7 +62,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
-          <v-list-item-content>
+          <v-list-item-content class="mx-2">
             <v-btn text color="teal darken-3" height="50" width="50" class="btn-navigation elevation-3"
               active-class="btn-navigation-active" to="/agenda">
               <v-icon>mdi-calendar</v-icon><br>
@@ -71,7 +71,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
-          <v-list-item-content>
+          <v-list-item-content class="mx-2">
             <v-btn text color="teal darken-3" height="50" width="50" class="btn-navigation elevation-3"
               active-class="btn-navigation-active" to="/otros">
               <v-icon>mdi-record</v-icon><br>
@@ -80,7 +80,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
-          <v-list-item-content>
+          <v-list-item-content class="mx-2">
             <v-btn text color="teal darken-3" height="50" width="50" class="btn-navigation elevation-3"
               active-class="btn-navigation-active" to="/configuracion">
               <v-icon>mdi-cog</v-icon><br>
