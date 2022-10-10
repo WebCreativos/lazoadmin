@@ -3,7 +3,6 @@
     <v-navigation-drawer :value="true" class="elevation-2 rounded-r-xl elevation-0" hide-overlay height="99.9%" app
       permanent>
       <v-app-bar height="120" color="teal darken-4" class="elevation-0">
-        <v-img src="/logo.png" width="120"></v-img>
       </v-app-bar>
       <v-list>
         <v-list-item>
