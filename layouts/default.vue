@@ -8,7 +8,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation elevation-3"
-              active-class="btn-navigation-active" to="/venta">
+              active-class="teal darken-3" to="/venta">
               <v-icon>mdi-cart</v-icon><br>
               <span>VENTA</span>
             </v-btn>
@@ -18,7 +18,7 @@
         <v-list-item class="pl-12" to="/atencion">
               <v-list-item-content>
                 <v-btn text color="teal darken-4" height="50" width="50" to="/atencion" class="btn-navigation elevation-3"
-                  active-class="btn-navigation-active"  exact>
+                  active-class="teal darken-3"  exact>
                   <v-icon>mdi-doctor</v-icon>
                   <span>Nueva atencion</span>
                 </v-btn>
@@ -27,7 +27,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation elevation-3"
-              active-class="btn-navigation-active" to="/productos/listado">
+              active-class="teal darken-3" to="/productos/listado">
               <v-icon>mdi-cart-plus</v-icon><br>
               <span>PRODUCTOS</span>
             </v-btn>
@@ -36,7 +36,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation elevation-3"
-              active-class="btn-navigation-active" to="/socios">
+              active-class="teal darken-3" to="/socios">
               <v-icon>mdi-account-plus</v-icon><br>
               <span>CLIENTES</span>
             </v-btn>
@@ -45,7 +45,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation elevation-3"
-              active-class="btn-navigation-active" to="/mascotas">
+              active-class="teal darken-3" to="/mascotas">
               <v-icon>mdi-dog</v-icon><br>
               <span>MASCOTAS</span>
             </v-btn>
@@ -55,7 +55,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn text color="teal darken-4" height="50" width="50"  class="btn-navigation elevation-3"
-              active-class="btn-navigation-active" to="/mensajes">
+              active-class="teal darken-3" to="/mensajes">
               <v-icon>mdi-comment</v-icon><br>
               <span>MENSAJES</span>
             </v-btn>
@@ -64,7 +64,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation elevation-3"
-              active-class="btn-navigation-active" to="/agenda">
+              active-class="teal darken-3" to="/agenda">
               <v-icon>mdi-calendar</v-icon><br>
               <span>AGENDA</span>
             </v-btn>
@@ -73,7 +73,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation elevation-3"
-              active-class="btn-navigation-active" to="/otros">
+              active-class="teal darken-3" to="/otros">
               <v-icon>mdi-record</v-icon><br>
               <span>OTROS</span>
             </v-btn>
@@ -82,7 +82,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation elevation-3"
-              active-class="btn-navigation-active" to="/configuracion">
+              active-class="teal darken-3" to="/configuracion">
               <v-icon>mdi-cog</v-icon><br>
               <span>CONFIGURACION</span>
             </v-btn>
@@ -138,7 +138,7 @@
     }
   }
 
-  .btn-navigation-active {
+  .teal darken-3 {
     span {
       color: white;
     }
