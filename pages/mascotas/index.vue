@@ -10,7 +10,7 @@
                 </v-text-field>
               </v-col>
               <v-col class="col-md-3">
-                <v-btn block color="gd-primary-to-right" @click="getMascotas()"
+                <v-btn block color="teal darken-4" @click="getMascotas()"
                   class="white--text rounded-lg font-weight-light">
                   Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
                 </v-btn>
@@ -44,8 +44,8 @@
         </v-card>
       </template>
       <template v-slot:button="{ item }">
-        <v-btn class="gd-primary-to-right font-weight-light rounded-lg white--text" :to="`/mascotas/editar/${item.id}`"
-          color="primary">
+        <v-btn class="teal darken-4 font-weight-light rounded-lg white--text" :to="`/mascotas/editar/${item.id}`"
+          color="teal darken-4">
           EDITAR
         </v-btn>
         <v-btn class="font-weight-light rounded-lg white--text" color="red" @click="deleteMascota(item.id)">

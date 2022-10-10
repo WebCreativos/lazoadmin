@@ -1,7 +1,7 @@
 <template>
     <v-card outlined>
       <v-card-title>
-        <v-btn outlined color="primary" @click="addConsulta()" v-if="!readonly">
+        <v-btn outlined color="teal darken-4" @click="addConsulta()" v-if="!readonly">
           AGREGAR CONSULTAS&nbsp;<v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-card-title>

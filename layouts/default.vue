@@ -2,13 +2,13 @@
   <v-app>
     <v-navigation-drawer :value="true" class="elevation-2 rounded-r-xl elevation-0" hide-overlay height="99.9%" app
       permanent>
-      <v-app-bar height="120" color="gd-primary-to-right" class="elevation-0">
+      <v-app-bar height="120" color="teal darken-4" class="elevation-0">
         <v-img src="/logo.png" width="120"></v-img>
       </v-app-bar>
       <v-list>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+            <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/venta">
               <v-icon>mdi-cart</v-icon><br>
               <span>VENTA</span>
@@ -20,7 +20,7 @@
         <v-list-group no-action append-icon="">
             <template v-slot:activator>
               <v-list-item-content>
-                    <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+                    <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation"
                   active-class="btn-navigation-active">
                   <v-icon>mdi-doctor</v-icon><br>
                   <span>ATENCIONES</span>
@@ -29,7 +29,7 @@
             </template>
             <v-list-item class="pl-12" to="/atencion">
               <v-list-item-content>
-                <v-btn text color="primary" height="50" width="50" to="/atencion" class="btn-navigation"
+                <v-btn text color="teal darken-4" height="50" width="50" to="/atencion" class="btn-navigation"
                   active-class="btn-navigation-active"  exact>
                   <v-icon>mdi-doctor</v-icon>
                   <span>Nueva atencion</span>
@@ -38,7 +38,7 @@
             </v-list-item>
             <v-list-item class="pl-12" link to="/atencion/antiguo" >
               <v-list-item-content>
-                <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+                <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation"
                   active-class="btn-navigation-active" to="/atencion/antiguo"  exact>
                   <v-icon>mdi-format-list-bulleted</v-icon>
                   <span>Cons. antiguas</span>
@@ -48,7 +48,7 @@
           </v-list-group>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+            <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/productos/listado">
               <v-icon>mdi-cart-plus</v-icon><br>
               <span>PRODUCTOS</span>
@@ -57,7 +57,7 @@
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+            <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/socios">
               <v-icon>mdi-account-plus</v-icon><br>
               <span>CLIENTES</span>
@@ -66,7 +66,7 @@
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+            <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/mascotas">
               <v-icon>mdi-dog</v-icon><br>
               <span>MASCOTAS</span>
@@ -76,7 +76,7 @@
 
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="50" width="50"  class="btn-navigation"
+            <v-btn text color="teal darken-4" height="50" width="50"  class="btn-navigation"
               active-class="btn-navigation-active" to="/mensajes">
               <v-icon>mdi-comment</v-icon><br>
               <span>MENSAJES</span>
@@ -85,7 +85,7 @@
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+            <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/agenda">
               <v-icon>mdi-calendar</v-icon><br>
               <span>AGENDA</span>
@@ -94,7 +94,7 @@
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+            <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/otros">
               <v-icon>mdi-record</v-icon><br>
               <span>OTROS</span>
@@ -103,7 +103,7 @@
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-btn text color="primary" height="50" width="50" class="btn-navigation"
+            <v-btn text color="teal darken-4" height="50" width="50" class="btn-navigation"
               active-class="btn-navigation-active" to="/configuracion">
               <v-icon>mdi-cog</v-icon><br>
               <span>CONFIGURACION</span>

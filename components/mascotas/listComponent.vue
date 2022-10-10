@@ -1,6 +1,6 @@
 <template>
   <v-card class="rounded-xl">
-    <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text font-weight-thin">
+    <v-toolbar color="teal darken-4" class="elevation-0 white--text font-weight-thin">
       <v-toolbar-title>
         Mascotas
       </v-toolbar-title>

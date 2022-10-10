@@ -1,12 +1,12 @@
 <template>
   <v-container fluid>
     <v-card class="rounded-xl">
-      <v-toolbar color="gd-primary-to-right" class="elevation-0">
+      <v-toolbar color="teal darken-4" class="elevation-0">
         <v-toolbar-title class="white--text font-weight-light">Noticias de relevancia</v-toolbar-title>
       </v-toolbar>
       <v-card-actions class="pl-5">
         <v-spacer></v-spacer>
-        <v-btn color="gd-primary-to-right" class="white--text font-weight-light" @click="addItem()">
+        <v-btn color="teal darken-4" class="white--text font-weight-light" @click="addItem()">
           Agregar noticia&nbsp;<v-icon>mdi-plus</v-icon>    
         </v-btn>
       </v-card-actions>
@@ -15,7 +15,7 @@
         <v-row>
           <v-col class="col-md-3 col-12" v-for="(item,index) in items.otros" :key="index">
             <v-card class="rounded-xl">
-              <v-toolbar class="mb-3 elevation-0" color="gd-primary-to-right" dense>
+              <v-toolbar class="mb-3 elevation-0" color="teal darken-4" dense>
                 <v-toolbar-title class="white--text font-weight-light">Noticia {{(index + 1)}}</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn icon @click="deleteOthers(index)" color="white">
@@ -29,7 +29,7 @@
                 <input :id="`fileUpload${index}`" type="file"  @input="($event)=>{
                   item.picture = $event.target.files[0]; 
                 }" class="hidden" ref="file" hidden>
-                <v-btn @click="selectPicture(index)" color="gd-primary" block class="mb-5 white--text font-weight-light rounded-lg">CARGAR FOTO</v-btn>
+                <v-btn @click="selectPicture(index)" color="teal darken-4" block class="mb-5 white--text font-weight-light rounded-lg">CARGAR FOTO</v-btn>
 
                 <v-text-field placeholder="URL VIDEO" outlined v-model="item.video" dense hide-details class="rounded-lg"></v-text-field>
               </v-card-text>
@@ -41,7 +41,7 @@
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="gd-primary-to-right" class="rounded-lg white--text font-weight-light" @click="createOTher()" large>
+        <v-btn color="teal darken-4" class="rounded-lg white--text font-weight-light" @click="createOTher()" large>
           GUARDAR
         </v-btn>
       </v-card-actions>

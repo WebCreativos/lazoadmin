@@ -1,6 +1,6 @@
 <template>
   <v-card class="rounded-xl">
-    <v-toolbar color="gd-primary-to-right" class="elevation-0">
+    <v-toolbar color="teal darken-4" class="elevation-0">
       <v-toolbar-title class="white--text font-weight-light">Mis ventas</v-toolbar-title>
     </v-toolbar>
     <v-divider></v-divider>
@@ -10,7 +10,7 @@
           <v-text-field type="number" v-model="search.codigo" solo dense label="Codigo de venta" class="rounded-lg"></v-text-field>
         </v-col>
         <v-col class="col-12 col-md-2">
-          <v-btn class="gd-primary-to-right rounded-lg white--text font-weight-light" @click="getVentas()" height="40" block>
+          <v-btn class="teal darken-4 rounded-lg white--text font-weight-light" @click="getVentas()" height="40" block>
             Buscar&nbsp;&nbsp;<v-icon>mdi-magnify</v-icon>
           </v-btn>
         </v-col>

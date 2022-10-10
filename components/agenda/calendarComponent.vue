@@ -26,7 +26,7 @@
 
       </v-sheet>
       <v-sheet height="600">
-        <v-calendar locale="es" ref="calendar" :events="value" v-model="focus" color="primary"
+        <v-calendar locale="es" ref="calendar" :events="value" v-model="focus" color="teal darken-4"
           :event-color="getEventColor" :type="type" @click:event="showEvent" :value="now" @click:more="viewDay"
           @click:date="viewDay"></v-calendar>
         <v-menu v-model="selectedOpen" :close-on-content-click="false" :activator="selectedElement" offset-x>
@@ -54,7 +54,7 @@
                 Cerrar
               </v-btn>
               <v-spacer></v-spacer>
-              <v-btn color="gd-primary-to-right" class="white--text font-weight-light rounded-lg"
+              <v-btn color="teal darken-4" class="white--text font-weight-light rounded-lg"
                 v-if="selectedEditable" @click="selectedOpen = false">
                 Guardar&nbsp;<v-icon>mdi-content-save</v-icon>
               </v-btn>

@@ -1,6 +1,6 @@
 <template>
   <v-card class="rounded-xl">
-    <v-toolbar color="gd-primary-to-right" elevation="0">
+    <v-toolbar color="teal darken-4" elevation="0">
       <v-toolbar-title class="white--text font-weight-light">
         Mascotas
       </v-toolbar-title>
@@ -81,13 +81,13 @@
 
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="gd-primary-to-right" class="mb-5 white--text font-weight-light" @click="checkHandler()">
+      <v-btn color="teal darken-4" class="mb-5 white--text font-weight-light" @click="checkHandler()">
         Guardar
       </v-btn>
     </v-card-actions>
     <v-dialog width="500" v-model="openChangeSociosModal">
       <v-card>
-        <v-toolbar color="primary" elevation="0">
+        <v-toolbar color="teal darken-4" elevation="0">
           Seleccione el socio
         </v-toolbar>
         <v-card-text class="py-4">
@@ -95,7 +95,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="gd-primary white--text" @click="changeSocio()">
+          <v-btn color="teal darken-4 white--text" @click="changeSocio()">
             Cambiar socio
           </v-btn>
         </v-card-actions>

@@ -97,7 +97,7 @@
         <v-divider></v-divider>
         <v-card-actions v-if="!readonly">
           <v-spacer></v-spacer>
-          <v-btn color="primary" depressed @click="checkHandler()">Finalizar visita</v-btn>
+          <v-btn color="teal darken-4" depressed @click="checkHandler()">Finalizar visita</v-btn>
         </v-card-actions>
       </v-card-text>
     </v-card>

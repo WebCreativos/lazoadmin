@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="rounded-xl">
-      <v-toolbar color="gd-primary-to-right" elevation="0" class="white--text">
+      <v-toolbar color="teal darken-4" elevation="0" class="white--text">
         <v-toolbar-title class="font-weight-light">Nueva atencion</v-toolbar-title>
       </v-toolbar>
       <v-card-text class="pa-4 rounded-lg">
@@ -21,19 +21,19 @@
               <v-col class="col-12 d-flex justify-space-between">
                 <v-row>
                   <v-col class="col-6">
-                    <v-btn block class="white--text" color="gd-primary-to-right font-weight-light rounded-lg" @click="()=>{
+                    <v-btn block class="white--text" color="teal darken-4 font-weight-light rounded-lg" @click="()=>{
                       listSociosModal = true
                       }">BUSCAR</v-btn>
                   </v-col>
                   <v-col class="col-6">
-                    <v-btn block class="white--text" color="gd-primary-to-right font-weight-light rounded-lg" @click="()=>{
+                    <v-btn block class="white--text" color="teal darken-4 font-weight-light rounded-lg" @click="()=>{
                       createSocioModal = true;
                       }">
                       <v-icon>mdi-plus</v-icon> cliente
                     </v-btn>
                   </v-col>
                   <v-col class="col-12">
-                    <v-btn block class="white--text" color="gd-primary-to-right font-weight-light rounded-lg"
+                    <v-btn block class="white--text" color="teal darken-4 font-weight-light rounded-lg"
                       :disabled="!value.socio.id" :to="`/socios/editar/${value.socio.id}`">
                       <v-icon>mdi-pencil</v-icon> Editar cliente
                     </v-btn>
@@ -101,7 +101,7 @@
     </v-card>
     <v-dialog v-model="createSocioModal" width="80%" height="auto" persistent>
       <v-card>
-        <v-toolbar class="elevation-0" color="primary">
+        <v-toolbar class="elevation-0" color="teal darken-4">
           <v-toolbar-title class="white--text font-weight-thin">Nuevo cliente</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon @click.native="createSocioModal = false">
@@ -118,7 +118,7 @@
     <v-dialog v-model="listSociosModal">
       <SociosListSociosComponent icon v-model="sociosList" @changePage="getSocios($event)">
         <template v-slot:button="{ item }">
-          <v-btn small class="my-3 gd-primary font-weight-light white--text" @click="setSocio(item)">
+          <v-btn small class="my-3 teal darken-4 font-weight-light white--text" @click="setSocio(item)">
             AGREGAR
           </v-btn>
         </template>
@@ -131,7 +131,7 @@
               <v-text-field outlined dense label="Direccion" v-model="searchSocios.direccion_contains"></v-text-field>
             </v-col>
             <v-col class="col-md-2 col-12">
-              <v-btn block depressed height="40" color="gd-primary" @click="getSocios()">
+              <v-btn block depressed height="40" color="teal darken-4" @click="getSocios()">
                 <v-icon color="white">mdi-magnify</v-icon>
               </v-btn>
             </v-col>

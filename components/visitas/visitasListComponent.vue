@@ -26,15 +26,15 @@
               </v-date-picker>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="menu = false;search.fecha=''">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.menu.save(menu)">OK</v-btn>
+                <v-btn text color="teal darken-4" @click="menu = false;search.fecha=''">Cancel</v-btn>
+                <v-btn text color="teal darken-4" @click="$refs.menu.save(menu)">OK</v-btn>
               </v-card-actions>
             </v-card>
           </v-menu>
         </v-col>
 
         <v-col class="col-md-2">
-          <v-btn block height="40" color="gd-primary" @click="getAtenciones()"
+          <v-btn block height="40" color="teal darken-4" @click="getAtenciones()"
             class="rounded-lg white--text font-weight-light">
             Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
           </v-btn>

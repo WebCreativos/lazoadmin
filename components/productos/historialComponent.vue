@@ -5,7 +5,7 @@
         <v-input>
           <v-text-field placeholder="Buscar producto" class="rounded-r-0" outlined dense hide-details height="40"
             v-model="search.nombre_contains"></v-text-field>
-          <v-btn depressed height="40" color="primary" class="rounded-l-0" @click="getProducts()">
+          <v-btn depressed height="40" color="teal darken-4" class="rounded-l-0" @click="getProducts()">
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
         </v-input>
@@ -13,14 +13,14 @@
       <v-card-text class="font-weight-light">
         <v-data-table :headers="headers" :items="products" hide-default-footer>
           <template v-slot:item.ver_historial={item} depressed>
-            <v-btn color="primary" @click="getHistorial(item)" depressed>Ver historial</v-btn>
+            <v-btn color="teal darken-4" @click="getHistorial(item)" depressed>Ver historial</v-btn>
           </template>
         </v-data-table>
       </v-card-text>
     </v-card>
     <v-dialog v-model="openModalProduct" persistent>
       <v-card >
-        <v-toolbar color="primary" class="elevation-0">
+        <v-toolbar color="teal darken-4" class="elevation-0">
           <v-toolbar-title class="font-weight-light white--text">
            Historial del producto
           </v-toolbar-title>

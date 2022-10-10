@@ -3,13 +3,13 @@
     <v-input hide-details>
       <v-autocomplete small-chips hide-details dense :items="razasList" :class="(!hideAddMore)?'rounded-r-0':''" label="Raza" item-text="nombre" item-value="nombre"  outlined
         v-model="selectedRaza"></v-autocomplete>
-        <v-btn class="rounded-l-0 rounded-r-lg" v-if="!hideAddMore" depressed height="40" color="primary" @click="showrazasModal = true">
+        <v-btn class="rounded-l-0 rounded-r-lg" v-if="!hideAddMore" depressed height="40" color="teal darken-4" @click="showrazasModal = true">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-input>
     <v-dialog v-model="showrazasModal">
       <v-card width="800">
-        <v-toolbar color="gd-primary-to-right" elevation="0">
+        <v-toolbar color="teal darken-4" elevation="0">
           <v-toolbar-title class="white--text font-weight-light">Razas</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon @click="showrazasModal = false">
@@ -22,7 +22,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn class="white--text" color="gd-primary-to-right font-weight-light rounded-lg" @click="addRaza()">
+          <v-btn class="white--text" color="teal darken-4 font-weight-light rounded-lg" @click="addRaza()">
             AGREGAR
           </v-btn>
         </v-card-actions>

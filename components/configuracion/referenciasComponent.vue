@@ -1,6 +1,6 @@
 <template>
   <v-card class="rounded-xl" outlined>
-    <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text">
+    <v-toolbar color="teal darken-4" class="elevation-0 white--text">
       <v-toolbar-title class="font-weight-light">
         Referencias de atencion
       </v-toolbar-title>

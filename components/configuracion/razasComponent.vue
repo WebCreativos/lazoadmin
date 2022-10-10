@@ -1,6 +1,6 @@
 <template>
   <v-card class="rounded-xl" outlined>
-    <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text">
+    <v-toolbar color="teal darken-4" class="elevation-0 white--text">
       <v-toolbar-title class="font-weight-light">
         Razas
       </v-toolbar-title>
@@ -11,7 +11,7 @@
           <v-text-field dense outlined label="Raza" v-model="raza.nombre" />
         </v-col>
         <v-col class="col-md-3">
-          <v-btn color="gd-primary-to-right" block height="38" class="white--text" large @click="addRaza()">GUARDAR
+          <v-btn color="teal darken-4" block height="38" class="white--text" large @click="addRaza()">GUARDAR
           </v-btn>
         </v-col>
       </v-row>

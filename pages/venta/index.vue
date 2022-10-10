@@ -3,7 +3,7 @@
     <v-row>
       <v-col class="col-12">
         <v-card class="rounded-xl">
-          <v-toolbar color="gd-primary-to-right" class="elevation-0">
+          <v-toolbar color="teal darken-4" class="elevation-0">
             <v-toolbar-title class="white--text font-weight-light">Nueva venta</v-toolbar-title>
           </v-toolbar>
           <v-form ref="form">
@@ -33,8 +33,8 @@
                           </v-date-picker>
                           <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                            <v-btn text color="primary" @click="$refs.menu.save(menu)">OK</v-btn>
+                            <v-btn text color="teal darken-4" @click="menu = false">Cancel</v-btn>
+                            <v-btn text color="teal darken-4" @click="$refs.menu.save(menu)">OK</v-btn>
                           </v-card-actions>
                         </v-card>
                       </v-menu>
@@ -90,7 +90,7 @@
                         <v-input>
                           <v-text-field hide-details filled readonly label="Articulo" prepend-inner-icon="mdi-cart"
                             v-model="producto.nombre" class="rounded-r-0" outlined dense></v-text-field>
-                          <v-btn class="rounded-l-0 rounded-r-lg" height="40" color="primary"
+                          <v-btn class="rounded-l-0 rounded-r-lg" height="40" color="teal darken-4"
                             @click="showProductsModal = true">
                             <v-icon>mdi-magnify</v-icon>
                           </v-btn>
@@ -125,7 +125,7 @@
                           prepend-inner-icon="mdi-currency-usd" label="Precio unidad" outlined dense></v-text-field>
                       </v-col>
                       <v-col class="col-md-12 col-12">
-                        <v-btn block color="gd-primary-to-right" class="rounded-lg  font-weight-light white--text"
+                        <v-btn block color="teal darken-4" class="rounded-lg  font-weight-light white--text"
                           @click="addProduct()" height="40" :disabled="producto.nombre == undefined">
                           Agregar a la venta&nbsp;&nbsp;<v-icon>mdi-cart-plus</v-icon>
                         </v-btn>
@@ -183,7 +183,7 @@
 
     <v-dialog v-model="showProductsModal" persistent fullscreen>
       <v-card min-width="90vw" class="rounded-xl">
-        <v-toolbar color="gd-primary-to-right" class="elevation-0">
+        <v-toolbar color="teal darken-4" class="elevation-0">
           <v-toolbar-title class="white--text font-weight-light">Agregar a la venta</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn color="white" @click="showProductsModal = false" icon>

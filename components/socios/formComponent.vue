@@ -1,6 +1,6 @@
 <template>
   <v-card class="rounded-xl">
-    <v-toolbar color="gd-primary-to-right" elevation="0">
+    <v-toolbar color="teal darken-4" elevation="0">
       <v-toolbar-title class="white--text font-weight-light">
         <slot></slot>
       </v-toolbar-title>
@@ -66,7 +66,7 @@
           </template>
           <v-col class="col-12 col-md-12">
             <v-card outlined dense class="rounded-xl">
-              <v-toolbar color="gd-primary-to-right white--text" elevation="0">
+              <v-toolbar color="teal darken-4 white--text" elevation="0">
                 <v-toolbar-title class="font-weight-light">
                   Mascotas
                 </v-toolbar-title>
@@ -129,12 +129,12 @@
                 </v-row>
               </v-card-text>
               <v-card-title>
-                <v-btn color="gd-primary-to-right" v-if="socio.mascotas.length>1" depressed @click="deleteMascota()"
+                <v-btn color="teal darken-4" v-if="socio.mascotas.length>1" depressed @click="deleteMascota()"
                   class="white--text font-weight-light rounded-lg mr-1">
                   Eliminar
                   <v-icon>mdi-minus</v-icon>
                 </v-btn>
-                <v-btn color="gd-primary-to-right" class="white--text font-weight-light rounded-lg"
+                <v-btn color="teal darken-4" class="white--text font-weight-light rounded-lg"
                   @click="addMascota()">
                   Agregar
                   <v-icon>mdi-plus</v-icon>
@@ -147,7 +147,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="gd-primary-to-right" class="mb-5 white--text font-weight-light" @click="checkHandler()">
+      <v-btn color="teal darken-4" class="mb-5 white--text font-weight-light" @click="checkHandler()">
         Guardar
       </v-btn>
     </v-card-actions>

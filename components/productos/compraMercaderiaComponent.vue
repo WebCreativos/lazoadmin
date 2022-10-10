@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="value" fullscreen>
-    <v-toolbar elevation="0" color="gd-primary-to-right">
+    <v-toolbar elevation="0" color="teal darken-4">
       <v-toolbar-title class="white--text font-weight-light">COMPRA DE MERCADERIA</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon color="white" @click="$emit('input', false)">
@@ -13,7 +13,7 @@
         <v-row class="mb-3">
           <v-col class="col-md-12 col-12">
             <v-card class="rounded-xl">
-              <v-toolbar elevation="0" color="primary">
+              <v-toolbar elevation="0" color="teal darken-4">
                 <v-toolbar-title class="font-weight-light white--text">
                   Seleccione el distribuidor
                 </v-toolbar-title>
@@ -27,7 +27,7 @@
           </v-col>
           <v-col class="col-md-6 col-12">
             <v-card class="rounded-xl" height="330">
-              <v-toolbar elevation="0" color="primary" class="mt-2">
+              <v-toolbar elevation="0" color="teal darken-4" class="mt-2">
                 <v-toolbar-title class="font-weight-light white--text">
                   Datos de la factura
                 </v-toolbar-title>
@@ -85,9 +85,9 @@
             </v-card>
           </v-col>
           <v-col class="col-md-6 col-12"> 
-            <ProductosListComponent color="primary" height="340" title="Seleccione los productos">
+            <ProductosListComponent color="teal darken-4" height="340" title="Seleccione los productos">
               <template v-slot:button="{ item }">
-                <v-btn @click="setItem(item)" v-if="!selectedItem(item)" color="gd-primary-to-right"
+                <v-btn @click="setItem(item)" v-if="!selectedItem(item)" color="teal darken-4"
                   class="rounded-lg white--text font-weight-light">SELECCIONAR</v-btn>
                 <v-btn @click="removeItem(item)" v-else color="red" class="rounded-lg white--text font-weight-light">
                   ELIMINAR&nbsp;
@@ -99,7 +99,7 @@
           </v-col>
           <v-col class="col-12 col-md-12">
             <v-card class="rounded-xl">
-              <v-toolbar elevation="0" color="primary">
+              <v-toolbar elevation="0" color="teal darken-4">
                 <v-toolbar-title class="font-weight-light white--text">
                   Compras de mercaderia
                 </v-toolbar-title>
