@@ -289,7 +289,7 @@
             return '#'
           } else {}
         }
-        if (mascota.socio == "S") {
+        if (mascota.socio.toUpperCase()=='SI') {
           return 'SOCIO'
         } else {
           return 'NO SOCIO'
@@ -297,7 +297,7 @@
       },
       setSocioName(mascota) {
         if (!mascota.socio) return
-        return (mascota.socio=='S')?  'Si': 'No' + ' es socio'
+        return (mascota.socio.toUpperCase()=='SI')?  'SI': 'No' + ' es socio'
       },
       checkDate(date) {
         if (date == "1000-01-01") return "-"

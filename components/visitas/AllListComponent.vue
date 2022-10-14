@@ -71,6 +71,7 @@
 </template>
 
 <script>
+var qs = require('qs');
   import {
     json2excel,
   } from 'js2excel';
@@ -125,7 +126,7 @@
           text: "Anamnesis",
           value: "anamnesis"
         }],
-        search: {},
+        search: { },
         openAtencionModal: false
       }
     },
@@ -138,21 +139,30 @@
       async getAtenciones() {
         this.search._start = 25*(this.items.page-1)
         this.search._limit = 25*(this.items.page)
+
         this.items.data = []
         await this.$axios.get('/atencion', {
             params: {...this.search,_sort:'fecha:desc'}
           })
           .then(response => {
-            this.items.data = response.data
+            this.items.data = response.data.filter((item)=>{
+              if(item.mascota.deceso == null || item.mascota.deceso =="1000-01-01") {
+                return item
+              }
+            })
           })
           .catch(error => {
             console.log(error)
           })
         await this.$axios.get('/atencion/count', {
-            params: this.search
+            params: this.search,
           })
           .then(response => {
-            this.items.length = response.data
+            this.items.length = response.data.filter((item)=>{
+              if(item.mascota.deceso == null || item.mascota.deceso =="1000-01-01") {
+                return item
+              }
+            })
           })
           .catch(error => {
             console.log(error)
