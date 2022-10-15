@@ -68,8 +68,7 @@
         this.$axios.get('/referencias')
           .then((data) => {
             this.referenciasList = data.data
-            console.log(this.value)
-            if(this.value.id) {
+            if(this.value && this.value.id) {
               this.selectedreferencia = this.referenciasList.find((referencia) => referencia.id == this.value.id)
             } 
             this.referenciasList.unshift({

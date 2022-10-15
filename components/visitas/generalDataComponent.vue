@@ -296,8 +296,8 @@
         }
       },
       setSocioName(mascota) {
-        if (!mascota.socio) return
-        return (mascota.socio.toUpperCase()=='SI')?  'SI': 'No' + ' es socio'
+        if (!mascota.socio) return "NO SOCIO"
+        return (mascota.socio.toUpperCase()=='SI')?  'SOCIO': 'No SOCIO'
       },
       checkDate(date) {
         if (date == "1000-01-01") return "-"
