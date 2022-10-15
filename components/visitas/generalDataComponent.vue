@@ -289,7 +289,7 @@
             return '#'
           } else {}
         }
-        if (mascota.socio.toUpperCase()=='SI') {
+        if (mascota.socio && mascota.socio.toUpperCase()=='SI') {
           return 'SOCIO'
         } else {
           return 'NO SOCIO'
