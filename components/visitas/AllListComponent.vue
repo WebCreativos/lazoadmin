@@ -158,11 +158,7 @@ var qs = require('qs');
             params: this.search,
           })
           .then(response => {
-            this.items.length = response.data.filter((item)=>{
-              if(item.mascota.deceso == null || item.mascota.deceso =="1000-01-01") {
-                return item
-              }
-            })
+            this.items.length = response.data
           })
           .catch(error => {
             console.log(error)
