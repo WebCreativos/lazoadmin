@@ -89,7 +89,6 @@
             console.log(error);
           });
       },
-    },
     deleteRaza(id) {
       this.$axios.delete('/razas/' + id)
         .then(response => {
@@ -99,6 +98,7 @@
           console.log(error);
         });
     }
+    },
   }
 
 </script>
