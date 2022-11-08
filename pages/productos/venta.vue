@@ -1,37 +1,37 @@
 <template>
   <v-container fluid>
-    <v-card>
+    <generalCardComponent>
       <v-card-text>
         <v-row>
           <v-col class="col-12 col-md-5">
-            <v-card color="blue darken-4 rounded-lg" class="elevation-0" height="400">
+            <generalCardComponent color="blue darken-4 rounded-lg" class="elevation-0" height="400">
               <v-card-text>
                 <v-row>
                   <v-col class="col-12 col-md-6">
-                    <v-text-field placeholder="MANUAL (codigo)" background-color="success darken--4"
-                      class="input-socio rounded-lg" outlined></v-text-field>
+                    <formsFieldsTextComponent placeholder="MANUAL (codigo)" background-color="success darken--4"
+                      class="input-socio rounded-lg" ></formsFieldsTextComponent>
                   </v-col>
                   <v-col class="col-12 col-md-6">
-                    <v-text-field placeholder="PRODUCTO" readonly background-color="success" class="input-socio rounded-lg"
-                      outlined>
-                    </v-text-field>
-                    <v-text-field placeholder="CANTIDAD" readonly background-color="success" class="input-socio rounded-lg"
-                      outlined>
-                    </v-text-field>
-                    <v-text-field placeholder="PRECIO" readonly background-color="success" class="input-socio rounded-lg"
-                      outlined>
-                    </v-text-field>
-                    <v-text-field placeholder="DESCUENTO" readonly background-color="success" class="input-socio rounded-lg"
-                      outlined>
-                    </v-text-field>
+                    <formsFieldsTextComponent placeholder="PRODUCTO" readonly background-color="success" class="input-socio rounded-lg"
+                      >
+                    </formsFieldsTextComponent>
+                    <formsFieldsTextComponent placeholder="CANTIDAD" readonly background-color="success" class="input-socio rounded-lg"
+                      >
+                    </formsFieldsTextComponent>
+                    <formsFieldsTextComponent placeholder="PRECIO" readonly background-color="success" class="input-socio rounded-lg"
+                      >
+                    </formsFieldsTextComponent>
+                    <formsFieldsTextComponent placeholder="DESCUENTO" readonly background-color="success" class="input-socio rounded-lg"
+                      >
+                    </formsFieldsTextComponent>
                   </v-col>
                 </v-row>
               </v-card-text>
-            </v-card>
+            </generalCardComponent>
           </v-col>
           <v-col class="col-md-2 col-12"></v-col>
           <v-col class="col-12 col-md-5">
-            <v-card color="blue darken-4 rounded-lg" class="elevation-0 pa-3" height="400">
+            <generalCardComponent color="blue darken-4 rounded-lg" class="elevation-0 pa-3" height="400">
               <v-card-text class="rounded-lg success" style="height:90%">
                 FACTURA FINAL
               </v-card-text>
@@ -39,12 +39,12 @@
                   <v-spacer></v-spacer>
                   <v-btn width="50%" color="red" class="font-weight-thin" depressed @click="createVentaModal = true">PAGAR</v-btn>
               </v-card-actions>
-            </v-card>
+            </generalCardComponent>
           </v-col>
         </v-row>
 
       </v-card-text>
-    </v-card>
+    </generalCardComponent>
 
 
       <modal-success :action="()=>{

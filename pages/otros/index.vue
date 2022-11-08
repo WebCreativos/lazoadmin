@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-card class="rounded-xl">
+    <generalCardComponent class="rounded-xl">
       <v-toolbar color="gd-primary-to-right" class="elevation-0">
         <v-toolbar-title class="white--text font-weight-light">Noticias de relevancia</v-toolbar-title>
       </v-toolbar>
@@ -14,7 +14,7 @@
       <v-card-text>
         <v-row>
           <v-col class="col-md-3 col-12" v-for="(item,index) in items.otros" :key="index">
-            <v-card class="rounded-xl">
+            <generalCardComponent class="rounded-xl">
               <v-toolbar class="mb-3 elevation-0" color="gd-primary-to-right" dense>
                 <v-toolbar-title class="white--text font-weight-light">Noticia {{(index + 1)}}</v-toolbar-title>
                 <v-spacer></v-spacer>
@@ -23,17 +23,17 @@
                 </v-btn>
               </v-toolbar>
               <v-card-text class="pa-4 rounded-lg">
-                <v-text-field placeholder="TITULO" v-model="item.title" outlined dense class="rounded-lg">
-                </v-text-field>
-                <v-textarea placeholder="TEXTO" outlined v-model="item.text" dense class="rounded-lg"></v-textarea>
+                <formsFieldsTextComponent placeholder="TITULO" v-model="item.title"  dense class="rounded-lg">
+                </formsFieldsTextComponent>
+                <v-textarea placeholder="TEXTO"  v-model="item.text" dense class="rounded-lg"></v-textarea>
                 <input :id="`fileUpload${index}`" type="file"  @input="($event)=>{
                   item.picture = $event.target.files[0]; 
                 }" class="hidden" ref="file" hidden>
                 <v-btn @click="selectPicture(index)" color="gd-primary" block class="mb-5 white--text font-weight-light rounded-lg">CARGAR FOTO</v-btn>
 
-                <v-text-field placeholder="URL VIDEO" outlined v-model="item.video" dense hide-details class="rounded-lg"></v-text-field>
+                <formsFieldsTextComponent placeholder="URL VIDEO"  v-model="item.video" dense hide-details class="rounded-lg"></formsFieldsTextComponent>
               </v-card-text>
-            </v-card>
+            </generalCardComponent>
 
           </v-col>
         </v-row>
@@ -45,7 +45,7 @@
           GUARDAR
         </v-btn>
       </v-card-actions>
-    </v-card>
+    </generalCardComponent>
     <modal-success :action="()=>{
       this.otrosModal = false
       }" v-model="otrosModal">

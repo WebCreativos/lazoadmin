@@ -1,17 +1,13 @@
 <template>
-  <v-card class="rounded-xl" outlined>
-    <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text">
-      <v-toolbar-title class="font-weight-light">
-        Razas
-      </v-toolbar-title>
-    </v-toolbar>
+  <generalCardComponent class="rounded-xl" >
+          <GeneralCardTitleComponent class="white--text">Razas</GeneralCardTitleComponent>
     <v-card-title>
       <v-row>
-        <v-col class="col-md-9">
-          <v-text-field dense outlined label="Raza" v-model="raza.nombre" />
+        <v-col class="col-md-10">
+          <formsFieldsTextComponent dense  label="Raza" v-model="raza.nombre" />
         </v-col>
-        <v-col class="col-md-3">
-          <v-btn color="gd-primary-to-right" block height="38" class="white--text" large @click="addRaza()">GUARDAR
+        <v-col class="col-md-2 d-flex align-end">
+          <v-btn color="secondary" block height="38" class="rounded-lg black--text font-weight-regular" large @click="addRaza()">GUARDAR
           </v-btn>
         </v-col>
       </v-row>
@@ -36,7 +32,7 @@
     <v-card-actions class="d-flex justify-center">
       <v-pagination total-visible="10" v-model="page" :length="Math.round(razasList.length/10)"></v-pagination>
     </v-card-actions>
-  </v-card>
+  </generalCardComponent>
 
 </template>
 

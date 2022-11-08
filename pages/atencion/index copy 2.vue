@@ -3,7 +3,7 @@
     <!--
     <v-row>
       <v-col class="col-12 col-md-12">
-        <v-card class="rounded-xl">
+        <generalCardComponent class="rounded-xl">
           <v-toolbar color="gd-primary-to-right" elevation="0" class="white--text">
             <v-toolbar-title class="font-weight-light">Nueva atencion</v-toolbar-title>
           </v-toolbar>
@@ -12,16 +12,16 @@
               <v-col class="col-md-4 col-12">
                 <v-row>
                   <v-col class="col-md-12 col-12">
-                    <v-text-field label="NOMBRE" readonly outlined dense filled v-model="atencion.socio.name"
-                      class="rounded-lg white--text"> </v-text-field>
-                    <v-text-field label="NRO CLIENTE" readonly outlined filled dense v-model="atencion.socio.id"
-                      class="rounded-lg white--text"> </v-text-field>
-                    <v-text-field label="APELLIDO" readonly outlined dense filled v-model="atencion.socio.last_name"
-                      class="rounded-lg white--text"> </v-text-field>
-                    <v-text-field label="DIRECCION" readonly outlined dense filled v-model="atencion.socio.address"
-                      class="rounded-lg white--text"> </v-text-field>
-                    <v-text-field label="TELEFONO" readonly hide-details filled v-model="atencion.socio.phone" outlined
-                      dense class="rounded-lg white--text"> </v-text-field>
+                    <formsFieldsTextComponent label="NOMBRE" readonly  dense filled v-model="atencion.socio.name"
+                      class="rounded-lg white--text"> </formsFieldsTextComponent>
+                    <formsFieldsTextComponent label="NRO CLIENTE" readonly  filled dense v-model="atencion.socio.id"
+                      class="rounded-lg white--text"> </formsFieldsTextComponent>
+                    <formsFieldsTextComponent label="APELLIDO" readonly  dense filled v-model="atencion.socio.last_name"
+                      class="rounded-lg white--text"> </formsFieldsTextComponent>
+                    <formsFieldsTextComponent label="DIRECCION" readonly  dense filled v-model="atencion.socio.address"
+                      class="rounded-lg white--text"> </formsFieldsTextComponent>
+                    <formsFieldsTextComponent label="TELEFONO" readonly hide-details filled v-model="atencion.socio.phone" 
+                      dense class="rounded-lg white--text"> </formsFieldsTextComponent>
                   </v-col>
                   <v-col class="col-12 d-flex justify-space-between">
                     <v-row>
@@ -44,26 +44,26 @@
                 </v-row>
               </v-col>
               <v-col class="col-md-4 col-12">
-                <v-card outlined class="rounded-xl">
+                <generalCardComponent  class="rounded-xl">
                   <v-data-table show-select single-select v-model="selectedMascota" :items="atencion.socio.mascotas"
                     hide-default-footer :headers="headersMascotas">
                   </v-data-table>
                   <v-card-text>
-                    <v-textarea hide-details class="mt-3" label="Observaciones" outlined
+                    <v-textarea hide-details class="mt-3" label="Observaciones" 
                       v-model="atencion.mascota.observaciones" readonly></v-textarea>
                   </v-card-text>
                   <v-card-text>
-                    <v-text-field class="mt-3" label="Ultima cuota paga" outlined v-model="atencion.socio.payment_date"
-                      readonly></v-text-field>
+                    <formsFieldsTextComponent class="mt-3" label="Ultima cuota paga"  v-model="atencion.socio.payment_date"
+                      readonly></formsFieldsTextComponent>
                   </v-card-text>
-                </v-card>
+                </generalCardComponent>
               </v-col>
               <v-col class="col-md-4 col-12">
-                <v-text-field label="RAZA" readonly v-model="atencion.mascota.raza" outlined dense
-                  class="rounded-lg white--text"> </v-text-field>
-                <v-text-field label="COLOR" readonly outlined v-model="atencion.mascota.color" dense
-                  class="rounded-lg white--text"> </v-text-field>
-                <v-select :items="[{
+                <formsFieldsTextComponent label="RAZA" readonly v-model="atencion.mascota.raza"  dense
+                  class="rounded-lg white--text"> </formsFieldsTextComponent>
+                <formsFieldsTextComponent label="COLOR" readonly  v-model="atencion.mascota.color" dense
+                  class="rounded-lg white--text"> </formsFieldsTextComponent>
+                <formsFieldsSelectComponent :items="[{
                       text:'Macho',
                       value: 'F'
                     },{
@@ -72,22 +72,22 @@
                     },{
                       text:'Otro',
                       value: 'NN'
-                    }]" label="SEXO" outlined dense v-model="atencion.mascota.sexo" readonly
+                    }]" label="SEXO"  dense v-model="atencion.mascota.sexo" readonly
                   class="rounded-lg white--text">
-                </v-select>
-                <v-text-field label="EDAD" readonly outlined dense v-model="atencion.mascota.edad"
-                  class="rounded-lg white--text"> </v-text-field>
-                <v-text-field type="date" label="DECESO" readonly outlined dense v-model="atencion.mascota.deceso"
-                  class="rounded-lg white--text"> </v-text-field>
-                <v-text-field type="text" label="SOCIO" readonly outlined dense :value="setSocioName(atencion.mascota)"
-                  class="rounded-lg white--text"> </v-text-field>
+                </formsFieldsSelectComponent>
+                <formsFieldsTextComponent label="EDAD" readonly  dense v-model="atencion.mascota.edad"
+                  class="rounded-lg white--text"> </formsFieldsTextComponent>
+                <formsFieldsTextComponent type="date" label="DECESO" readonly  dense v-model="atencion.mascota.deceso"
+                  class="rounded-lg white--text"> </formsFieldsTextComponent>
+                <formsFieldsTextComponent type="text" label="SOCIO" readonly  dense :value="setSocioName(atencion.mascota)"
+                  class="rounded-lg white--text"> </formsFieldsTextComponent>
               </v-col>
             </v-row>
           </v-card-text>
-        </v-card>
+        </generalCardComponent>
       </v-col>
       <v-col class="col-12">
-        <v-card class="rounded-xl">
+        <generalCardComponent class="rounded-xl">
           <v-toolbar color="gd-primary-to-right" elevation="0">
             <v-toolbar-title class="white--text font-weight-light">Atenciones de la mascota</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -106,11 +106,11 @@
             </v-btn>
           </v-toolbar>
           <v-card-text class="pa-4 rounded-lg">
-            <v-card outlined class="rounded-xl">
+            <generalCardComponent  class="rounded-xl">
               <v-data-table show-select single-select v-model="selectedAtencion" :headers="headers" hide-default-footer
                 :items="consultaItems">
                 <template v-slot:item.fecha="{ item }">
-                  <v-btn outlined small @click="()=>{
+                  <v-btn  small @click="()=>{
                     openAtencionModal = true;
                     atencion = item;
                   }">
@@ -126,18 +126,18 @@
                 </template>
 
               </v-data-table>
-            </v-card>
+            </generalCardComponent>
           </v-card-text>
           <v-card-actions>
           </v-card-actions>
-        </v-card>
+        </generalCardComponent>
       </v-col>
       <v-col class="col-12">
         <visitasAllListComponent></visitasAllListComponent>
       </v-col>
     </v-row>
     <v-dialog v-model="createSocioModal" width="80%" height="auto">
-      <v-card>
+      <generalCardComponent>
         <v-toolbar class="elevation-0" color="primary">
           <v-toolbar-title class="white--text font-weight-thin">Nuevo cliente</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -149,12 +149,12 @@
           <formSociosComponent :handler="createSocio" v-model="socio"></formSociosComponent>
         </v-card-text>
         <v-divider></v-divider>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
     <v-dialog v-model="openModalListSocios">
       <SociosListSociosComponent v-model="sociosList">
         <template v-slot:button="{ item }">
-          <v-btn outlined @click="($e)=>{
+          <v-btn  @click="($e)=>{
             atencion.socio = item;
             openModalListSocios = false;
         }" color="primary">

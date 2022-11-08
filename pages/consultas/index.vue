@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row>
       <v-col class="col-12 col-md-12">
-        <v-card class="rounded-lg">
+        <generalCardComponent class="rounded-lg">
           <v-card-title class="font-weight-light">
             Consultas pendientes
           </v-card-title>
@@ -26,14 +26,14 @@
 
             </v-data-table>
           </v-card-text>
-        </v-card>
+        </generalCardComponent>
       </v-col>
       <v-col class="col-12 col-md-12">
-        <v-card>
+        <generalCardComponent>
           <v-card-title class="font-weight-light">
             Consultas aprobadas
             <v-spacer></v-spacer>
-            <v-btn outlined @click="dialogAgregarConsulta = true">AGREGAR CONSULTA</v-btn>
+            <v-btn  @click="dialogAgregarConsulta = true">AGREGAR CONSULTA</v-btn>
           </v-card-title>
           <v-card-text>
             <v-data-table :headers="headersAprobados" :items="consultasAprobadas" hide-default-footer>
@@ -58,12 +58,12 @@
             </v-data-table>
 
           </v-card-text>
-        </v-card>
+        </generalCardComponent>
 
       </v-col>
     </v-row>
     <v-dialog v-model="openDialogEditConsulta" persistent>
-      <v-card width="600">
+      <generalCardComponent width="600">
         <v-toolbar color="primary elevation-0">
           <v-toolbar-title class="font-weight-light white--text">Aprobar hora y fecha de la consulta</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -72,16 +72,16 @@
           </v-btn>
         </v-toolbar>
         <v-card-text class="mt-3">
-          <v-text-field type="date" label="Fecha" outlined v-model="consulta.fecha"></v-text-field>
-          <v-text-field type="time" label="Hora" outlined v-model="consulta.hora"></v-text-field>
+          <formsFieldsTextComponent type="date" label="Fecha"  v-model="consulta.fecha"></formsFieldsTextComponent>
+          <formsFieldsTextComponent type="time" label="Hora"  v-model="consulta.hora"></formsFieldsTextComponent>
         </v-card-text>
         <v-card-actions>
           <v-btn block @click="aprobarConsulta()" color="success">APROBAR CONSULTA</v-btn>
         </v-card-actions>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
     <v-dialog v-model="dialogAgregarConsulta" persistent>
-      <v-card width="600">
+      <generalCardComponent width="600">
         <v-toolbar color="primary elevation-0">
           <v-toolbar-title class="font-weight-light white--text">Agregar nueva consulta</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -91,24 +91,24 @@
         </v-toolbar>
         <v-card-text class="mt-2">
           <v-form ref="form">
-            <v-select :items="['Higiene','Consulta','Medicacion','Otro']" :rules="rules.required"
-              v-model="nuevaConsulta.tipo" label="Tipo de consulta" outlined></v-select>
-            <v-text-field type="date" label="Fecha deseada" v-model="nuevaConsulta.fecha" :rules="rules.required"
-              outlined>
-            </v-text-field>
-            <v-select type="date" label="Socio" :items="socios" item-text="name" item-value="id"
-              v-model="nuevaConsulta.socio" :rules="rules.required" outlined>
-            </v-select>
-            <v-text-field type="time" label="Hora deseada (Opcional)" v-model="nuevaConsulta.hora"
-              :rules="rules.required" outlined></v-text-field>
-            <v-textarea outlined label="Detalles (Indique los detalles de su consulta)" :rules="rules.required"
+            <formsFieldsSelectComponent :items="['Higiene','Consulta','Medicacion','Otro']" :rules="rules.required"
+              v-model="nuevaConsulta.tipo" label="Tipo de consulta" ></formsFieldsSelectComponent>
+            <formsFieldsTextComponent type="date" label="Fecha deseada" v-model="nuevaConsulta.fecha" :rules="rules.required"
+              >
+            </formsFieldsTextComponent>
+            <formsFieldsSelectComponent type="date" label="Socio" :items="socios" item-text="name" item-value="id"
+              v-model="nuevaConsulta.socio" :rules="rules.required" >
+            </formsFieldsSelectComponent>
+            <formsFieldsTextComponent type="time" label="Hora deseada (Opcional)" v-model="nuevaConsulta.hora"
+              :rules="rules.required" ></formsFieldsTextComponent>
+            <v-textarea  label="Detalles (Indique los detalles de su consulta)" :rules="rules.required"
               v-model="nuevaConsulta.detalles" :counter="250" maxlength="250"></v-textarea>
           </v-form>
         </v-card-text>
         <v-card-actions>
           <v-btn block @click="agregarConsulta()" color="success">AGREGAR CONSULTA</v-btn>
         </v-card-actions>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
 
   </v-container>

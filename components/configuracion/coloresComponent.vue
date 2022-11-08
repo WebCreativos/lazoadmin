@@ -1,20 +1,17 @@
 <template>
-  <v-card class="rounded-xl" outlined>
-    <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text">
-      <v-toolbar-title class="font-weight-light">
-        Colores
-      </v-toolbar-title>
-    </v-toolbar>
+  <generalCardComponent class="rounded-xl" >
+          <GeneralCardTitleComponent class="white--text">Colores</GeneralCardTitleComponent>
     <v-card-title>
       <v-row>
-        <v-col class="col-md-9">
-          <v-text-field dense outlined label="Color" v-model="color.nombre" />
+        <v-col class="col-md-10 col-12">
+          <formsFieldsTextComponent dense  label="Color" v-model="color.nombre" />
         </v-col>
-        <v-col class="col-md-3">
-          <v-btn color="gd-primary-to-right" block height="38" class="white--text" large @click="addColor()">GUARDAR</v-btn>
+        <v-col class="col-md-2 d-flex align-end">
+          <v-btn color="secondary" block height="38" class="rounded-lg black--text font-weight-regular" large @click="addColor()">GUARDAR</v-btn>
         </v-col>
       </v-row>
     </v-card-title>
+    <v-divider></v-divider>
     <v-card-text>
       <v-data-table :items="coloresList" :headers="headers" :page="page" hide-default-footer>
         <template v-slot:item.default={item}>
@@ -35,7 +32,7 @@
     <v-card-actions class="d-flex justify-center">
       <v-pagination v-model="page" total-visible="10" :length="Math.round(coloresList.length/10)"></v-pagination>
     </v-card-actions>
-  </v-card>
+  </generalCardComponent>
 
 </template>
 

@@ -1,10 +1,6 @@
 <template>
-  <v-card class="rounded-xl" outlined>
-    <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text">
-      <v-toolbar-title class="font-weight-light">
-        Referencias de atencion
-      </v-toolbar-title>
-    </v-toolbar>
+  <generalCardComponent class="rounded-xl" >
+          <GeneralCardTitleComponent class="white--text">Referencias</GeneralCardTitleComponent>
     <v-card-text>
       <v-data-table :items="referenciasList" :headers="headers" hide-default-footer>
         <template v-slot:item.default={item}>
@@ -22,7 +18,7 @@
       </v-data-table>
 
     </v-card-text>
-  </v-card>
+  </generalCardComponent>
 
 </template>
 

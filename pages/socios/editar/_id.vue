@@ -1,6 +1,8 @@
 <template>
   <v-container fluid>
-    <sociosFormComponent v-if="showForm" :handler="editSocio" v-model="socio"></sociosFormComponent>
+    <sociosFormComponent :handler="editSocio">
+      Editar socio
+    </sociosFormComponent>
     <modal-success :action="()=>{
       this.createSocioModal = false;
       this.$router.go(-1);
@@ -19,8 +21,7 @@
 
 <script>
   export default {
-    components: {
-    },
+    components: {},
     data() {
       return {
         socio: {
@@ -32,24 +33,14 @@
       }
     },
     created() {
-        this.getSocio();
+      this.getSocio();
     },
     methods: {
       getSocio() {
-          this.$axios.get(`/socios/${this.$route.params.id_socio}`)
-            .then(response => {
-                this.socio = response.data
-                this.showForm = false
-                setTimeout(()=>{
-                    this.showForm = true
-                },500)
-            })
+        this.$store.dispatch('socios/find', this.$route.params.id)
       },
       editSocio() {
-          this.$delete(this.socio,'published_at')
-          this.$axios.put(`/socios/${this.socio.id}`, this.socio).then(response => {
-            this.createSocioModal = true
-          })
+        this.$store.dispatch('socios/update')
       },
 
     }

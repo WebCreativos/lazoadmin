@@ -1,34 +1,30 @@
 <template>
-  <v-card class="rounded-xl" outlined>
-    <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text">
-      <v-toolbar-title class="font-weight-light">
-        Cuotas
-      </v-toolbar-title>
-    </v-toolbar>
+  <generalCardComponent class="rounded-xl">
+    <GeneralCardTitleComponent class="white--text">Cuotas</GeneralCardTitleComponent>
     <v-form ref="form">
       <v-card-title>
         <v-row>
           <v-col class="col-12 col-md-10">
             <v-row>
-              <v-col class="col-md-4">
-                <v-text-field hide-details label="Nombre del plan" class="rounded-lg" solo dense :rules="rules.required"
-                  v-model="cuota.nombre">
-                </v-text-field>
+              <v-col class="col-md-5">
+                <formsFieldsTextComponent hide-details label="Nombre del plan" class="rounded-lg" solo dense
+                  :rules="rules.required" v-model="cuota.nombre">
+                </formsFieldsTextComponent>
               </v-col>
-              <v-col class="col-md-4">
-                <v-text-field hide-details label="Valor de la cuota" class="rounded-lg" type="number" solo dense
-                  :rules="rules.required" v-model="cuota.valor">
-                </v-text-field>
+              <v-col class="col-md-5">
+                <formsFieldsTextComponent hide-details label="Valor de la cuota" class="rounded-lg" type="number" solo
+                  dense :rules="rules.required" v-model="cuota.valor">
+                </formsFieldsTextComponent>
               </v-col>
-              <v-col class="col-md-4">
-                <v-switch hide-details v-model="cuota.default" class="mt-1" label="Cuota base"></v-switch>
+              <v-col class="col-md-2 d-flex align-end">
+                <v-switch hide-details inset v-model="cuota.default" class="mb-2" label="Cuota base"></v-switch>
               </v-col>
 
             </v-row>
           </v-col>
-          <v-col class="col-md-2 col-12">
-            <v-btn color="gd-primary-to-right" @click="createCuota()" block
-              class="rounded-lg white--text font-weight-light">Guardar</v-btn>
+          <v-col class="col-md-2 col-12  d-flex align-end">
+            <v-btn color="secondary" block height="38" class="rounded-lg black--text font-weight-regular"
+              @click="createCuota()">Guardar</v-btn>
           </v-col>
         </v-row>
       </v-card-title>
@@ -37,24 +33,25 @@
     <v-card-text>
       <v-data-table :items="cuotasList" :headers="headers" hide-default-footer>
         <template v-slot:item.default={item}>
-            <v-icon color="success" v-if="item.default">mdi-check</v-icon>
-            <v-icon color="red" v-else>mdi-close</v-icon>
+          <v-icon color="success" v-if="item.default">mdi-check</v-icon>
+          <v-icon color="red" v-else>mdi-close</v-icon>
         </template>
 
         <template v-slot:item.actions={item}>
-          <v-btn small class="white--text font-weight-light rounded-lg" @click="setDefaultCuota(item)" color="gd-primary-to-right">
-            Cuota base <v-icon>mdi-check</v-icon>
-          </v-btn>
-          <v-btn small class="white--text font-weight-light rounded-lg" color="red" @click="deleteCuota(item.id)">
-            Eliminar <v-icon>mdi-delete</v-icon>
-          </v-btn>
-
+          <v-btn-toggle class="my-3 rounded-lg elevation-1" dense background-color="secondary" color="primary" >
+            <v-btn color="transparent" class="font-weight-bold" @click="setDefaultCuota(item)">
+               <v-icon>mdi-check</v-icon>&nbsp;Cuota base
+            </v-btn>
+            <v-btn icon color="transparent" class="font-weight-light" @click="deleteCuota(item.id)">
+              <v-icon color="red">ion-ios-trash</v-icon>
+            </v-btn>
+          </v-btn-toggle>
         </template>
 
       </v-data-table>
 
     </v-card-text>
-  </v-card>
+  </generalCardComponent>
 
 </template>
 
@@ -108,7 +105,7 @@
           });
       },
       createCuota() {
-          if(!this.$refs.form.validate()) return
+        if (!this.$refs.form.validate()) return
         this.$axios.post('/cuotas', this.cuota)
           .then(response => {
             this.cuotasList.push(response.data);
@@ -121,7 +118,7 @@
       updateCuota(cuota) {
         this.$axios.put('/cuotas/' + cuota.id, cuota)
           .then(response => {
-              this.getCuotas()
+            this.getCuotas()
           })
           .catch(error => {
             console.log(error);
@@ -129,8 +126,8 @@
 
       },
       setDefaultCuota(cuota) {
-        let oldDefaultCuota = this.cuotasList.find((c)=>c.default)
-        if(oldDefaultCuota) {
+        let oldDefaultCuota = this.cuotasList.find((c) => c.default)
+        if (oldDefaultCuota) {
           oldDefaultCuota.default = false
           this.updateCuota(oldDefaultCuota)
         }

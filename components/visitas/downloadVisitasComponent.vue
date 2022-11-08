@@ -1,9 +1,9 @@
 <template>
-  <v-card>
+  <generalCardComponent>
       <v-card-text>
           
       </v-card-text>
-  </v-card>
+  </generalCardComponent>
 </template>
 
 <script>

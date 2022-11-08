@@ -1,11 +1,20 @@
 <template>
   <v-container fluid>
+    <headersGeneralComponent>
+      <template v-slot:icon>
+        <img src="/icons/doctor.png" alt="icono" width="30" />
+      </template>
+      <template v-slot:title>
+        Visitas
+      </template>
+    </headersGeneralComponent>
+
     <v-row>
       <v-col class="col-12 col-md-12">
-        <v-card class="rounded-xl">
+        <generalCardComponent class="rounded-xl">
           <visitasGeneralDataComponent v-model="atencion" @mascota="mascota = $event"
             @getAtencionMascota="getAtencionMascota($event)"></visitasGeneralDataComponent>
-        </v-card>
+        </generalCardComponent>
       </v-col>
       <v-col class="col-12">
         <visitasMascotaComponent 

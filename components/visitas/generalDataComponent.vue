@@ -1,53 +1,56 @@
 <template>
   <div>
-    <v-card class="rounded-xl">
-      <v-toolbar color="gd-primary-to-right" elevation="0" class="white--text">
-        <v-toolbar-title class="font-weight-light">Nueva atencion</v-toolbar-title>
-      </v-toolbar>
+    <generalCardComponent class="rounded-xl">
+      <GeneralCardTitleComponent class="white--text">
+        Nueva visita
+      </GeneralCardTitleComponent>
       <v-card-text class="pa-4 rounded-lg">
         <v-row>
-          <v-col class="col-md-4 col-12">
-            <v-row>
-              <v-col class="col-md-12 col-12">
-                <v-text-field label="NOMBRE" readonly outlined dense filled v-model="value.socio.name"
-                  class="rounded-lg white--text"> </v-text-field>
-                <v-text-field label="NRO CLIENTE" readonly outlined filled dense v-model="value.socio.id"
-                  class="rounded-lg white--text"> </v-text-field>
-                <v-text-field label="DIRECCION" readonly outlined dense filled v-model="value.socio.address"
-                  class="rounded-lg white--text"> </v-text-field>
-                <v-text-field label="TELEFONO" readonly hide-details filled v-model="value.socio.phone" outlined dense
-                  class="rounded-lg white--text"> </v-text-field>
-              </v-col>
-              <v-col class="col-12 d-flex justify-space-between">
+          <v-col class="col-md-6 col-12">
+            <GeneralCardComponent outlined min-height="500">
+              <v-card-text>
+                <formsFieldsTextComponent label="NOMBRE" readonly dense filled v-model="value.socio.name"
+                  class="rounded-lg white--text"> </formsFieldsTextComponent>
+                <formsFieldsTextComponent label="NRO CLIENTE" readonly filled dense v-model="value.socio.id"
+                  class="rounded-lg white--text"> </formsFieldsTextComponent>
+                <formsFieldsTextComponent label="DIRECCION" readonly dense filled v-model="value.socio.address"
+                  class="rounded-lg white--text"> </formsFieldsTextComponent>
+                <formsFieldsTextComponent label="TELEFONO" readonly hide-details filled v-model="value.socio.phone"
+                  dense class="rounded-lg white--text"> </formsFieldsTextComponent>
+
+              </v-card-text>
+              <v-divider></v-divider>
+              <v-card-text>
                 <v-row>
-                  <v-col class="col-6">
-                    <v-btn block class="white--text" color="gd-primary-to-right font-weight-light rounded-lg" @click="()=>{
+                  <v-col class="col-4">
+                    <v-btn block class="rounded-lg black--text font-weight-regular" color="secondary" @click="()=>{
                       listSociosModal = true
                       }">BUSCAR</v-btn>
                   </v-col>
-                  <v-col class="col-6">
-                    <v-btn block class="white--text" color="gd-primary-to-right font-weight-light rounded-lg" @click="()=>{
+                  <v-col class="col-4">
+                    <v-btn block class="rounded-lg black--text font-weight-regular" color="secondary" @click="()=>{
                       createSocioModal = true;
                       }">
                       <v-icon>mdi-plus</v-icon> cliente
                     </v-btn>
                   </v-col>
-                  <v-col class="col-12">
-                    <v-btn block class="white--text" color="gd-primary-to-right font-weight-light rounded-lg"
+                  <v-col class="col-4">
+                    <v-btn block class="rounded-lg black--text font-weight-regular" color="secondary"
                       :disabled="!value.socio.id" :to="`/socios/editar/${value.socio.id}`">
                       <v-icon>mdi-pencil</v-icon> Editar cliente
                     </v-btn>
                   </v-col>
                 </v-row>
-              </v-col>
-            </v-row>
+              </v-card-text>
+            </GeneralCardComponent>
           </v-col>
-          <v-col class="col-md-4 col-12">
-            <v-card outlined class="rounded-xl">
-              <v-data-table show-select single-select v-if="!refreshPetTable" @input="getAtentionsPet($event)" :items-per-page="6"
-                :page="pagePets" :items="value.socio.mascotas" hide-default-footer :headers="headersMascotas">
+          <v-col class="col-md-6 col-12">
+            <generalCardComponent outlined min-height="500">
+              <v-data-table show-select single-select v-if="!refreshPetTable" @input="getAtentionsPet($event)"
+                :items-per-page="6" :page="pagePets" :items="value.socio.mascotas" hide-default-footer
+                :headers="headersMascotas">
                 <template v-slot:item.nombre="{ item }">
-                  <v-btn outlined block small @click="openEditPetModal(item)">
+                  <v-btn block small @click="openEditPetModal(item)">
                     <div class="d-flex justify-space-between align-center" style="width:100%">
                       {{item.nombre}}<v-icon>mdi-pen</v-icon>
                     </div>
@@ -60,47 +63,13 @@
               <v-card-actions class="d-flex justify-center">
                 <v-pagination v-model="pagePets" :length="cantPets()"></v-pagination>
               </v-card-actions>
-              <v-card-text>
-                <v-textarea hide-details class="mt-3" label="Observaciones" outlined
-                  v-model="value.mascota.observaciones" readonly></v-textarea>
-              </v-card-text>
-              <v-card-text>
-                <v-text-field class="mt-3" label="Ultima cuota paga" outlined v-model="value.socio.payment_date"
-                  readonly></v-text-field>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col class="col-md-4 col-12">
-            <v-text-field label="NOMBRE" readonly v-model="value.mascota.nombre" outlined dense
-              class="rounded-lg white--text"> </v-text-field>
-            <v-text-field label="RAZA" readonly v-model="value.mascota.raza" outlined dense
-              class="rounded-lg white--text"> </v-text-field> 
-            <v-text-field label="COLOR" readonly outlined v-model="value.mascota.color" dense
-              class="rounded-lg white--text"> </v-text-field>
-            <v-select :items="[{
-                      text:'Macho',
-                      value: 'M'
-                    },{
-                      text:'Hembra',
-                      value: 'H'
-                    },{
-                      text:'CASTRADO',
-                      value: 'C'
-                    }]" label="SEXO" outlined dense v-model="value.mascota.sexo" readonly
-              class="rounded-lg white--text">
-            </v-select>
-            <v-text-field label="EDAD" readonly outlined dense :value="checkYears(value.mascota.fecha_nac)"
-              class="rounded-lg white--text"> </v-text-field>
-            <v-text-field type="date" label="DECESO" readonly outlined dense :value="checkDate(value.mascota.deceso)"
-              class="rounded-lg white--text"> </v-text-field>
-            <v-text-field type="text" label="SOCIO" readonly outlined dense :value="setSocioName(value.mascota)"
-              class="rounded-lg white--text"> </v-text-field>
+            </generalCardComponent>
           </v-col>
         </v-row>
       </v-card-text>
-    </v-card>
+    </generalCardComponent>
     <v-dialog v-model="createSocioModal" width="80%" height="auto" persistent>
-      <v-card>
+      <generalCardComponent>
         <v-toolbar class="elevation-0" color="primary">
           <v-toolbar-title class="white--text font-weight-thin">Nuevo cliente</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -113,34 +82,37 @@
           </sociosFormComponent>
         </v-card-text>
         <v-divider></v-divider>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
     <v-dialog v-model="listSociosModal">
-      <SociosListSociosComponent icon v-model="sociosList" @changePage="getSocios($event)">
-        <template v-slot:button="{ item }">
-          <v-btn small class="my-3 gd-primary font-weight-light white--text" @click="setSocio(item)">
-            AGREGAR
-          </v-btn>
-        </template>
-        <template v-slot:extraFields>
+      <GeneralCardComponent>
+        <GeneralCardTitleComponent class="white--text">Socios</GeneralCardTitleComponent>
+        <v-card-title>
           <v-row>
-            <v-col class="col-md-5 col-12">
+            <v-col class="col-md-10 col-12">
               <SociosFindSociosComponent v-model="searchSocios.name_contains"></SociosFindSociosComponent>
             </v-col>
-            <v-col class="col-md-5 col-12">
-              <v-text-field outlined dense label="Direccion" v-model="searchSocios.direccion_contains"></v-text-field>
-            </v-col>
             <v-col class="col-md-2 col-12">
-              <v-btn block depressed height="40" color="gd-primary" @click="getSocios()">
-                <v-icon color="white">mdi-magnify</v-icon>
+              <v-btn block  height="40" color="secondary" @click="getSocios()">
+                <v-icon color="black">mdi-magnify</v-icon>
               </v-btn>
             </v-col>
           </v-row>
-        </template>
-      </SociosListSociosComponent>
+        </v-card-title>
+        <v-card-text>
+          <SociosListComponent icon v-model="sociosList" @changePage="getSocios($event)">
+            <template v-slot:button="{ item }">
+              <v-btn fab x-small color="secondary" class="my-3 black--text rounded-lg elevation-2" @click="setSocio(item)">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </template>
+          </SociosListComponent>
+        </v-card-text>
+      </GeneralCardComponent>
     </v-dialog>
     <v-dialog v-model="updateMascotasModal">
-        <MascotasFormComponent :value="selectedPet" @input="selectedPet = $event" :handler="updatePet"></MascotasFormComponent>
+      <MascotasFormComponent :value="selectedPet" @input="selectedPet = $event" :handler="updatePet">
+      </MascotasFormComponent>
     </v-dialog>
   </div>
 </template>
@@ -153,9 +125,9 @@
         pagePets: 1,
         createSocioModal: false,
         listSociosModal: false,
-        updateMascotasModal:false,
-        selectedPet:{},
-        refreshPetTable:false,
+        updateMascotasModal: false,
+        selectedPet: {},
+        refreshPetTable: false,
         searchSocios: {},
         socio: {
           suc: 'CASA CENTRAL',
@@ -165,16 +137,13 @@
           mascotas: [{}],
           afiliacion: moment().format('YYYY-MM-DD'),
         },
-        razasList:[],
+        razasList: [],
         headersMascotas: [{
-          text: 'ID Paciente',
-          value: 'id',
-        }, {
-          text: '',
-          value: 'state'
-        }, {
           text: "Paciente",
           value: "nombre"
+        }, {
+          text: 'Estado',
+          value: 'state'
         }],
         pageItems: 0,
 
@@ -201,7 +170,7 @@
           })
       },
       updatePet() {
-        this.$axios.put('/mascotas/'+this.selectedPet.id, this.selectedPet)
+        this.$axios.put('/mascotas/' + this.selectedPet.id, this.selectedPet)
           .then((data) => {
             this.updateMascotasModal = false
             const findIndex = this.value.socio.mascotas.findIndex((item) => item.id === data.data.id)
@@ -209,7 +178,7 @@
               index: findIndex,
               pet: data.data
             })
-            this.refreshPetTable = true 
+            this.refreshPetTable = true
             setTimeout(() => {
               this.refreshPetTable = false
             }, 500);
@@ -231,9 +200,10 @@
       async getSocios(page = 1) {
         this.$store.dispatch('socios/findAll', {
           page: page,
-          _sort:'id:desc',
-          name_contains: this.searchSocios.name_contains,
-          address_contains: this.searchSocios.direccion_contains
+          params: {
+            _sort: 'id:desc',
+            name_contains: this.searchSocios.name_contains,
+          }
         })
 
       },
@@ -289,7 +259,7 @@
             return '#'
           } else {}
         }
-        if (mascota.socio && mascota.socio.toUpperCase()=='SI') {
+        if (mascota.socio && mascota.socio.toUpperCase() == 'SI') {
           return 'SOCIO'
         } else {
           return 'NO SOCIO'
@@ -297,7 +267,7 @@
       },
       setSocioName(mascota) {
         if (!mascota.socio) return "NO SOCIO"
-        return (mascota.socio.toUpperCase()=='SI')?  'SOCIO': 'No SOCIO'
+        return (mascota.socio.toUpperCase() == 'SI') ? 'SOCIO' : 'No SOCIO'
       },
       checkDate(date) {
         if (date == "1000-01-01") return "-"

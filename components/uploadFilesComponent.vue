@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <generalCardComponent>
     <v-card-title class="font-weight-light">
       Subir archivos
     </v-card-title>
@@ -17,7 +17,7 @@
     <v-card-text>
       <v-row>
         <v-col class="col-md-3 col-12 mt-3" v-for="(file,index) in filesList" :key="`f${index}`">
-          <v-card outlined class="rounded-lg">
+          <generalCardComponent  class="rounded-lg">
             <v-card-title>
               <span v-if="file.name">{{file.name}}</span>
               <v-spacer></v-spacer>
@@ -35,12 +35,12 @@
                 <v-icon>mdi-magnify</v-icon>
               </v-btn>
             </v-card-actions>
-          </v-card>
+          </generalCardComponent>
 
         </v-col>
       </v-row>
     </v-card-text>
-  </v-card>
+  </generalCardComponent>
 </template>
 
 <script>

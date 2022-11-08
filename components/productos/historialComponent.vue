@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-card>
+    <generalCardComponent>
       <v-card-title>
         <v-input>
-          <v-text-field placeholder="Buscar producto" class="rounded-r-0" outlined dense hide-details height="40"
-            v-model="search.nombre_contains"></v-text-field>
+          <formsFieldsTextComponent placeholder="Buscar producto" class="rounded-r-0"  dense hide-details height="40"
+            v-model="search.nombre_contains"></formsFieldsTextComponent>
           <v-btn depressed height="40" color="primary" class="rounded-l-0" @click="getProducts()">
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
@@ -17,9 +17,9 @@
           </template>
         </v-data-table>
       </v-card-text>
-    </v-card>
+    </generalCardComponent>
     <v-dialog v-model="openModalProduct" persistent>
-      <v-card >
+      <generalCardComponent >
         <v-toolbar color="primary" class="elevation-0">
           <v-toolbar-title class="font-weight-light white--text">
            Historial del producto
@@ -43,7 +43,7 @@
               </template>
           </v-data-table>
         </v-card-text>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
   </div>
 </template>

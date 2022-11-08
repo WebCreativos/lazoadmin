@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card class="rounded-xl">
+    <generalCardComponent class="rounded-xl">
       <v-toolbar color="gd-primary-to-right" elevation="0">
         <v-toolbar-title class="white--text font-weight-light">Consultas antiguas</v-toolbar-title>
       </v-toolbar>
@@ -47,7 +47,7 @@
       <v-card-actions class="d-flex justify-center">
         <v-pagination :total-visible="10" :length="Math.ceil(listAtencions.length/25)" v-model="page"></v-pagination>
       </v-card-actions>
-    </v-card>
+    </generalCardComponent>
   </v-container>
 </template>
 

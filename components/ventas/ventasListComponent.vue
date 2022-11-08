@@ -1,16 +1,14 @@
 <template>
-  <v-card class="rounded-xl">
-    <v-toolbar color="gd-primary-to-right" class="elevation-0">
-      <v-toolbar-title class="white--text font-weight-light">Mis ventas</v-toolbar-title>
-    </v-toolbar>
+  <generalCardComponent class="rounded-xl">
+    <generalCardTitleComponent class="white--text">Mis ventas</generalCardTitleComponent>
     <v-divider></v-divider>
     <v-card-title>
       <v-row>
         <v-col class="col-12 col-md-10">
-          <v-text-field type="number" v-model="search.codigo" solo dense label="Codigo de venta" class="rounded-lg"></v-text-field>
+          <formsFieldsTextComponent type="number" v-model="search.codigo" solo dense label="Codigo de venta" class="rounded-lg"></formsFieldsTextComponent>
         </v-col>
-        <v-col class="col-12 col-md-2">
-          <v-btn class="gd-primary-to-right rounded-lg white--text font-weight-light" @click="getVentas()" height="40" block>
+        <v-col class="col-12 col-md-2 d-flex align-end">
+          <v-btn color="secondary" class="rounded-lg black--text" @click="getVentas()" height="40" block>
             Buscar&nbsp;&nbsp;<v-icon>mdi-magnify</v-icon>
           </v-btn>
         </v-col>
@@ -18,7 +16,7 @@
     </v-card-title>
     <v-divider></v-divider>
     <v-card-text>
-      <v-card outlined class="rounded-xl">
+      <generalCardComponent  class="rounded-xl">
         <v-card-text>
           <v-data-table hide-default-footer :headers="headers" :items="ventas" :items-per-page="-1">
             <template v-slot:item.cliente="{ item }">
@@ -30,9 +28,9 @@
 
           </v-data-table>
         </v-card-text>
-      </v-card>
+      </generalCardComponent>
     </v-card-text>
-  </v-card>
+  </generalCardComponent>
 </template>
 
 <script>

@@ -1,33 +1,9 @@
 <template>
   <div>
-    <v-input hide-details>
-      <v-autocomplete small-chips hide-details dense :items="razasList" :class="(!hideAddMore)?'rounded-r-0':''" label="Raza" item-text="nombre" item-value="nombre"  outlined
-        v-model="selectedRaza"></v-autocomplete>
-        <v-btn class="rounded-l-0 rounded-r-lg" v-if="!hideAddMore" depressed height="40" color="primary" @click="showrazasModal = true">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </v-input>
-    <v-dialog v-model="showrazasModal">
-      <v-card width="800">
-        <v-toolbar color="gd-primary-to-right" elevation="0">
-          <v-toolbar-title class="white--text font-weight-light">Razas</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="showrazasModal = false">
-            <v-icon color="white">mdi-close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-card-text class="pa-3">
-          <v-text-field solo dense label="color" v-model="raza.nombre">
-          </v-text-field>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn class="white--text" color="gd-primary-to-right font-weight-light rounded-lg" @click="addRaza()">
-            AGREGAR
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <FormsFieldsSelectButtonComponent :items="razasList" label="Raza" item-text="nombre"
+      item-value="id" return-object :handler="()=>{showrazasModal = true}" v-model="selectedRaza">
+    </FormsFieldsSelectButtonComponent>
+    <generalCreateDialogComponent :handler="addRaza" title="Agregar raza" v-model="showrazasModal"></generalCreateDialogComponent>
   </div>
 </template>
 

@@ -1,63 +1,88 @@
 <template>
   <v-container fluid>
+    <headersGeneralComponent>
+      <template v-slot:icon>
+        <img src="/icons/cart.png" alt="icono" width="30" />
+      </template>
+      <template v-slot:title>
+        Ventas
+      </template>
+    </headersGeneralComponent>
+
     <v-row>
       <v-col class="col-12">
-        <v-card class="rounded-xl">
-          <v-toolbar color="gd-primary-to-right" class="elevation-0">
-            <v-toolbar-title class="white--text font-weight-light">Nueva venta</v-toolbar-title>
-          </v-toolbar>
+        <generalCardComponent class="rounded-xl">
+          <generalCardTitleComponent class="white--text">Nueva venta</generalCardTitleComponent>
           <v-form ref="form">
             <v-card-text>
-              <v-row>
-                <v-col class="col-md-10">
+              <generalCardComponent outlined>
+                <generalCardTitleComponent color="transparent" class="black--text text-subtitle-2 font-weight-regular">
+                  <span class="text-subtitle-1 font-weight-regular">Datos de la factura</span>
+
+                </generalCardTitleComponent>
+                <v-divider></v-divider>
+                <v-card-text>
                   <v-row>
-                    <!--
+                    <v-col class="col-md-10">
+                      <v-row>
+                        <!--
                     <v-col class="col-12 col-md-3">
-                      <v-select :items="[{text:'Si',value:false},{text:'No',value:true}]" :rules="rules.required" dense
-                        outlined label="Cliente activo" class="font-weight-light" v-model="cliente_activo"></v-select>
+                      <formsFieldsSelectComponent :items="[{text:'Si',value:false},{text:'No',value:true}]" :rules="rules.required" dense
+                         label="Cliente activo" class="font-weight-light" v-model="cliente_activo"></formsFieldsSelectComponent>
                     </v-col>
                     -->
-                    <v-col class="col-12 col-md-3">
-                      <v-menu ref="menu" class="calendar" v-model="menu" transition="scale-transition" offset-y
-                        min-width="290px" :close-on-content-click="false">
-                        <template v-slot:activator="{ on }">
-                          <div v-on="on" style="cursor:pointer">
-                            <v-text-field outlined dense class="selectInput font-weight-light"
-                              label="Seleccione una fecha" :rules="rules.required" :value="formatDate()"
-                              append-icon="mdi-calendar" readonly placeholder="DATE" height="10">
-                            </v-text-field>
-                          </div>
-                        </template>
-                        <v-card>
-                          <v-date-picker v-model="venta.fecha" no-title scrollable class="elevation-0">
-                          </v-date-picker>
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                            <v-btn text color="primary" @click="$refs.menu.save(menu)">OK</v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-menu>
-                    </v-col>
-                    <v-col class="col-md-3">
-                      <v-select outlined dense
-                        :items="['Efectivo','Factura','Boleta',{value:'NotaCredito',text:'Nota de credito'},{value:'NotaDebito',text:'Nota de debito'}]"
-                        :rules="rules.required" v-model="venta.tipo" label="Tipo"></v-select>
-                    </v-col>
-                    <v-col class="col-md-3">
-                      <v-text-field label="Numero de factura (Manual)" outlined dense v-model="venta.codigo" type="number"></v-text-field>
-                    </v-col>
-                    <v-col class="col-md-3">
-                      <v-text-field label="Vendedor" outlined dense v-model="venta.vendedor" type="text"></v-text-field>
-                    </v-col>
+                        <v-col class="col-12 col-md-6">
+                          <v-menu ref="menu" class="calendar" v-model="menu" transition="scale-transition" offset-y
+                            min-width="290px" :close-on-content-click="false">
+                            <template v-slot:activator="{ on }">
+                              <div v-on="on" style="cursor:pointer">
+                                <formsFieldsTextComponent dense class="selectInput font-weight-light"
+                                  label="Seleccione una fecha" :rules="rules.required" :value="formatDate()"
+                                  append-icon="mdi-calendar" readonly placeholder="DATE" height="10">
+                                </formsFieldsTextComponent>
+                              </div>
+                            </template>
+                            <generalCardComponent>
+                              <v-date-picker v-model="venta.fecha" no-title scrollable class="elevation-0">
+                              </v-date-picker>
+                              <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+                                <v-btn text color="primary" @click="$refs.menu.save(menu)">OK</v-btn>
+                              </v-card-actions>
+                            </generalCardComponent>
+                          </v-menu>
+                        </v-col>
+                        <v-col class="col-md-6">
+                          <formsFieldsSelectComponent dense
+                            :items="['Efectivo','Factura','Boleta',{value:'NotaCredito',text:'Nota de credito'},{value:'NotaDebito',text:'Nota de debito'}]"
+                            :rules="rules.required" v-model="venta.tipo" label="Tipo"></formsFieldsSelectComponent>
+                        </v-col>
+                        <v-col class="col-md-6">
+                          <formsFieldsTextComponent label="Numero de factura (Manual)" dense v-model="venta.codigo"
+                            type="number"></formsFieldsTextComponent>
+                        </v-col>
+                        <v-col class="col-md-6">
+                          <formsFieldsTextComponent label="Vendedor" dense v-model="venta.vendedor" type="text">
+                          </formsFieldsTextComponent>
+                        </v-col>
 
+                      </v-row>
+                    </v-col>
+                    <v-col class="col-12 col-md-2 d-flex justify-center align-center">
+                      <v-btn large fab color="rounded-lg success darken-1" @click="createVenta()">
+                        <v-icon>mdi-cart</v-icon>
+                      </v-btn>
+                    </v-col>
                   </v-row>
-                </v-col>
-              </v-row>
+                </v-card-text>
+              </generalCardComponent>
             </v-card-text>
             <v-card-text>
-              <v-card outlined class="rounded-xl">
-                <V-card-title class="font-weight-light text-subtitle-1">DATOS DEL CLIENTE</V-card-title>
+              <generalCardComponent outlined>
+                <generalCardTitleComponent color="transparent" class="black--text">
+                  <span class="text-subtitle-1 font-weight-regular">Datos del cliente</span>
+                </generalCardTitleComponent>
                 <v-divider></v-divider>
                 <v-card-text>
                   <v-row>
@@ -65,64 +90,74 @@
                       <SociosFindSociosComponent v-model="findedClient"></SociosFindSociosComponent>
                     </v-col>
                     <v-col class="col-md-12 col-12">
-                      <v-text-field outlined label="Nombre" v-model="venta.cliente.nombre">
-                      </v-text-field>
+                      <formsFieldsTextComponent label="Nombre" v-model="venta.cliente.nombre">
+                      </formsFieldsTextComponent>
                     </v-col>
                     <v-col class="col-md-12 col-12">
-                      <v-text-field outlined label="Direccion" v-model="venta.cliente.direccion">
-                      </v-text-field>
+                      <formsFieldsTextComponent label="Direccion" v-model="venta.cliente.direccion">
+                      </formsFieldsTextComponent>
                     </v-col>
 
                   </v-row>
                 </v-card-text>
-              </v-card>
+              </generalCardComponent>
             </v-card-text>
           </v-form>
           <v-card-text>
-            <v-card outlined class="rounded-xl">
-              <V-card-title class="font-weight-light text-subtitle-1">ARTICULOS</V-card-title>
+            <generalCardComponent outlined>
+              <generalCardTitleComponent color="transparent" class="black--text">
+                <span class="text-subtitle-1 font-weight-regular">Articulos</span>
+              </generalCardTitleComponent>
               <v-divider></v-divider>
               <v-card-text>
                 <v-row>
-                  <v-col class="col-12" :class="{'col-md-8 col-12':referenciaConsulta.length>0}">
+                  <v-col class="col-12">
                     <v-row>
                       <v-col class="col-md-12 col-12">
                         <v-input>
-                          <v-text-field hide-details filled readonly label="Articulo" prepend-inner-icon="mdi-cart"
-                            v-model="producto.nombre" class="rounded-r-0" outlined dense></v-text-field>
-                          <v-btn class="rounded-l-0 rounded-r-lg" height="40" color="primary"
+                          <v-text-field hide-details solo filled readonly label="Articulo" prepend-inner-icon="mdi-cart"
+                            v-model="producto.nombre" class="rounded-r-0" dense>
+                          </v-text-field>
+                          <v-btn class="rounded-l-0 rounded-r-lg" height="40" color="secondary"
                             @click="showProductsModal = true">
-                            <v-icon>mdi-magnify</v-icon>
+                            <v-icon color="black">mdi-magnify</v-icon>
                           </v-btn>
                         </v-input>
                       </v-col>
                       <v-col>
                         <v-input :disabled="producto.tipo != 'producto'">
-                          <v-text-field type="number" readonly hide-details v-model="producto.cantidad"
-                            class="rounded-r-0" prepend-inner-icon="mdi-format-list-bulleted" label="Cantidad" outlined
-                            dense>
-                          </v-text-field>
-                          <v-btn :disabled="producto.cantidad <=1 || producto.cantidad == undefined" @click="()=>{
+                          <div class="d-flex flex-column">
+                          <div class="mb-2">
+                            <label
+                              class="font-weight-regular mb-4 text-uppercase text-subtitle-2 black--text">CANTIDAD</label>
+                          </div>
+                          <div class="d-flex">
+                            <v-text-field type="number" solo readonly hide-details v-model="producto.cantidad"
+                              class="rounded-r-0" prepend-inner-icon="mdi-format-list-bulleted" dense>
+                            </v-text-field>
+                            <v-btn :disabled="producto.cantidad <=1 || producto.cantidad == undefined" @click="()=>{
                               producto.cantidad--
-                            }" class="rounded-r-0 rounded-l-0" outlined height="40" color="warning">
-                            <v-icon>mdi-minus</v-icon>
-                          </v-btn>
-                          <v-btn :disabled="producto.cantidad == undefined" @click="()=>{
+                            }" class="rounded-r-0 rounded-l-0" height="40" color="warning">
+                              <v-icon>mdi-minus</v-icon>
+                            </v-btn>
+                            <v-btn :disabled="producto.cantidad == undefined" @click="()=>{
                               producto.cantidad++
-                            }" class="rounded-l-0 rounded-r-lg" height="40" outlined color="success">
-                            <v-icon>mdi-plus</v-icon>
-                          </v-btn>
+                            }" class="rounded-l-0 rounded-r-lg" height="40" color="success">
+                              <v-icon>mdi-plus</v-icon>
+                            </v-btn>
+                          </div>
+                          </div>
                         </v-input>
                       </v-col>
                       <v-col>
-                        <v-text-field type="number" :readonly="producto.descuento == undefined"
-                          v-model="producto.descuento" prepend-inner-icon="mdi-percent" label="Descuento" outlined
-                          dense>
-                        </v-text-field>
+                        <formsFieldsTextComponent type="number" :readonly="producto.descuento == undefined"
+                          v-model="producto.descuento" prepend-inner-icon="mdi-percent" label="Descuento" dense>
+                        </formsFieldsTextComponent>
                       </v-col>
                       <v-col>
-                        <v-text-field v-model="producto.precio" filled :readonly="producto.tipo != 'consulta'"
-                          prepend-inner-icon="mdi-currency-usd" label="Precio unidad" outlined dense></v-text-field>
+                        <formsFieldsTextComponent v-model="producto.precio" filled
+                          :readonly="producto.tipo != 'consulta'" prepend-inner-icon="mdi-currency-usd"
+                          label="Precio unidad" dense></formsFieldsTextComponent>
                       </v-col>
                       <v-col class="col-md-12 col-12">
                         <v-btn block color="gd-primary-to-right" class="rounded-lg  font-weight-light white--text"
@@ -133,15 +168,11 @@
                     </v-row>
 
                   </v-col>
-                  <v-col class="col-md-4" v-if="referenciaConsulta.length>0">
-                    <v-textarea outlined label="Referencias de la consulta" v-model="referenciaConsulta" readonly>
-                    </v-textarea>
-                  </v-col>
                 </v-row>
               </v-card-text>
               <v-divider></v-divider>
               <v-card-text>
-                <v-card outlined class="rounded-xl">
+                <generalCardComponent outlined>
                   <v-card-text>
                     <v-data-table hide-default-footer :headers="headers" :items="venta.productos">
                       <template v-slot:item.precio="{ item }">
@@ -163,18 +194,15 @@
 
                     </v-data-table>
                   </v-card-text>
-                </v-card>
+                </generalCardComponent>
               </v-card-text>
-            </v-card>
+            </generalCardComponent>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn x-large color="success darken-1" class="rounded-lg font-weight-bold white--text font-weight-light"
-              height="40" @click="createVenta()" block>Generar venta&nbsp;<v-icon>mdi-cart</v-icon>
-            </v-btn>
 
           </v-card-actions>
-        </v-card>
+        </generalCardComponent>
       </v-col>
       <v-col class="col-12">
         <ventasListComponent v-if="showVentasList" v-model="ventas"></ventasListComponent>
@@ -182,7 +210,7 @@
     </v-row>
 
     <v-dialog v-model="showProductsModal" persistent fullscreen>
-      <v-card min-width="90vw" class="rounded-xl">
+      <generalCardComponent min-width="90vw" class="rounded-xl">
         <v-toolbar color="gd-primary-to-right" class="elevation-0">
           <v-toolbar-title class="white--text font-weight-light">Agregar a la venta</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -222,7 +250,7 @@
           </visitasListComponent>
         </v-card-text>
 
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
     <modal-success :action="()=>{
       this.createVentaModal = false
@@ -322,8 +350,7 @@
         menu: false
       }
     },
-    mounted() {
-    },
+    mounted() {},
     methods: {
       formatDate() {
         if (this.venta.fecha)
@@ -345,9 +372,9 @@
             productos: item.productos,
             item: item
           }
-          if(item.socio) {
-            this.venta.cliente.nombre  = item.socio.name
-            this.venta.cliente.direccion  = item.socio.address
+          if (item.socio) {
+            this.venta.cliente.nombre = item.socio.name
+            this.venta.cliente.direccion = item.socio.address
           }
           if (item.referencias_caja) {
             this.referenciaConsulta = item.referencias_caja
@@ -409,10 +436,10 @@
                 cliente: {},
                 productos: []
               },
-                    this.$root.$emit('generatedSale');
-              setTimeout(() => {
-                this.showVentasList = true
-              }, 500);
+              this.$root.$emit('generatedSale');
+            setTimeout(() => {
+              this.showVentasList = true
+            }, 500);
           })
       },
       getSocios(val) {

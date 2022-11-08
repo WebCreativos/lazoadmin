@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row>
       <v-col class="col-12">
-        <v-card class="rounded-xl">
+        <generalCardComponent class="rounded-xl">
           <v-toolbar class="elevation-0 gd-primary-to-right font-weight-thin white--text">
             <v-toolbar-title>Mensajes</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -26,11 +26,11 @@
               </template>
             </v-data-table>
           </v-card-text>
-        </v-card>
+        </generalCardComponent>
       </v-col>
     </v-row>
     <v-dialog v-model="modalMessage" persistent width="500">
-      <v-card>
+      <generalCardComponent>
         <v-toolbar color="primary" class="elevation-0">
           <v-toolbar-title class="white--text font-weight-light">AGREGAR MENSAJE</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -42,15 +42,15 @@
         </v-toolbar>
         <v-card-text class="pt-4">
           <v-form ref="form">
-            <v-text-field v-model="message.titulo" outlined dense label="Titulo"></v-text-field>
-            <v-textarea v-model="message.contenido" outlined dense label="Mensaje"></v-textarea>
+            <formsFieldsTextComponent v-model="message.titulo"  dense label="Titulo"></formsFieldsTextComponent>
+            <v-textarea v-model="message.contenido"  dense label="Mensaje"></v-textarea>
           </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn @click="createMessage()" color="success darken-1" depressed>AGREGAR</v-btn>
         </v-card-actions>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
   </v-container>
 </template>

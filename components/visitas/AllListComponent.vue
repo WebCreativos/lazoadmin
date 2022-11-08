@@ -1,29 +1,22 @@
 <template>
   <div>
-    <v-card class="rounded-xl">
-      <v-toolbar color="gd-primary-to-right" elevation="0">
-        <v-toolbar-title class="white--text font-weight-light">Consultas</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn outlined class="white--text font-weight-light" @click="exportDataProximas()">
-          Descargar&nbsp;<v-icon>mdi-download</v-icon>
-        </v-btn>
-      </v-toolbar>
+    <generalCardComponent class="rounded-xl">
+      <GeneralCardTitleComponent class="white--text">
+        Consultas
+      </GeneralCardTitleComponent>
       <v-card-title>
         <v-row>
-          <v-col class="col-12">
-            <visitasCreateReferenciasComponent v-model="search.referencias"></visitasCreateReferenciasComponent>
+          <v-col class="col-5">
+            <formsFieldsTextComponent hide-details v-model="search.fecha_gte" type="date"
+              height="40" dense label="Fecha desde"></formsFieldsTextComponent>
           </v-col>
-          <v-col class="col-12">
-            <v-input hide-details>
-              <v-text-field hide-details v-model="search.fecha_gte" type="date" class="rounded-r-0" height="40"
-                dense outlined label="Fecha desde"></v-text-field>
-              <v-text-field hide-details v-model="search.fecha_lte" type="date" class="rounded-l-0" height="40"
-                dense outlined label="Fecha hasta"></v-text-field>
-            </v-input>
+          <v-col class="col-5">
+            <formsFieldsTextComponent hide-details v-model="search.fecha_lte" type="date"
+              height="40" dense label="Fecha hasta"></formsFieldsTextComponent>
           </v-col>
-          <v-col class="col-12">
-            <v-btn @click="items.page = 1;getAtenciones()" color="gd-primary-to-right" height="40" depressed
-              class="white--text font-weight-light" block>
+          <v-col class="col-md-2 col-12 d-flex align-end">
+            <v-btn @click="items.page = 1;getAtenciones()" color="secondary" height="40"
+              class="black--text font-weight-regular rounded-lg" block>
               Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
             </v-btn>
           </v-col>
@@ -34,9 +27,9 @@
       <v-card-text>
         <v-data-table :headers="headers" hide-default-footer :items="items.data" :items-per-page="25">
           <template v-slot:item.fecha="{ item }">
-              <v-btn outlined small @click="showModalAtencion(item)">
-                <v-icon>mdi-magnify</v-icon> &nbsp;{{formatDate(item.fecha)}}
-              </v-btn>
+            <v-btn small outlined @click="showModalAtencion(item)">
+              <v-icon>mdi-magnify</v-icon> &nbsp;{{formatDate(item.fecha)}}
+            </v-btn>
           </template>
           <template v-slot:item.clientName="{ item }">
             {{clientName(item.mascota)}}
@@ -55,8 +48,8 @@
       <v-card-actions class="d-flex justify-center">
         <v-pagination :total-visible="10" :length="Math.ceil(items.length/25)" v-model="items.page"></v-pagination>
       </v-card-actions>
-    </v-card>
-    <v-dialog v-model="openAtencionModal" width="80%"  height="auto">
+    </generalCardComponent>
+    <v-dialog v-model="openAtencionModal" width="80%" height="auto">
       <v-toolbar color="primary" class="elevation-0 white--text font-weight-thin">
         <v-toolbar-title>VER VISITA</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -71,7 +64,7 @@
 </template>
 
 <script>
-var qs = require('qs');
+  var qs = require('qs');
   import {
     json2excel,
   } from 'js2excel';
@@ -105,9 +98,9 @@ var qs = require('qs');
           value: "tratamiento"
         }],
         items: {
-          data:[],
-          length:0,
-          page:1
+          data: [],
+          length: 0,
+          page: 1
         },
         atencion: {},
         headersProximas: [{
@@ -126,7 +119,7 @@ var qs = require('qs');
           text: "Anamnesis",
           value: "anamnesis"
         }],
-        search: { },
+        search: {},
         openAtencionModal: false
       }
     },
@@ -137,16 +130,19 @@ var qs = require('qs');
     },
     methods: {
       async getAtenciones() {
-        this.search._start = 25*(this.items.page-1)
-        this.search._limit = 25*(this.items.page)
+        this.search._start = 25 * (this.items.page - 1)
+        this.search._limit = 25 * (this.items.page)
 
         this.items.data = []
         await this.$axios.get('/atencion', {
-            params: {...this.search,_sort:'fecha:desc'}
+            params: {
+              ...this.search,
+              _sort: 'fecha:desc'
+            }
           })
           .then(response => {
-            this.items.data = response.data.filter((item)=>{
-              if(item.mascota.deceso == null || item.mascota.deceso =="1000-01-01") {
+            this.items.data = response.data.filter((item) => {
+              if (item.mascota.deceso == null || item.mascota.deceso == "1000-01-01") {
                 return item
               }
             })
@@ -170,7 +166,7 @@ var qs = require('qs');
         return `${finalDate[2]}/${finalDate[1]}/${finalDate[0]}`
       },
       formatHour(hour) {
-        if(!hour) return 'Hora no asignada'
+        if (!hour) return 'Hora no asignada'
         let finalHour = hour.split(':')
         return `${finalHour[0]}:${finalHour[1]}`
       },
@@ -178,15 +174,15 @@ var qs = require('qs');
         this.atencion = {}
         this.atencion = atencion
         this.$forceUpdate()
-        this.$axios.get('/socios/'+atencion.socio.id)
-          .then((data)=>{
+        this.$axios.get('/socios/' + atencion.socio.id)
+          .then((data) => {
             this.$store.dispatch('atentions/setSocio', data.data)
             this.$store.dispatch('atentions/setMascota', {})
             this.openAtencionModal = true
           })
       },
-      clientName(pet){
-        if(pet.socios){
+      clientName(pet) {
+        if (pet.socios) {
           return pet.socios[0].name
         }
       },
@@ -223,7 +219,7 @@ var qs = require('qs');
             Cliente: `${item.socio.name}`,
             Telefono: `${item.socio.phone}`,
             Mascota: item.mascota.nombre,
-            Motivo: item.referencias?.nombre,
+            Motivo: item.referencias ?.nombre,
           }
         })
         try {
@@ -238,8 +234,8 @@ var qs = require('qs');
 
       }
     },
-    watch:{
-      "items.page": function(val) {
+    watch: {
+      "items.page": function (val) {
         this.getAtenciones()
       }
     }

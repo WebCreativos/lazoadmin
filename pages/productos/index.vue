@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-card class="rounded-xl">
+    <generalCardComponent class="rounded-xl">
       <v-toolbar card class="gd-primary-to-right" elevation="0">
         <v-toolbar-title class="white--text font-weight-light">AGREGAR PRODUCTO</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -11,28 +11,28 @@
             <v-col class="col-12 col-md-7">
               <v-row>
                 <v-col class="col-12 col-md-6">
-                  <v-text-field label="CODIGO" :rules="rules.codigo" type="number" v-model="product.codigo" class="rounded-lg" solo dense>
-                  </v-text-field>
-                  <v-card color="gd-primary-to-right" class="rounded-lg elevation-0" height="400">
+                  <formsFieldsTextComponent label="CODIGO" :rules="rules.codigo" type="number" v-model="product.codigo" class="rounded-lg" solo dense>
+                  </formsFieldsTextComponent>
+                  <generalCardComponent color="gd-primary-to-right" class="rounded-lg elevation-0" height="400">
                     <v-card-text>
                       <input id="fileUpload" type="file" @input="onFileChange($event)" ref="file" hidden>
                       <v-btn @click="selectPicture()" block class="mb-5" depressed>CARGAR FOTO</v-btn>
                       <v-img :src="previewImg()" v-if="product.foto" width="100%" contain height="200"></v-img>
                     </v-card-text>
-                  </v-card>
+                  </generalCardComponent>
                 </v-col>
                 <v-col class="col-12 col-md-6">
-                  <v-text-field label="NOMBRE" v-model="product.nombre" class="rounded-lg" solo dense></v-text-field>
-                  <v-text-field label="COSTO/UNIDAD" type="number" v-model="product.precio_unidad" class="rounded-lg"
-                    solo dense></v-text-field>
-                  <v-text-field label="CANTIDAD" :rules="rules.minNumber" type="number" v-model="product.cantidad" class="rounded-lg" solo dense>
-                  </v-text-field>
-                  <v-text-field label="PRECIO FINAL" type="number" v-model="product.precio_final" class="rounded-lg"
-                    solo dense></v-text-field>
-                  <v-text-field label="FECHA DE COMPRA" type="date" v-model="product.fecha_compra" class="rounded-lg"
-                    solo dense></v-text-field>
-                  <v-text-field label="VENCIMIENTO" type="date" v-model="product.vencimiento" class="rounded-lg" solo
-                    dense></v-text-field>
+                  <formsFieldsTextComponent label="NOMBRE" v-model="product.nombre" class="rounded-lg" solo dense></formsFieldsTextComponent>
+                  <formsFieldsTextComponent label="COSTO/UNIDAD" type="number" v-model="product.precio_unidad" class="rounded-lg"
+                    solo dense></formsFieldsTextComponent>
+                  <formsFieldsTextComponent label="CANTIDAD" :rules="rules.minNumber" type="number" v-model="product.cantidad" class="rounded-lg" solo dense>
+                  </formsFieldsTextComponent>
+                  <formsFieldsTextComponent label="PRECIO FINAL" type="number" v-model="product.precio_final" class="rounded-lg"
+                    solo dense></formsFieldsTextComponent>
+                  <formsFieldsTextComponent label="FECHA DE COMPRA" type="date" v-model="product.fecha_compra" class="rounded-lg"
+                    solo dense></formsFieldsTextComponent>
+                  <formsFieldsTextComponent label="VENCIMIENTO" type="date" v-model="product.vencimiento" class="rounded-lg" solo
+                    dense></formsFieldsTextComponent>
 
                 </v-col>
               </v-row>
@@ -51,7 +51,7 @@
           GUARDAR
         </v-btn>
       </v-card-actions>
-    </v-card>
+    </generalCardComponent>
     <modal-success :action="()=>{
       this.dialog = false
       }" v-model="dialog">

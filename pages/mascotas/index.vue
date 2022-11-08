@@ -1,58 +1,28 @@
 <template>
   <v-container fluid>
-    <MascotasListComponent @changePage="getMascotas($event)" v-model="mascotasList">
-      <template v-slot:extraFields>
-        <v-card outlined width="100%" class="rounded-lg">
-          <v-card-text>
-            <v-row>
-              <v-col class="col-md-9">
-                <v-text-field v-model="search.nombre_contains" hide-details label="Nombre" outlined dense>
-                </v-text-field>
-              </v-col>
-              <v-col class="col-md-3">
-                <v-btn block color="gd-primary-to-right" @click="getMascotas()"
-                  class="white--text rounded-lg font-weight-light">
-                  Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
-                </v-btn>
-              </v-col>
-
-              <!--
-
-          <v-col class="col-md-2 col-sm-2 col-12">
-            <v-switch class="mt-0" hide-details v-model="search.old_pet" default="false" label="Masc. antigua">
-            </v-switch>
-          </v-col>
-          -->
-            </v-row>
-            <v-row v-if="showExtraFilters">
-              <v-col class="col-md-6">
-                <v-text-field v-model="search.nro_chip" hide-details label="Nro Chip" outlined dense></v-text-field>
-              </v-col>
-              <v-col class="col-md-6">
-                <mascotasRazasComponent hideAddMore v-model="search.raza"></mascotasRazasComponent>
-              </v-col>
-            </v-row>
-
-          </v-card-text>
-          <v-card-actions class="d-flex justify-center">
-            <v-btn small outlined @click="showExtraFilters = !showExtraFilters">
-              <span v-show="!showExtraFilters">VER MAS FILTROS</span>
-              <span v-show="showExtraFilters">VER MENOS FILTROS</span>
-            </v-btn>
-
-          </v-card-actions>
-        </v-card>
+    <headersGeneralComponent>
+      <template v-slot:icon>
+        <img src="/icons/dog.png" alt="icono" width="30" />
       </template>
-      <template v-slot:button="{ item }">
-        <v-btn class="gd-primary-to-right font-weight-light rounded-lg white--text" :to="`/mascotas/editar/${item.id}`"
-          color="primary">
-          EDITAR
-        </v-btn>
-        <v-btn class="font-weight-light rounded-lg white--text" color="red" @click="deleteMascota(item.id)">
-          ELIMINAR
-        </v-btn>
+      <template v-slot:title>
+        Mascotas
       </template>
-    </MascotasListComponent>
+    </headersGeneralComponent>
+    <GeneralCardComponent>
+      <v-card-title class="primary">
+        <formsFieldsTextButtonComponent class="elevation-6 rounded-lg" background-color="white"
+          @click="getSocios($event)" label="Buscar...">
+          <template v-slot:icon>
+            <v-icon>mdi-magnify</v-icon>
+          </template>
+        </formsFieldsTextButtonComponent>
+      </v-card-title>
+      <MascotasListComponent @changePage="getMascotas($event)" v-model="mascotasList">
+        <template v-slot:button="{ item }">
+          <mascotasActionsButtonComponent :item="item" />
+        </template>
+      </MascotasListComponent>
+    </GeneralCardComponent>
   </v-container>
 </template>
 

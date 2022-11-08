@@ -1,20 +1,20 @@
 <template>
-    <v-card outlined>
+    <generalCardComponent >
       <v-card-title>
-        <v-btn outlined color="primary" @click="addConsulta()" v-if="!readonly">
+        <v-btn  color="primary" @click="addConsulta()" v-if="!readonly">
           AGREGAR CONSULTAS&nbsp;<v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-card-title>
       <v-card-text>
         <v-data-table :headers="headers" :items="value" hide-default-footer>
           <template v-slot:item.fecha="{ item }">
-            <v-text-field dense outlined hide-details type="date" v-model="item.fecha"></v-text-field>
+            <formsFieldsTextComponent dense  hide-details type="date" v-model="item.fecha"></formsFieldsTextComponent>
           </template>
           <template v-slot:item.referencias="{ item }">
-            <v-text-field dense outlined hide-details v-model="item.referencias"></v-text-field>
+            <formsFieldsTextComponent dense  hide-details v-model="item.referencias"></formsFieldsTextComponent>
           </template>
           <template v-slot:item.observacion="{ item }">
-            <v-text-field dense outlined  hide-details v-model="item.observacion"></v-text-field>
+            <formsFieldsTextComponent dense   hide-details v-model="item.observacion"></formsFieldsTextComponent>
           </template>
           <template v-slot:item.delete="{ item }">
             <v-btn small color="red" @click="deleteProduct(item)"  v-if="!readonly">
@@ -25,7 +25,7 @@
 
         </v-data-table>
       </v-card-text>
-    </v-card>
+    </generalCardComponent>
 </template>
 
 <script>

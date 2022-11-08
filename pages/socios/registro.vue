@@ -39,8 +39,11 @@
         createSocioModal: false
       }
     },
+    created() {
+      this.$store.dispatch('socios/clear')
+    },
     methods: {
-      createSocio() {
+      async createSocio() {
         if (!this.socio.user.username) {
           this.socio.user.username = Math.floor(Math.random() * 900000000) + 100000000;
         }
@@ -50,6 +53,10 @@
         if(!this.socio.user.password) {
           this.socio.user.password = this.socio.user.username
         }
+
+        await this.$store.dispatch('socios/create')
+
+
         this.$axios.post('/users', this.socio.user).then(response => {
           this.socio.user = response.data
           this.$axios.post('/socios', this.socio).then(response => {

@@ -7,12 +7,12 @@
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-toolbar>
-    <v-card flat>
+    <generalCardComponent flat>
       <v-card-text>
 
         <v-row class="mb-3">
           <v-col class="col-md-12 col-12">
-            <v-card class="rounded-xl">
+            <generalCardComponent class="rounded-xl">
               <v-toolbar elevation="0" color="primary">
                 <v-toolbar-title class="font-weight-light white--text">
                   Seleccione el distribuidor
@@ -23,10 +23,10 @@
                 <productosCreateDistribuidoresComponent v-model="compra.distribuidor">
                 </productosCreateDistribuidoresComponent>
               </v-card-text>
-            </v-card>
+            </generalCardComponent>
           </v-col>
           <v-col class="col-md-6 col-12">
-            <v-card class="rounded-xl" height="330">
+            <generalCardComponent class="rounded-xl" height="330">
               <v-toolbar elevation="0" color="primary" class="mt-2">
                 <v-toolbar-title class="font-weight-light white--text">
                   Datos de la factura
@@ -35,54 +35,54 @@
               <v-card-text>
                 <v-row>
                   <v-col class="col-md-6 col-12">
-                    <v-text-field
+                    <formsFieldsTextComponent
                       label="Número de factura"
                       dense
                       v-model="compra.nrofactura"
-                      outlined
-                    ></v-text-field>
+                      
+                    ></formsFieldsTextComponent>
                   </v-col>
                   <v-col class="col-md-6 col-12">
-                    <v-text-field
+                    <formsFieldsTextComponent
                       label="Fecha de factura"
                       dense
                       type="date"
                       :rules="[(v) => !!v || 'Fecha de factura es requerida']"
                       v-model="compra.fecha"
-                      outlined
-                    ></v-text-field>
+                      
+                    ></formsFieldsTextComponent>
                   </v-col>
                   <v-col class="col-md-6 col-12">
-                    <v-text-field
+                    <formsFieldsTextComponent
                       label="Total"
                       dense
                       type="number"
                       v-model="compra.total"
-                      outlined
-                    ></v-text-field>
+                      
+                    ></formsFieldsTextComponent>
                   </v-col>
                   <v-col class="col-md-6 col-12">
-                    <v-text-field
+                    <formsFieldsTextComponent
                       label="Monto entregado"
                       dense
                       type="number"
                       v-model="compra.entrega"
-                      outlined
-                    ></v-text-field>
+                      
+                    ></formsFieldsTextComponent>
                   </v-col>
                   <v-col class="col-md-12 col-12">
-                    <v-select
+                    <formsFieldsSelectComponent
                       label="Iva incluido"
                       dense
                       :items="[{text:'Si',value:true},{text:'No',value:false}]"
                       v-model="compra.iva_incluido"
-                      outlined
-                    ></v-select>
+                      
+                    ></formsFieldsSelectComponent>
                   </v-col>
 
                 </v-row>
               </v-card-text>
-            </v-card>
+            </generalCardComponent>
           </v-col>
           <v-col class="col-md-6 col-12"> 
             <ProductosListComponent color="primary" height="340" title="Seleccione los productos">
@@ -98,7 +98,7 @@
 
           </v-col>
           <v-col class="col-12 col-md-12">
-            <v-card class="rounded-xl">
+            <generalCardComponent class="rounded-xl">
               <v-toolbar elevation="0" color="primary">
                 <v-toolbar-title class="font-weight-light white--text">
                   Compras de mercaderia
@@ -108,18 +108,18 @@
               <v-card-text>
                 <v-data-table :headers="filterHeaders" :items="compra.productos" hide-default-footer>
                   <template v-slot:item.precio_unidad="{ item }">
-                    <v-text-field type="number" outlined dense hide-details v-model="item.precio_unidad"></v-text-field>
+                    <formsFieldsTextComponent type="number"  dense hide-details v-model="item.precio_unidad"></formsFieldsTextComponent>
                   </template>
                   <template v-slot:item.cantidad="{ item }">
-                    <v-text-field type="number" outlined dense hide-details v-model="item.cantidad"></v-text-field>
+                    <formsFieldsTextComponent type="number"  dense hide-details v-model="item.cantidad"></formsFieldsTextComponent>
                   </template>
                   <template v-slot:item.iva="{ item }">
-                    <v-text-field type="number" outlined dense hide-details v-model="item.iva"></v-text-field>
+                    <formsFieldsTextComponent type="number"  dense hide-details v-model="item.iva"></formsFieldsTextComponent>
                   </template>
                   <template v-slot:item.descuento="{ item }">
                     <v-input hide-details style="width:100%">
-                      <v-text-field type="number" class="rounded-r-0" style="width:50%" outlined dense hide-details v-model="item.descuento"></v-text-field>
-                      <v-select style="width:50%" :items="[{text:'Porcentaje (%)',value:'porcentaje'},{text:'Fijo ($)',value:'fijo'}]" class="rounded-l-0" value="Porcentaje (%)"  outlined dense hide-details v-model="item.tipo_descuento"></v-select>
+                      <formsFieldsTextComponent type="number" class="rounded-r-0" style="width:50%"  dense hide-details v-model="item.descuento"></formsFieldsTextComponent>
+                      <formsFieldsSelectComponent style="width:50%" :items="[{text:'Porcentaje (%)',value:'porcentaje'},{text:'Fijo ($)',value:'fijo'}]" class="rounded-l-0" value="Porcentaje (%)"   dense hide-details v-model="item.tipo_descuento"></formsFieldsSelectComponent>
                     </v-input>
                   </template>
                   <template v-slot:item.actions="{ item }">
@@ -129,7 +129,7 @@
                   </template>
                 </v-data-table>
               </v-card-text>
-            </v-card>
+            </generalCardComponent>
           </v-col>
         </v-row>
 
@@ -141,7 +141,7 @@
         <v-btn color="success darken-1" :disabled="compra.productos.length == 0" class="rounded-lg white--text font-weight-light"
           @click="saveCompras()">AGREGAR COMPRAS</v-btn>
       </v-card-actions>
-    </v-card>
+    </generalCardComponent>
     <modal-success :action="()=>{
       this.$emit('input', false);
       this.successCompras = false

@@ -20,8 +20,8 @@
         </v-toolbar>
         <v-divider></v-divider>
         <v-toolbar flat>
-          <v-select solo v-model="type" dense hide-details class="font-weight-light" label="Tipo de calendario"
-            :items="[{value:'month',text:'Mensual'},{value:'day',text:'Diario'}]"></v-select>
+          <formsFieldsSelectComponent solo v-model="type" dense hide-details class="font-weight-light" label="Tipo de calendario"
+            :items="[{value:'month',text:'Mensual'},{value:'day',text:'Diario'}]"></formsFieldsSelectComponent>
         </v-toolbar>
 
       </v-sheet>
@@ -30,7 +30,7 @@
           :event-color="getEventColor" :type="type" @click:event="showEvent" :value="now" @click:more="viewDay"
           @click:date="viewDay"></v-calendar>
         <v-menu v-model="selectedOpen" :close-on-content-click="false" :activator="selectedElement" offset-x>
-          <v-card color="grey lighten-4" min-width="350px" flat>
+          <generalCardComponent color="grey lighten-4" min-width="350px" flat>
             <v-toolbar class="elevation-0" :color="selectedEvent.color" dark>
               <v-toolbar-title class="font-weight-light" v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
@@ -39,18 +39,18 @@
               </v-btn>
             </v-toolbar>
             <v-card-text>
-              <v-text-field outlined label="Titulo" :readonly="!selectedEditable" background-color="white"
-                v-model="selectedEvent.data.titulo"></v-text-field>
-              <v-textarea outlined label="Detalles" :readonly="!selectedEditable" background-color="white"
+              <formsFieldsTextComponent  label="Titulo" :readonly="!selectedEditable" background-color="white"
+                v-model="selectedEvent.data.titulo"></formsFieldsTextComponent>
+              <v-textarea  label="Detalles" :readonly="!selectedEditable" background-color="white"
                 :filled="!selectedEditable" v-model="selectedEvent.data.detalles"></v-textarea>
-              <v-text-field type="fecha" outlined label="Fecha" :readonly="!selectedEditable" background-color="white"
-                :filled="!selectedEditable" v-model="selectedEvent.data.fecha"></v-text-field>
-              <v-text-field type="hora" outlined label="hora" :readonly="!selectedEditable" background-color="white"
-                :filled="!selectedEditable" v-model="selectedEvent.data.hora"></v-text-field>
+              <formsFieldsTextComponent type="fecha"  label="Fecha" :readonly="!selectedEditable" background-color="white"
+                :filled="!selectedEditable" v-model="selectedEvent.data.fecha"></formsFieldsTextComponent>
+              <formsFieldsTextComponent type="hora"  label="hora" :readonly="!selectedEditable" background-color="white"
+                :filled="!selectedEditable" v-model="selectedEvent.data.hora"></formsFieldsTextComponent>
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
-              <v-btn outlined color="red" class="font-weight-light rounded-lg" @click="selectedOpen = false">
+              <v-btn  color="red" class="font-weight-light rounded-lg" @click="selectedOpen = false">
                 Cerrar
               </v-btn>
               <v-spacer></v-spacer>
@@ -59,7 +59,7 @@
                 Guardar&nbsp;<v-icon>mdi-content-save</v-icon>
               </v-btn>
             </v-card-actions>
-          </v-card>
+          </generalCardComponent>
         </v-menu>
       </v-sheet>
     </v-col>

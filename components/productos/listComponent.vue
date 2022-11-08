@@ -1,5 +1,5 @@
 <template>
-  <v-card class="rounded-xl" :height="height">
+  <generalCardComponent class="rounded-xl" :height="height">
     <v-toolbar elevation="0" :color="color">
       <v-toolbar-title class="font-weight-light" :class="{'white--text':color!='transparent','black--text':color=='transparent'}">
         {{title}}
@@ -16,8 +16,8 @@
     <v-card-title>
       <v-row>
         <v-col class="col-md-10">
-          <v-text-field solo dense v-model="search.search" label="Buscar producto (Nombre, Codigo)">
-          </v-text-field>
+          <formsFieldsTextComponent solo dense v-model="search.search" label="Buscar producto (Nombre, Codigo)">
+          </formsFieldsTextComponent>
         </v-col>
         <v-col class="col-md-2">
           <v-btn block color="gd-primary-to-right" @click="getProducts()"
@@ -28,7 +28,7 @@
       </v-row>
     </v-card-title>
     <v-card-text class="mt-4 mb-4">
-      <v-card outlined class="rounded-xl">
+      <generalCardComponent  class="rounded-xl">
         <v-data-table hide-default-footer :headers="headers" :items="productos">
           <template v-slot:item.precio_unidad="{ item }">
             $ {{item.precio_unidad}}
@@ -38,9 +38,9 @@
             <slot name="button" :item="item"></slot>
           </template>
         </v-data-table>
-      </v-card>
+      </generalCardComponent>
     </v-card-text>
-  </v-card>
+  </generalCardComponent>
 </template>
 
 <script>

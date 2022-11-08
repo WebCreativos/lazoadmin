@@ -1,7 +1,7 @@
 <template>
   <v-autocomplete full-width class="font-weight-light" no-filter :hide-details="hideDetails" :items="mascotas" dense
     :loading="isLoading" :search-input.sync="search" hide-no-data item-value="nombre" item-text="nombre"
-    placeholder="Nombre de la mascota" outlined :rounded="rounded" background-color="white" v-model="result"
+    placeholder="Nombre de la mascota"  :rounded="rounded" background-color="white" v-model="result"
     @keyup.enter="result = search">
     <template v-slot:append-outer v-if="icon">
       <v-slide-x-reverse-transition mode="out-in">

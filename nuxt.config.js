@@ -4,7 +4,7 @@ export default {
   mode:'spa',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: 'Lazo - Administracion',
+    titleTemplate: 'Appets - Administracion',
     title: 'frontend',
     htmlAttrs: {
       lang: 'en'
@@ -47,7 +47,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://api.zoodevelopment.net/',
+    baseURL: 'https://api2.descuentosya.uy/',
     //baseURL: 'http://localhost:1338/' 
   },
   auth: {
@@ -90,9 +90,9 @@ export default {
       dark: false,
       themes: {
         light: {
-          primary: "#03989e",
+          primary: "#333350",
           accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
+          secondary: "#ffc107",
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,

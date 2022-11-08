@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="rounded-xl">
+    <generalCardComponent class="rounded-xl">
       <v-toolbar elevation="0" color="primary">
         <v-toolbar-title class="font-weight-light white--text">
           Compras de mercaderia
@@ -28,9 +28,9 @@
           </template>
         </v-data-table>
       </v-card-text>
-    </v-card>
+    </generalCardComponent>
     <v-dialog persistent v-model="productosCompraModal">
-      <v-card class="rounded-xl">
+      <generalCardComponent class="rounded-xl">
         <v-toolbar color="gd-primary-to-right" class="elevation-0">
           <v-toolbar-title class="font-weight-light white--text">
             Detalles de la compra
@@ -43,23 +43,23 @@
         <v-card-text class="pa-3">
           <v-row>
             <v-col class="col-12 col-md-6">
-              <v-text-field label="Nro de factura" dense hide-details :value="compra.nrofactura" outlined readonly>
-              </v-text-field>
+              <formsFieldsTextComponent label="Nro de factura" dense hide-details :value="compra.nrofactura"  readonly>
+              </formsFieldsTextComponent>
             </v-col>
             <v-col class="col-12 col-md-6">
-              <v-text-field label="Distribuidor" dense hide-details :value="compra.distribuidor.nombre" outlined readonly>
-              </v-text-field>
+              <formsFieldsTextComponent label="Distribuidor" dense hide-details :value="compra.distribuidor.nombre"  readonly>
+              </formsFieldsTextComponent>
             </v-col>
             <v-col class="col-12 col-md-6">
-              <v-text-field type="number" label="Total" prepend-inner-icon="mdi-currency-usd" dense hide-details
-                :value="compra.total" outlined readonly>
-              </v-text-field>
+              <formsFieldsTextComponent type="number" label="Total" prepend-inner-icon="mdi-currency-usd" dense hide-details
+                :value="compra.total"  readonly>
+              </formsFieldsTextComponent>
             </v-col>
             <v-col class="col-12 col-md-6">
               <v-input>
-                <v-text-field type="number" class="rounded-r-0" label="Monto entregado"
-                  prepend-inner-icon="mdi-currency-usd" dense hide-details v-model="compra.entrega" outlined>
-                </v-text-field>
+                <formsFieldsTextComponent type="number" class="rounded-r-0" label="Monto entregado"
+                  prepend-inner-icon="mdi-currency-usd" dense hide-details v-model="compra.entrega" >
+                </formsFieldsTextComponent>
                 <v-btn class="font-weight-light rounded-l-0 white--text" height="40" color="gd-primary-to-right"
                   @click="updateProduct()" depressed>
                   Actualizar&nbsp;<v-icon>mdi-save</v-icon>
@@ -67,7 +67,7 @@
               </v-input>
             </v-col>
             <v-col class="col-12">
-              <v-card class="rounded-xl" outlined>
+              <generalCardComponent class="rounded-xl" >
                 <v-toolbar elevation="0" color="primary">
                   <v-toolbar-title class="font-weight-light white--text">
                     Productos
@@ -89,11 +89,11 @@
                     <v-spacer></v-spacer>
                     <h2 class="font-weight-light">Total a pagar: <span>$ {{compra.total - compra.entrega}}</span></h2>
                 </v-card-actions>
-              </v-card>
+              </generalCardComponent>
             </v-col>
           </v-row>
         </v-card-text>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
     <modal-success :action="()=>{
       this.$emit('input', false);

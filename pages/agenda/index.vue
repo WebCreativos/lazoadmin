@@ -1,49 +1,50 @@
 <template>
   <v-container fluid>
+    <headersGeneralComponent>
+      <template v-slot:icon>
+        <img src="/icons/calendar.png" alt="icono" width="30" />
+      </template>
+      <template v-slot:title>
+        Agenda
+      </template>
+      <template v-slot:subtitle>
+        <v-btn @click="modalAgenda = true" large class="font-weight-regular rounded-lg black--text" color="secondary">
+          AGREGAR EVENTO <v-icon>mdi-plus</v-icon>
+        </v-btn>
+      </template>
+    </headersGeneralComponent>
+
     <v-row>
       <v-col class="col-12">
-        <v-card class="rounded-xl">
-          <toolbarComponent>
-            <template v-slot:title>
-              Agenda
-            </template>
-            <template v-slot:buttons>
-              <v-btn color="gd-primary-to-right" class="rounded-lg white--text font-weight-light"
-                @click="modalAgenda = true">
-                AGREGAR EVENTO&nbsp;&nbsp;<v-icon>mdi-calendar</v-icon>
-              </v-btn>
-            </template>
-          </toolbarComponent>
-          <v-card-title>
+        <generalCardComponent class="rounded-xl">
+          <v-card-title class="primary">
             <v-row>
               <v-col class="col-md-5">
-                <v-select dense class="font-weight-light" v-model="search.type" solo label="Tipo"
+                <formsFieldsSelectComponent dense label-color="white--text" v-model="search.type" solo label="Tipo"
                   :items="[{text:'Todos',value:null},{text:'Consulta',value:'consulta'},{text:'Evento',value:'evento'}]">
-                </v-select>
+                </formsFieldsSelectComponent>
               </v-col>
-              <v-col class="col-md-3">
-                <v-text-field type="date" hide-details solo dense v-model="search.fecha" label="Buscar por fecha"
-                  class="font-weight-light">
-                </v-text-field>
+              <v-col class="col-md-4">
+                <formsFieldsTextComponent type="date" label-color="white--text" hide-details solo dense
+                  v-model="search.fecha" label="Buscar por fecha" class="font-weight-light">
+                </formsFieldsTextComponent>
               </v-col>
 
-              <v-col class="col-md-3">
-                <v-btn block color="gd-primary-to-right" @click="getAgendas()"
-                  class="white--text rounded-lg font-weight-light">
+              <v-col class="col-md-2 d-flex align-end">
+                <v-btn block color="secondary" @click="getAgendas()" class="black--text rounded-lg font-weight-bold">
                   Buscar&nbsp;<v-icon>mdi-magnify</v-icon>
                 </v-btn>
               </v-col>
-              <v-col class="col-md-1">
+              <v-col class="col-md-1  d-flex align-end">
                 <v-btn block color="red" @click="search.fecha = null;getAgendas()"
                   class="white--text rounded-lg font-weight-light">
                   <v-icon>mdi-delete</v-icon>
                 </v-btn>
               </v-col>
-
             </v-row>
           </v-card-title>
           <v-card-text>
-            <v-card outlined>
+            <generalCardComponent outlined class="mt-3">
               <v-card-text>
                 <v-row>
                   <v-col class="d-flex justify-center">
@@ -74,57 +75,73 @@
 
                 </v-row>
               </v-card-text>
-            </v-card>
+            </generalCardComponent>
             <agendaCalendarComponent @prev="getAgendas($event)" @next="getAgendas($event)" v-model="agendas">
             </agendaCalendarComponent>
           </v-card-text>
-        </v-card>
+        </generalCardComponent>
       </v-col>
     </v-row>
     <v-dialog v-model="modalAgenda">
-      <v-card min-width="800px">
-        <v-toolbar color="primary" class="elevation-0 white--text font-weight-thin">
-          <v-toolbar-title>AGREGAR EVENTO</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="modalAgenda = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-card-text class="pa-3">
+      <generalCardComponent min-width="800px">
+        <GeneralCardTitleComponent class="white--text">
+          AGREGAR EVENTO
+          <template v-slot:button>
+            <v-btn icon @click="modalAgenda = false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </template>
+        </GeneralCardTitleComponent>
+        <v-card-text>
           <v-form ref="form">
-            <v-text-field solo class="rounded-lg" dense v-if="agenda.type!='indisponible'" :rules="rules.required"
-              v-model="agenda.titulo" label="Nombre del evento"></v-text-field>
-            <v-text-field solo class="rounded-lg" dense :rules="rules.required" type="date" v-model="agenda.fecha"
-              label="Fecha"></v-text-field>
-            <v-text-field solo class="rounded-lg" dense v-if="agenda.type!='indisponible'" :rules="rules.required"
-              type="time" v-model="agenda.hora" label="Hora"></v-text-field>
-            <v-textarea solo class="rounded-lg" dense v-if="agenda.type!='indisponible'" v-model="agenda.detalles"
-              label="Detalle"></v-textarea>
-            <v-select solo class="rounded-lg" dense
-              :items="[{text:'Consulta',value:'consulta'},{text:'Evento',value:'evento'},{text:'Fecha indisponible',value:'indisponible'}]"
-              v-model="agenda.type" label="Tipo de evento"></v-select>
-            <div v-if="agenda.type == 'consulta'">
-              <v-card outlined>
-                <v-card-title class="font-weight-light">Detalles de la consulta</v-card-title>
-                <v-card-text>
-                  <v-select solo hide-details :items="['Higiene','Consulta','Medicacion','Otro']"
-                    :rules="rules.required" v-model="agenda.consulta.tipo_consulta" label="Tipo de consulta" dense
-                    class="rounded-lg">
-                  </v-select>
-                </v-card-text>
-              </v-card>
-            </div>
+            <v-row>
+              <v-col class="col-12">
+                <formsFieldsTextComponent solo class="rounded-lg" dense v-if="agenda.type!='indisponible'"
+                  :rules="rules.required" v-model="agenda.titulo" label="Nombre del evento"></formsFieldsTextComponent>
+              </v-col>
+              <v-col class="col-12">
+                <formsFieldsTextComponent solo class="rounded-lg" dense :rules="rules.required" type="date"
+                  v-model="agenda.fecha" label="Fecha"></formsFieldsTextComponent>
+              </v-col>
+              <v-col class="col-12">
+                <formsFieldsTextComponent solo class="rounded-lg" dense v-if="agenda.type!='indisponible'"
+                  :rules="rules.required" type="time" v-model="agenda.hora" label="Hora"></formsFieldsTextComponent>
+              </v-col>
+              <v-col class="col-12">
+                <FormsFieldsTextareaComponent solo class="rounded-lg" dense v-if="agenda.type!='indisponible'"
+                  v-model="agenda.detalles" label="Detalle"></FormsFieldsTextareaComponent>
+              </v-col>
+              <v-col class="col-12">
+                <formsFieldsSelectComponent solo class="rounded-lg" dense
+                  :items="[{text:'Consulta',value:'consulta'},{text:'Evento',value:'evento'},{text:'Fecha indisponible',value:'indisponible'}]"
+                  v-model="agenda.type" label="Tipo de evento"></formsFieldsSelectComponent>
+              </v-col>
+              <v-col class="col-12">
+                <div v-if="agenda.type == 'consulta'">
+                  <generalCardComponent>
+                    <v-card-title class="font-weight-light">Detalles de la consulta</v-card-title>
+                    <v-card-text>
+                      <formsFieldsSelectComponent solo hide-details :items="['Higiene','Consulta','Medicacion','Otro']"
+                        :rules="rules.required" v-model="agenda.consulta.tipo_consulta" label="Tipo de consulta" dense
+                        class="rounded-lg">
+                      </formsFieldsSelectComponent>
+                    </v-card-text>
+                  </generalCardComponent>
+                </div>
+              </v-col>
+            </v-row>
           </v-form>
         </v-card-text>
+        <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="gd-primary-to-right" class="white--text font-weight-light" @click="addAgenda()">AGREGAR A LA
+          <v-btn color="secondary" class="rounded-lg black--text font-weight-bold" @click="addAgenda()">AGREGAR A LA
             AGENDA</v-btn>
         </v-card-actions>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
     <v-dialog v-model="modalReschedule">
-      <v-card min-width="800px">
+      <generalCardComponent min-width="800px">
         <v-toolbar color="primary" class="elevation-0 white--text font-weight-thin">
           <v-toolbar-title>AGREGAR SOCIO</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -134,18 +151,18 @@
         </v-toolbar>
         <v-card-text class="pa-3">
           <v-form ref="form">
-            <v-text-field type="date" outlined v-model="agenda.date" label="Fecha"></v-text-field>
+            <formsFieldsTextComponent type="date" v-model="agenda.date" label="Fecha"></formsFieldsTextComponent>
           </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" depressed @click="addAgenda()">AGREGAR A LA AGENDA</v-btn>
+          <v-btn color="secondary" class="rounded-lg black--text font-weight-bold" @click="addAgenda()">AGREGAR A LA AGENDA</v-btn>
         </v-card-actions>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
 
     <v-dialog v-model="modalReschedule">
-      <v-card min-width="800px">
+      <generalCardComponent min-width="800px">
         <v-toolbar color="primary" class="elevation-0 white--text font-weight-thin">
           <v-toolbar-title>RE AGENDAR</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -155,14 +172,14 @@
         </v-toolbar>
         <v-card-text class="pa-3">
           <v-form ref="form">
-            <v-text-field type="date" outlined v-model="agenda.date" label="Fecha"></v-text-field>
+            <formsFieldsTextComponent type="date" v-model="agenda.date" label="Fecha"></formsFieldsTextComponent>
           </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="primary" depressed @click="reSchedule()">RE AGENDAR</v-btn>
         </v-card-actions>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
 
 
@@ -179,18 +196,18 @@
       </template>
     </modal-success>
     <v-dialog v-model="modalCalendar">
-      <v-card width="500">
+      <generalCardComponent width="500">
         <v-toolbar color="primary" class="elevation-0">
           <v-toolbar-title class="white--text font-weight-light">Buscar en la agenda</v-toolbar-title>
         </v-toolbar>
         <v-card-text class="pa-3">
-          <v-text-field outlined type="date" v-model="search.date_gte"></v-text-field>
+          <formsFieldsTextComponent type="date" v-model="search.date_gte"></formsFieldsTextComponent>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn depressed color="primary" @click="getAgendas()">BUSCAR AGENDA</v-btn>
         </v-card-actions>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
   </v-container>
 </template>
@@ -246,7 +263,7 @@
           this.search.fecha_lte = moment().endOf('month').format('YYYY-MM-DD')
         }
         //remove one day with moment
-        if(this.search.fecha)
+        if (this.search.fecha)
           this.search.fecha = moment(this.search.fecha).subtract(1, "days").format("YYYY-MM-DD")
 
 

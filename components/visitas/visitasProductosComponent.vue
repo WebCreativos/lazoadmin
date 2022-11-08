@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card outlined>
+    <generalCardComponent >
       <v-card-title class="font-weight-light">
         Vacunas
         <v-spacer></v-spacer>
@@ -8,7 +8,7 @@
       <v-card-text>
         <v-data-table :headers="vacunasHeaders" :items="vacunasList" hide-default-footer>
           <template v-slot:item.actions="{ item }">
-              <v-btn block  outlined @click="addProduct(item)">Agregar</v-btn>
+              <v-btn block   @click="addProduct(item)">Agregar</v-btn>
           </template>
         </v-data-table>
       </v-card-text>
@@ -16,23 +16,23 @@
       <v-card-title class="font-weight-light">
         Productos de la consulta
         <v-spacer></v-spacer>
-        <v-btn outlined color="primary" @click="modalProductos = true"  v-if="!readonly">
+        <v-btn  color="primary" @click="modalProductos = true"  v-if="!readonly">
           AGREGAR PRODUCTO&nbsp;<v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-card-title>
       <v-card-text>
         <v-data-table :headers="headers" :items="value" hide-default-footer>
           <template v-slot:item.descripcion="{ item }">
-            <v-text-field dense outlined hide-details v-model="item.descripcion"></v-text-field>
+            <formsFieldsTextComponent dense  hide-details v-model="item.descripcion"></formsFieldsTextComponent>
           </template>
           <template v-slot:item.observacion="{ item }">
-            <v-text-field dense outlined hide-details v-model="item.observacion"></v-text-field>
+            <formsFieldsTextComponent dense  hide-details v-model="item.observacion"></formsFieldsTextComponent>
           </template>
           <template v-slot:item.precio="{ item }">
-            <v-text-field dense outlined type="number" hide-details v-model="item.precio"></v-text-field>
+            <formsFieldsTextComponent dense  type="number" hide-details v-model="item.precio"></formsFieldsTextComponent>
           </template>
           <template v-slot:item.cant="{ item }">
-            <v-text-field dense outlined type="number" hide-details v-model="item.cant"></v-text-field>
+            <formsFieldsTextComponent dense  type="number" hide-details v-model="item.cant"></formsFieldsTextComponent>
           </template>
           <template v-slot:item.total="{ item }">
             $ {{(item.cant && item.precio) ? item.cant*item.precio : 0}}
@@ -47,9 +47,9 @@
         </v-data-table>
       </v-card-text>
 
-    </v-card>
+    </generalCardComponent>
     <v-dialog v-model="modalProductos" width="60%">
-      <v-card>
+      <generalCardComponent>
         <v-card-title class="font-weight-light">
           Productos
           <v-spacer></v-spacer>
@@ -60,12 +60,12 @@
         <v-card-text>
           <v-data-table :headers="headersProductos" :items="listProductos" hide-default-footer>
             <template v-slot:item.add="{ item }">
-              <v-btn outlined @click="addProduct(item)">Agregar</v-btn>
+              <v-btn  @click="addProduct(item)">Agregar</v-btn>
             </template>
 
           </v-data-table>
         </v-card-text>
-      </v-card>
+      </generalCardComponent>
     </v-dialog>
   </div>
 </template>

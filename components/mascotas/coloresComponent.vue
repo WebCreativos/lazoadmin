@@ -1,34 +1,9 @@
 <template>
   <div>
-    <v-input>
-      <v-autocomplete hide-details dense :items="coloresList" label="Color"
-        item-text="nombre" small-chips item-value="nombre" class="rounded-r-0" chips outlined v-model="selectedColor"></v-autocomplete>
-        <v-btn class="rounded-l-0 rounded-r-lg" height="40" depressed color="primary" @click="showcoloresModal = true">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </v-input>
-    <v-dialog v-model="showcoloresModal">
-      <v-card width="800">
-        <v-toolbar color="gd-primary-to-right" elevation="0">
-          <v-toolbar-title class="white--text font-weight-light">Colores</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="showcoloresModal = false">
-            <v-icon color="white">mdi-close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-card-text class="pa-3">
-          <v-text-field solo dense label="color" v-model="color.nombre">
-          </v-text-field>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn class="white--text" color="gd-primary-to-right font-weight-light rounded-lg"
-            @click="addColor()">
-            AGREGAR
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <FormsFieldsSelectButtonComponent :items="coloresList" label="Color" item-text="nombre"
+      item-value="id" return-object :handler="()=>{showcoloresModal = true}" v-model="selectedColor">
+    </FormsFieldsSelectButtonComponent>
+    <generalCreateDialogComponent :handler="addColor" title="Agregar color" v-model="showcoloresModal"></generalCreateDialogComponent>
   </div>
 </template>
 

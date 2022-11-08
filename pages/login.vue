@@ -1,17 +1,17 @@
 <template>
   <v-container justify-center align-center fill-height>
     <v-form ref="signup" @keyup.enter="login()">
-      <v-card class="radius-10" max-width="800">
+      <generalCardComponent class="radius-10" max-width="800">
         <v-toolbar color="primary"  elevation="0">
           <v-toolbar-title class="white--text font-weight-light text-center full-width">Iniciar sesion
           </v-toolbar-title>
         </v-toolbar>
         <v-card-text style="width:800px">
           <v-form>
-            <v-text-field label="Documento" outlined class="login" color="primary" v-model="user.username" type="number">
-            </v-text-field>
-            <v-text-field label="Password" outlined type="password" class="login" color="primary" v-model="user.password">
-            </v-text-field>
+            <formsFieldsTextComponent label="Documento"  class="login" color="primary" v-model="user.username" type="number">
+            </formsFieldsTextComponent>
+            <formsFieldsTextComponent label="Password"  type="password" class="login" color="primary" v-model="user.password">
+            </formsFieldsTextComponent>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -20,7 +20,7 @@
             sesion
           </v-btn>
         </v-card-actions>
-      </v-card>
+      </generalCardComponent>
     </v-form>
   </v-container>
 </template>

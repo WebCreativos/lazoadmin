@@ -1,35 +1,11 @@
 <template>
   <div>
-    <v-input>
-      <v-select solo dense hide-details :items="referenciasList" label="Nombre del referencia" class="rounded-r-0"
-        item-text="nombre" item-value="id" return-object v-model="selectedreferencia">
-      </v-select>
-      <v-btn class="rounded-l-0 rounded-r-lg" height="40" color="primary" @click="showreferenciasModal = true">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </v-input>
-    <v-dialog v-model="showreferenciasModal">
-      <v-card width="800">
-        <v-toolbar color="gd-primary-to-right" elevation="0">
-          <v-toolbar-title class="white--text font-weight-light">Referencias</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="showreferenciasModal = false">
-            <v-icon color="white">mdi-close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-card-text class="pa-3">
-          <v-text-field solo dense label="referencia" v-model="referencia.nombre">
-          </v-text-field>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn class="white--text" color="gd-primary-to-right font-weight-light rounded-lg"
-            @click="addReferencia()">
-            AGREGAR
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+
+    <FormsFieldsSelectButtonComponent :items="referenciasList" label="Nombre del referencia" item-text="nombre"
+      item-value="id" return-object :handler="()=>{showcoloresModal = true}" v-model="selectedreferencia">
+    </FormsFieldsSelectButtonComponent>
+    <generalCreateDialogComponent :handler="addReferencia" title="Agregar referencia" v-model="showreferenciasModal">
+    </generalCreateDialogComponent>
   </div>
 </template>
 
@@ -51,11 +27,10 @@
     created() {
       this.getreferencias()
     },
-    mounted() {
-    },
+    mounted() {},
     methods: {
       addReferencia() {
-        if(!this.checkReferencia()) return
+        if (!this.checkReferencia()) return
         this.$axios.post(`/referencias`, this.referencia)
           .then((data) => {
             this.referencia.nombre = ""
@@ -68,9 +43,9 @@
         this.$axios.get('/referencias')
           .then((data) => {
             this.referenciasList = data.data
-            if(this.value && this.value.id) {
+            if (this.value && this.value.id) {
               this.selectedreferencia = this.referenciasList.find((referencia) => referencia.id == this.value.id)
-            } 
+            }
             this.referenciasList.unshift({
               id: null,
               nombre: "Seleccione una referencia"
@@ -78,12 +53,12 @@
           })
       },
       checkReferencia() {
-        if(this.referencia.nombre == "")
+        if (this.referencia.nombre == "")
           return false
-        
-        if(this.referenciasList.find((e)=>e.nombre == this.referencia.nombre))
+
+        if (this.referenciasList.find((e) => e.nombre == this.referencia.nombre))
           return false
-        
+
         return true
       }
     },

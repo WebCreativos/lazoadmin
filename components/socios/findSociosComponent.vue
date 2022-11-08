@@ -1,7 +1,7 @@
 <template>
-  <v-combobox full-width class="font-weight-light" no-filter :hide-details="hideDetails" :items="socios" dense
+  <v-combobox full-width class="font-weight-bold" solo no-filter :hide-details="hideDetails" :items="socios" dense
     :loading="isLoading" :search-input.sync="search" hide-no-data item-value="name" item-text="name"
-    placeholder="Buscar socios" :return-object="returnObject" outlined :rounded="rounded" background-color="white"
+    placeholder="Buscar socios" :return-object="returnObject"  :rounded="rounded" background-color="white"
     v-model="result" @keyup.enter="result = search">
     <template v-slot:append-outer v-if="icon">
       <v-slide-x-reverse-transition mode="out-in">

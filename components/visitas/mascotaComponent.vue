@@ -1,28 +1,31 @@
 <template>
   <div>
-    <v-card class="rounded-xl">
-      <v-toolbar color="gd-primary-to-right" elevation="0">
-        <v-toolbar-title class="white--text font-weight-light">Atenciones de la mascota {{value.mascota.nombre}}
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn class="mr-2 font-weight-light" :disabled="(!value.socio.id || !value.mascota.id)"
-          color="white" @click="openModalAtencion(createAtencion, 'NUEVA VISITA')">
-          Nueva visita
-        </v-btn>
-        <v-btn class="font-weight-light mr-2" :disabled="selectedAtencion.length==0" color="white"
-          @click="deleteAtencion()">
-          Eliminar visita
-        </v-btn>
-        <v-btn outlined :disabled="!value.mascota.id" class="white--text font-weight-light" @click="exportData()">
-          Descargar&nbsp;<v-icon>mdi-download</v-icon>
-        </v-btn>
-      </v-toolbar>
-      <v-card-text class="pa-4 rounded-lg">
-        <v-card outlined class="rounded-xl">
+
+
+    <generalCardComponent v-show="value.mascota.nombre">
+      <GeneralCardTitleComponent class="white--text">
+        <v-toolbar-title>{{value.mascota.nombre}}, {{checkYears(value.mascota.fecha_nac)}}, M</v-toolbar-title>
+        <template v-slot:button>
+          <v-chip class="mr-2">{{value.mascota.color}}</v-chip>
+          <v-chip>{{value.mascota.raza}}</v-chip>
+
+        </template>
+      </GeneralCardTitleComponent>
+      <v-divider></v-divider>
+      <v-card-title class="primary">
+        <v-tabs :vertical="$vuetify.breakpoint.smAndDown" grow v-model="tab" hide-slider slider-color="primary"
+          background-color="primary" active-class="active-tab">
+          <v-tab class="white--text">Resumen medico</v-tab>
+          <v-tab class="white--text">Consultas anteriores</v-tab>
+          <v-tab class="white--text">Analisis</v-tab>
+        </v-tabs>
+      </v-card-title>
+      <v-card-text class="py-3">
+        <generalCardComponent outlined>
           <v-data-table show-select single-select v-model="selectedAtencion" :headers="headers" hide-default-footer
             :items="consultaItems.data">
             <template v-slot:item.fecha="{ item }">
-              <v-btn outlined small @click="()=>{
+              <v-btn small @click="()=>{
                     openModalAtencion(()=>{}, 'VER VISITA',item, true);
                     atencion = item;
                   }">
@@ -53,68 +56,33 @@
               <v-icon color="red" v-else>mdi-close</v-icon>
             </template>
             <template v-slot:item.update="{item}">
-              <v-btn outlined small class="mr-2 font-weight-light" color="black"
+              <v-btn small class="mr-2 font-weight-light" outlined
                 @click="openModalAtencion(updateAtencion, 'ACTUALIZAR VISITA',item)">
                 Modificar
               </v-btn>
             </template>
-            <template v-slot:item.actions="{ item }">
-              <v-row no-gutters>
-                <v-col class="col-12">
-                  <v-btn outlined block class="font-weight-light"
-                    @click="()=>{openChangeAtentionsModal = true; dataMoveAtention.atencion = item.id}" small>
-                    Cambiar a otra mascota</v-btn>
-                </v-col>
-              </v-row>
-
-            </template>
           </v-data-table>
-        </v-card>
-      </v-card-text>
-      <v-card-actions class="d-flex justify-center">
-        <v-pagination :total-visible="10" :length="Math.ceil(consultaItems.length/10)" v-model="page"></v-pagination>
-      </v-card-actions>
-    </v-card>
-    <v-dialog v-model="modalData.openModal" width="40%" height="auto">
-      <v-toolbar color="primary" class="elevation-0 white--text font-weight-thin">
-        <v-toolbar-title>{{modalData.title}}</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn icon @click="closeModalAtencion()">
-          <v-icon color="white">mdi-close</v-icon>
-        </v-btn>
-      </v-toolbar>
-      <visitas-data-component class="overflow-card" :openModal="modalData.openModal" :readonly="modalData.readonly"
-        :handler="modalData.handler">
-      </visitas-data-component>
-    </v-dialog>
-    <v-dialog width="500" v-model="openChangeAtentionsModal">
-      <v-card>
-        <v-toolbar color="primary" elevation="0">
-          <v-toolbar-title class="white--text">Seleccione el socio</v-toolbar-title>
-        </v-toolbar>
-        <v-card-text class="py-4">
-          <v-row>
-            <v-col class="col-6">
-              <SociosFindSociosComponent returnObject v-model="dataMoveSocio"></SociosFindSociosComponent>
-            </v-col>
-            <v-col class="col-6">
-              <v-select outlined dense :items="dataMoveMascotas" item-value="id" item-text="nombre"
-                v-model="dataMoveAtention.mascota" label="Mascota"></v-select>
-            </v-col>
-          </v-row>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="gd-primary white--text" @click="changeAtentionPet()">
-            Cambiar mascota
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-snackbar color="success" v-model="successChangeMascota">
-      Mascota cambiada correctamente
-    </v-snackbar>
+        </generalCardComponent>
 
+      </v-card-text>
+    </generalCardComponent>
+    <v-dialog v-model="modalData.openModal" fullscreen>
+      <GeneralCardComponent>
+        <GeneralCardTitleComponent class="white--text">
+          {{modalData.title}}
+          <template v-slot:button>
+            <v-btn icon @click="closeModalAtencion()">
+              <v-icon color="white">mdi-close</v-icon>
+            </v-btn>
+          </template>
+        </GeneralCardTitleComponent>
+        <v-card-text class="py-4">
+          <visitas-data-component :openModal="modalData.openModal" :readonly="modalData.readonly"
+            :handler="modalData.handler">
+          </visitas-data-component>
+        </v-card-text>
+      </GeneralCardComponent>
+    </v-dialog>
   </div>
 </template>
 
@@ -186,13 +154,26 @@
           delete atencion.socio
           this.$store.dispatch('atentions/setSingle', atencion)
         } else {
-          if(this.consultaItems.data.length > 0) {
-            console.log(this.consultaItems.data[this.consultaItems.data.length-1]?.peso)
-            let peso = this.consultaItems.data[this.consultaItems.data.length-1]?.peso
-            this.$store.dispatch('atentions/setSingle', {peso:peso})
+          if (this.consultaItems.data.length > 0) {
+            console.log(this.consultaItems.data[this.consultaItems.data.length - 1] ?.peso)
+            let peso = this.consultaItems.data[this.consultaItems.data.length - 1] ?.peso
+            this.$store.dispatch('atentions/setSingle', {
+              peso: peso
+            })
           }
         }
       },
+      checkYears(date) {
+        console.log(date)
+        if (date == "1000-01-01") return "-"
+        let monthsDate = moment().diff(date, 'months')
+        if (monthsDate > 12) {
+          return Math.round(monthsDate / 12) + ' años'
+        } else {
+          return monthsDate + ' meses'
+        }
+      },
+
       closeModalAtencion() {
         this.modalData.openModal = false;
         this.$store.dispatch('atentions/cleanSelected')

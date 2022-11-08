@@ -1,62 +1,63 @@
 <template>
-  <v-form ref="form">
-    <v-card>
-      <v-card-text class="overflow-card">
+  <generalCardComponent outlined>
+    <v-card-text>
+      <v-form ref="form">
         <v-row>
-            <!--
+          <!--
           <v-col class="col-12">
-            <v-text-field type="text" label="SOCIO" readonly outlined filled dense
-              :value="setSocioName(atencion.mascota)" class="rounded-lg white--text"> </v-text-field>
+            <formsFieldsTextComponent type="text" label="SOCIO" readonly  filled dense
+              :value="setSocioName(atencion.mascota)" class="rounded-lg white--text"> </formsFieldsTextComponent>
           </v-col>
             -->
-          <v-col class="col-12">
-            <v-text-field outlined :readonly="readonly" type="date" v-model="atencion.fecha" label="Fecha">
-            </v-text-field>
+          <v-col class="col-12 col-md-6">
+            <formsFieldsTextComponent :readonly="readonly" type="date" v-model="atencion.fecha" label="Fecha">
+            </formsFieldsTextComponent>
           </v-col>
-          <v-col class="col-12">
-            <v-text-field outlined :readonly="readonly" type="time" v-model="atencion.hora" label="Hora"></v-text-field>
+          <v-col class="col-12  col-md-6">
+            <formsFieldsTextComponent :readonly="readonly" type="time" v-model="atencion.hora" label="Hora">
+            </formsFieldsTextComponent>
           </v-col>
-          <v-col class="col-12">
-            <v-text-field outlined :readonly="readonly" v-model="atencion.peso" type="number" label="Peso">
-            </v-text-field>
+          <v-col class="col-12  col-md-6">
+            <formsFieldsTextComponent :readonly="readonly" v-model="atencion.peso" type="number" label="Peso">
+            </formsFieldsTextComponent>
           </v-col>
-          <v-col class="col-12">
-            <v-text-field outlined :readonly="readonly" v-model="atencion.temperatura" type="number"
-              label="Temperatura"></v-text-field>
+          <v-col class="col-12  col-md-6">
+            <formsFieldsTextComponent :readonly="readonly" v-model="atencion.temperatura" type="number"
+              label="Temperatura"></formsFieldsTextComponent>
           </v-col>
-          <v-col class="col-12">
+          <v-col class="col-12 col-md-12">
             <createReferenciasComponent v-model="atencion.referencias"></createReferenciasComponent>
           </v-col>
-          <v-col class="col-12">
-            <v-textarea outlined :readonly="readonly" v-model="atencion.anamnesis" label="Anamnesis"></v-textarea>
+          <v-col class="col-12 col-md-6">
+            <FormsFieldsTextareaComponent :readonly="readonly" v-model="atencion.anamnesis" label="Anamnesis"></FormsFieldsTextareaComponent>
+          </v-col>
+          <v-col class="col-12 col-md-6">
+            <FormsFieldsTextareaComponent :readonly="readonly" v-model="atencion.EOG" label="EOG"></FormsFieldsTextareaComponent>
+          </v-col>
+          <v-col class="col-12 col-md-12">
+            <FormsFieldsTextareaComponent :readonly="readonly" v-model="atencion.tratamiento" label="Tratamiento"></FormsFieldsTextareaComponent>
           </v-col>
           <v-col class="col-12">
-            <v-textarea outlined :readonly="readonly" v-model="atencion.EOG" label="EOG"></v-textarea>
+            <formsFieldsSelectComponent :readonly="readonly" v-model="atencion.proxima_consulta" :items="['Si','No']"
+              label="Tendra proxima consulta?"></formsFieldsSelectComponent>
           </v-col>
           <v-col class="col-12">
-            <v-textarea outlined :readonly="readonly" v-model="atencion.tratamiento" label="Tratamiento"></v-textarea>
-          </v-col>
-          <v-col class="col-12">
-            <v-select outlined :readonly="readonly" v-model="atencion.proxima_consulta" :items="['Si','No']"
-              label="Tendra proxima consulta?"></v-select>
-          </v-col>
-          <v-col class="col-12">
-            <v-card class="rounded-lg" outlined v-show="atencion.proxima_consulta == 'Si'">
+            <generalCardComponent class="rounded-lg" v-show="atencion.proxima_consulta == 'Si'">
               <v-card-title class="font-weight-light">Proxima consulta</v-card-title>
               <v-card-text>
                 <v-row>
                   <v-col class="col-12">
-                    <v-text-field outlined type="date" :readonly="readonly" v-model="atencion.fecha_proxima_consulta"
+                    <formsFieldsTextComponent type="date" :readonly="readonly" v-model="atencion.fecha_proxima_consulta"
                       label="Fecha de proxima consulta">
-                    </v-text-field>
+                    </formsFieldsTextComponent>
                   </v-col>
                   <v-col class="col-12">
-                    <v-text-field outlined type="time" :readonly="readonly" v-model="atencion.hora_proxima_consulta"
+                    <formsFieldsTextComponent type="time" :readonly="readonly" v-model="atencion.hora_proxima_consulta"
                       label="Hora de proxima consulta">
-                    </v-text-field>
+                    </formsFieldsTextComponent>
                   </v-col>
                   <v-col class="col-12">
-                    <v-textarea outlined :readonly="readonly" v-model="atencion.motivo_proxima_consulta"
+                    <v-textarea :readonly="readonly" v-model="atencion.motivo_proxima_consulta"
                       label="Motivo de proxima consulta">
                     </v-textarea>
                   </v-col>
@@ -65,43 +66,25 @@
                   </v-col>
                 </v-row>
               </v-card-text>
-            </v-card>
+            </generalCardComponent>
           </v-col>
           <v-col class="col-12">
-            <v-textarea outlined :readonly="readonly" v-model="atencion.referencias_caja"
-              label="Referencias de la caja"></v-textarea>
-          </v-col>
-
-          <v-col class="col-12">
-            <v-checkbox outlined :readonly="readonly" v-model="atencion.con_costo" label="Consulta con costo">
+            <v-checkbox :readonly="readonly" v-model="atencion.con_costo" label="Consulta con costo">
             </v-checkbox>
           </v-col>
           <v-col class="col-12" v-show="atencion.con_costo">
-            <v-text-field outlined :readonly="readonly" v-model="atencion.costo" type="number" label="Costo ($)">
-            </v-text-field>
+            <formsFieldsTextComponent :readonly="readonly" v-model="atencion.costo" type="number" label="Costo ($)">
+            </formsFieldsTextComponent>
           </v-col>
-
-          <v-col class="col-12">
-            <UploadFilesComponent v-model="atencion.files" :readonly="readonly"></UploadFilesComponent>
-          </v-col>
-
-          <v-col class="col-12">
-            <visitas-productos-component  v-if="!readonly" :readonly="readonly" v-model="atencion.productos">
-            </visitas-productos-component>
-          </v-col>
-          <v-col class="col-12">
-            <visitasProximaComponent :readonly="readonly" v-model="atencion.proximas"></visitasProximaComponent>
-          </v-col>
-
         </v-row>
-        <v-divider></v-divider>
-        <v-card-actions v-if="!readonly">
-          <v-spacer></v-spacer>
-          <v-btn color="primary" depressed @click="checkHandler()">Finalizar visita</v-btn>
-        </v-card-actions>
-      </v-card-text>
-    </v-card>
-  </v-form>
+      </v-form>
+      <v-divider></v-divider>
+    </v-card-text>
+    <v-card-actions v-if="!readonly">
+      <v-spacer></v-spacer>
+      <v-btn color="primary" depressed @click="checkHandler()">Finalizar visita</v-btn>
+    </v-card-actions>
+  </generalCardComponent>
 </template>
 
 <script>
@@ -154,7 +137,7 @@
     methods: {
       checkHandler() {
         if (!this.$refs.form.validate()) return
-        this.$store.dispatch('atentions/setSingle',this.atencion)
+        this.$store.dispatch('atentions/setSingle', this.atencion)
         this.handler();
 
       },
@@ -166,7 +149,7 @@
       },
 
     },
-    computed:{
+    computed: {
       value() {
         return this.$store.getters['atentions/get']
       }

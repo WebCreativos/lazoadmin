@@ -1,174 +1,92 @@
 <template>
   <v-container fluid>
+    <headersGeneralComponent>
+      <template v-slot:icon>
+        <img src="/icons/cog.png" alt="icono" width="30" />
+      </template>
+      <template v-slot:title>
+        CONFIGURACION
+      </template>
+    </headersGeneralComponent>
+
     <v-row>
       <v-col class="col-12">
-        <v-card class="rounded-xl">
-          <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text">
-            <v-toolbar-title class="font-weight-light">
-              Configuracion
-            </v-toolbar-title>
-          </v-toolbar>
-          <v-card-text>
-            <configuracionColoresComponent></configuracionColoresComponent>
-          </v-card-text>
-          <v-card-text>
-            <configuracionRazasComponent></configuracionRazasComponent>
-          </v-card-text>
+        <configuracionColoresComponent></configuracionColoresComponent>
+      </v-col>
+      <v-col class="col-12">
+        <configuracionRazasComponent></configuracionRazasComponent>
+      </v-col>
+      <v-col class="col-12">
+        <configuracionReferenciasComponent></configuracionReferenciasComponent>
+      </v-col>
+      <v-col class="col-12">
+        <configuracionEspeciesComponent></configuracionEspeciesComponent>
+      </v-col>
+      <v-col class="col-12">
+        <configuracionCuotasComponent></configuracionCuotasComponent>
+      </v-col>
+      <v-col class="col-12">
+        <generalCardComponent class="rounded-xl">
+          <GeneralCardTitleComponent class="white--text">
+            Usuarios
+            <template v-slot:button>
+              <v-btn class="black--text font-weight-regular rounded-lg" color="secondary"
+                @click="openModalUsers = true">Agregar</v-btn>
 
+            </template>
+          </GeneralCardTitleComponent>
           <v-card-text>
-            <configuracionReferenciasComponent></configuracionReferenciasComponent>
-          </v-card-text>
-          <v-card-text>
-            <configuracionEspeciesComponent></configuracionEspeciesComponent>
-          </v-card-text>
-          <v-card-text>
-            <configuracionCuotasComponent></configuracionCuotasComponent>
-          </v-card-text>
-          <v-card-text>
-            <v-card class="rounded-xl" outlined>
-              <v-toolbar color="gd-primary-to-right white--text" class="elevation-0">
-                <v-toolbar-title class="font-weight-light">
-                  Usuarios
-                </v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-btn class="white--text font-weight-light rounded-lg" color="gd-primary-to-right"
-                  @click="openModalUsers = true">Agregar</v-btn>
-              </v-toolbar>
-              <v-card-text>
-                <v-data-table :items="users" :headers="headers" hide-default-footer>
-                  <template v-slot:item.edit={item}>
-                    <v-btn class="white--text font-weight-light rounded-lg" color="gd-primary-to-right" @click="()=>{
+            <v-data-table :items="users" :headers="headers" hide-default-footer>
+              <template v-slot:item.edit={item}>
+                <v-btn class="white--text font-weight-light rounded-lg" color="gd-primary-to-right" @click="()=>{
                         openModalEditUsers = true;
                         user = item;
                     }">
-                      Editar
-                    </v-btn>
-                  </template>
+                  Editar
+                </v-btn>
+              </template>
 
-                  <template v-slot:item.permisos.atencion={item}>
-                    <v-icon color="success" v-if="item.permisos && item.permisos.atencion">mdi-check</v-icon>
-                    <v-icon color="red" v-else>mdi-close</v-icon>
-                  </template>
-                  <template v-slot:item.permisos.socios={item}>
-                    <v-icon color="success" v-if="item.permisos && item.permisos.socios">mdi-check</v-icon>
-                    <v-icon color="red" v-else>mdi-close</v-icon>
-                  </template>
+              <template v-slot:item.permisos.atencion={item}>
+                <v-icon color="success" v-if="item.permisos && item.permisos.atencion">mdi-check</v-icon>
+                <v-icon color="red" v-else>mdi-close</v-icon>
+              </template>
+              <template v-slot:item.permisos.socios={item}>
+                <v-icon color="success" v-if="item.permisos && item.permisos.socios">mdi-check</v-icon>
+                <v-icon color="red" v-else>mdi-close</v-icon>
+              </template>
 
-                  <template v-slot:item.permisos.agenda={item}>
-                    <v-icon color="success" v-if="item.permisos && item.permisos.agenda">mdi-check</v-icon>
-                    <v-icon color="red" v-else>mdi-close</v-icon>
-                  </template>
+              <template v-slot:item.permisos.agenda={item}>
+                <v-icon color="success" v-if="item.permisos && item.permisos.agenda">mdi-check</v-icon>
+                <v-icon color="red" v-else>mdi-close</v-icon>
+              </template>
 
-                  <template v-slot:item.permisos.venta={item}>
-                    <v-icon color="success" v-if="item.permisos && item.permisos.venta">mdi-check</v-icon>
-                    <v-icon color="red" v-else>mdi-close</v-icon>
-                  </template>
+              <template v-slot:item.permisos.venta={item}>
+                <v-icon color="success" v-if="item.permisos && item.permisos.venta">mdi-check</v-icon>
+                <v-icon color="red" v-else>mdi-close</v-icon>
+              </template>
 
-                </v-data-table>
-              </v-card-text>
-            </v-card>
-
+            </v-data-table>
           </v-card-text>
-          <v-card-text>
-            <v-card class="rounded-xl" outlined>
-              <v-toolbar color="gd-primary-to-right white--text" class="elevation-0">
-                <v-toolbar-title class="font-weight-light">
-                  Logs
-                </v-toolbar-title>
-              </v-toolbar>
-              <v-card-text>
-                <v-data-table :items="logsList" :headers="headerLogs" hide-default-footer>
-                  <template v-slot:item.eventType={item}>
-                    <v-chip v-if="item.eventType=='Create'" color="success" class="white--text font-weight-regular" label>Nuevo registro</v-chip>
-                    <v-chip v-else-if="item.eventType=='Update'" color="blue" class="white--text font-weight-regular" label>Registro actualizado</v-chip>
-                    <v-chip v-else-if="item.eventType=='Delete'" color="red" class="white--text font-weight-regular" label>Registro eliminado</v-chip>
-                    </template>
-                </v-data-table>
-              </v-card-text>
-            </v-card>
-
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="gd-primary-to-right" @click="changeConfiguracion()"
-              class="white--text font-weight-light rounded-lg">Guardar configuraciones</v-btn>
-          </v-card-actions>
-          <!-- 
-          <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text">
-            <v-toolbar-title class="font-weight-light">
-              Exportar informacion
-            </v-toolbar-title>
-          </v-toolbar>
-          <v-card-text>
-            <v-row>
-              <v-col class="col-md-12 col-12">
-                <v-card class="rounded-xl">
-                  <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text">
-                    <v-toolbar-title class="font-weight-light">Consultas</v-toolbar-title>
-                  </v-toolbar>
-                  <v-card-text>
-                    <v-row>
-                      <v-col class="col-md-6">
-                        <v-text-field outlined dense type="date" v-model="searchConsultas.fecha_gte"
-                          label="Fecha desde"></v-text-field>
-                      </v-col>
-                      <v-col class="col-md-6">
-                        <v-text-field outlined dense type="date" v-model="searchConsultas.fecha_lte"
-                          label="Fecha hasta"></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="gd-primary-to-right" @click="generateConsultas()"
-                      class="white--text font-weight-light rounded-lg">Exportar</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-col>
-              <v-col class="col-md-12 col-12">
-                <v-card class="rounded-xl">
-                  <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text">
-                    <v-toolbar-title class="font-weight-light">Facturas</v-toolbar-title>
-                  </v-toolbar>
-                  <v-card-text>
-                    <v-row>
-                      <v-col class="col-md-6">
-                        <v-text-field outlined dense type="date" v-model="searchFacturas.fecha_gte"
-                          label="Fecha desde"></v-text-field>
-                      </v-col>
-                      <v-col class="col-md-6">
-                        <v-text-field outlined dense type="date" v-model="searchFacturas.fecha_lte"
-                          label="Fecha hasta"></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="gd-primary-to-right" @click="changeConfiguracion()"
-                      class="white--text font-weight-light rounded-lg">Exportar</v-btn>
-                  </v-card-actions>
-
-                </v-card>
-
-              </v-col>
-              <v-col class="col-md-12 col-12">
-                <v-card class="rounded-xl">
-                  <v-toolbar color="gd-primary-to-right" class="elevation-0 white--text">
-                    <v-toolbar-title class="font-weight-light">Debitos</v-toolbar-title>
-                  </v-toolbar>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="gd-primary-to-right" @click="changeConfiguracion()"
-                      class="white--text font-weight-light rounded-lg">Exportar</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-card-text>
-          -->
-        </v-card>
+        </generalCardComponent>
       </v-col>
+
+
       <v-col class="col-12">
+        <generalCardComponent>
+          <GeneralCardTitleComponent class="white--text">Logs</GeneralCardTitleComponent>
+          <v-card-text>
+            <v-data-table :items="logsList" :headers="headerLogs" hide-default-footer>
+              <template v-slot:item.eventType={item}>
+                <v-chip v-if="item.eventType=='Create'" color="success" class="white--text font-weight-regular" label>
+                  Nuevo registro</v-chip>
+                <v-chip v-else-if="item.eventType=='Update'" color="blue" class="white--text font-weight-regular" label>
+                  Registro actualizado</v-chip>
+                <v-chip v-else-if="item.eventType=='Delete'" color="red" class="white--text font-weight-regular" label>
+                  Registro eliminado</v-chip>
+              </template>
+            </v-data-table>
+          </v-card-text>
+        </generalCardComponent>
       </v-col>
     </v-row>
 
@@ -235,7 +153,7 @@
         headers: [{
           value: 'username',
           text: 'CI',
-        },{
+        }, {
           value: 'name',
           text: 'Nombre',
         }, {
@@ -259,22 +177,20 @@
           text: 'Editar',
           align: 'right'
         }],
-        headerLogs:[
-          {
-            value: 'eventLevel',
-            text: 'Nivel de evento',
-          },{
-            value: 'collectionName',
-            text: 'Coleccion',
-          },{
-            value: 'eventType',
-            text: 'Tipo de evento',
-          },{
-            value: 'eventDate',
-            text: 'Fecha',
-          }
-        ],
-        logsList:[],
+        headerLogs: [{
+          value: 'eventLevel',
+          text: 'Nivel de evento',
+        }, {
+          value: 'collectionName',
+          text: 'Coleccion',
+        }, {
+          value: 'eventType',
+          text: 'Tipo de evento',
+        }, {
+          value: 'eventDate',
+          text: 'Fecha',
+        }],
+        logsList: [],
         users: [],
         searchFacturas: {},
         searchConsultas: {}
@@ -301,7 +217,7 @@
             console.log(error);
           })
       },
-      getLogs(){
+      getLogs() {
         this.$axios.get('/logs')
           .then(response => {
             this.logsList = response.data
@@ -346,7 +262,7 @@
             this.user = {}
           })
       },
-      generateConsultas(){
+      generateConsultas() {
         this.$axios.get('/atencion/excel', {
             params: {
               ...this.searchConsultas

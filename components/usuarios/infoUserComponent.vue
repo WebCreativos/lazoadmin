@@ -1,20 +1,20 @@
 <template>
-  <v-card>
+  <generalCardComponent>
       <slot name="header"></slot>
     <v-card-text>
       <v-row>
         <v-col class="col-12">
-          <v-text-field outlined v-model="user.username" type="number" label="CI"></v-text-field>
+          <formsFieldsTextComponent  v-model="user.username" type="number" label="CI"></formsFieldsTextComponent>
         </v-col>
         <v-col class="col-12">
-          <v-text-field outlined v-model="user.name" type="text" label="Nombre"></v-text-field>
+          <formsFieldsTextComponent  v-model="user.name" type="text" label="Nombre"></formsFieldsTextComponent>
         </v-col>
         <v-col class="col-12">
-            <v-text-field outlined v-model="user.password" type="password" label="Password"></v-text-field>
+            <formsFieldsTextComponent  v-model="user.password" type="password" label="Password"></formsFieldsTextComponent>
           </v-col>
         </v-row>
     </v-card-text>
-    <v-card>
+    <generalCardComponent>
       <v-card-title>
         Permisos
       </v-card-title>
@@ -39,8 +39,8 @@
           <v-spacer></v-spacer>
           <slot name="button"></slot>
       </v-card-actions>
-    </v-card>
-  </v-card>
+    </generalCardComponent>
+  </generalCardComponent>
 </template>
 
 <script>
