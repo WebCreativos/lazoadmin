@@ -101,11 +101,6 @@
             to: '/atencion'
           },
           {
-            icon: 'cart-plus',
-            title: 'Productos',
-            to: '/productos/listado'
-          },
-          {
             icon: 'users',
             title: 'Socios',
             to: '/socios'
