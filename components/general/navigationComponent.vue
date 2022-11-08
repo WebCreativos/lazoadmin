@@ -121,6 +121,44 @@
             to: '/configuracion'
           },
         ],
+        bottomItems: [{
+            icon: 'cart',
+            title: 'Venta',
+            to: '/venta'
+          },
+          {
+            icon: 'doctor',
+            title: 'Atencion',
+            to: '/atencion'
+          },
+          {
+            icon: 'users',
+            title: 'Socios',
+            to: '/socios'
+          },
+          {
+            icon: 'dog',
+            title: 'Mascotas',
+            to: '/mascotas'
+          },
+          {
+            icon: 'mdi-dots-horizontal',
+            title: 'More',
+            subItems: [{
+                icon: 'calendar',
+                title: 'Calendario',
+                to: '/agenda'
+              },
+              {
+                icon: 'cog',
+                title: 'Configuracion',
+                to: '/configuracion'
+              },
+            ]
+          },
+
+        ],
+
       }
     },
     methods: {
