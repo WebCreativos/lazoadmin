@@ -76,7 +76,7 @@
         </v-bottom-sheet>
         <template v-else>
           <v-btn :key="i+'n'" color="primary" icon :to="item.to">
-            <v-icon color="secondary">{{ item.icon }}</v-icon>
+              <img :src="`/icons/${item.icon}.png`">
           </v-btn>
         </template>
       </template>
